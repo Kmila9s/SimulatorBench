@@ -1,23 +1,9 @@
 [
   {
-    "case": "009-boolfn-minset",
-    "variant": "vhdl",
-    "category": "semantics",
-    "reason": "G84 to_unsigned(n, s'length) dentro de una comparación da otro valor",
-    "since": "2026-11-21"
-  },
-  {
     "case": "034-hamming",
     "variant": "vhdl",
     "category": "elaboration",
     "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
-  },
-  {
-    "case": "057-barrel",
-    "variant": "vhdl",
-    "category": "semantics",
-    "reason": "G85 agregado (others => x(i)) con elemento indexado aborta (Malformed expression)",
     "since": "2026-11-21"
   },
   {
@@ -64,13 +50,6 @@
   },
   {
     "case": "098-tcqrs",
-    "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
-  },
-  {
-    "case": "102-counter-arst",
     "variant": "vhdl",
     "category": "elaboration",
     "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
