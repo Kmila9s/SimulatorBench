@@ -1,85 +1,98 @@
-# SimulatorBench
+<p align="right"><a href="README.es.md">Español</a></p>
 
-GHDL-vs-Kmila accuracy harness. See `Documentacion/HANDOFF_simulator_bench_api.md`
-for the master plan.
+<p align="center"><img src="docs/assets/banner-en.png" alt="SimulatorBench — Kmila vs GHDL accuracy bench" width="100%"></p>
 
-**Status 2026-11-21 (v3.0.8, layout v2):** verbatim **138/149**; los 11 restantes están catalogados en `known-gaps.json` (G84, G85, G86; repros en `Documentacion/handoffs/repros_gaps_2026-11-16/v308/`) y se corrigen en v3.1.8. *Golden master* del refactor: `run --legacy-source` 149/149 con `hash --legacy-source --check Tests/baseline/2026-11-20-v316/bench-kmila-vcd.sha256` idéntico, en proceso y por HTTP.
+<p align="center"><a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-3c82f6" alt="License: MIT"></a> <a href="https://dotnet.microsoft.com/"><img src="https://img.shields.io/badge/.NET-10-475569" alt=".NET 10"></a> <a href="https://kmila.com.mx"><img src="https://img.shields.io/badge/HDL-VHDL-475569" alt="VHDL"></a> <a href="https://github.com/Kmila9s/SimulatorBench/releases"><img src="https://img.shields.io/github/v/release/Kmila9s/SimulatorBench?color=3c82f6&label=release" alt="Release"></a></p>
 
-**Status 2026-11-16:** 149/149 PASS (fuente legada `kmila.vhdl`), golden master del refactor multi-HDL.
+<p align="center">
+  <a href="https://kmila.com.mx/demo"><b>Try the browser demo</b></a> · <a href="https://kmila.com.mx">Website</a> · <a href="https://github.com/Kmila9s/Documentation/releases">User manual (PDF) and thesis</a>
+</p>
 
-**Status 2026-08-03:** 148/148 PASS = 100%, 0 skipped (per `report.json`). Corpus grew to 148 cases (ids up to 165) with the function/procedure body-inlining, local-variable, and early-return tiers (154-165).
+## What it is
 
-**Status 2026-07-28:** 136/136 PASS = 100%, 0 skipped. 7 cases (147-153) added during the Tier 4.1 / 4.2 / 4.3 arc (VHDL-2008 case?, signal attributes end-to-end, function/procedure body inlining fences).
+The accuracy harness behind Kmila: each case is simulated verbatim in Kmila and in GHDL and the waveforms are compared strictly (nine-valued, including t = 0). Known differences are tracked in `known-gaps.json` with a ratchet.
 
-**Status 2026-06-24:** 119/119 PASS = 100%, 0 skipped. 17 cases
-(120–136) added during the 2026-06-22 → 2026-06-24 hardening + §6
-follow-up sessions targeting the 5 ESCOM Arquitectura de Computadoras
-practicas. ~26 cumulative simulator/bench bugs fixed across the
-harness's lifetime.
+<p align="center"><img src="docs/assets/screenshot.png" alt="" width="90%"></p>
 
-The 2026-06-22/23 cases lock in: multi-hop concurrent alias chains
-(120/121), constant-array element access via dynamic and literal indices
-(122/123), named-association aggregates with user-defined function
-elements (124), case-statement choice resolution (125–127), the P2A LOAD
-pipeline + enum-equality conditional (128/129), arithmetic-in-vector-range
-(130), indexed-LHS writes inside processes (131), and direct entity
-instantiation (132).
+## Quick start
 
-The 2026-06-24 follow-up cases lock in: `(others => '0')` initial-value
-expansion at signal-construction time (133), `(others => '0')` as an RHS
-aggregate inside a clocked reset branch with engine-side expansion
-against the target width (134), `unsigned * unsigned` width tripwire
-matching `numeric_std` `leftW+rightW` semantics (135), and function-body
-caller-scope binding correctness when the same function is inlined
-across multiple instances with different architecture-scope signals
-(136 — passes today; confirms the handoff §6 item 6 workaround is
-correct, no code change needed).
-
-See `Documentacion/HANDOFF_practicas_2026-06-23.md` (with §10
-Continuation 2026-06-24) for the per-case narrative.
-
-## Setup (one-time)
-
-```sh
-Setup/install-deps.sh        # brew install ghdl gtkwave (macOS)
+```bash
+# requires the Kmila repo next to this one and GHDL 6 on PATH
+dotnet run -c Release -- list          # cases and their variants
+dotnet run -c Release -- run           # verbatim, in process
 ```
 
-## Usage
+## Where it fits
 
-```sh
-dotnet run -- verify                      # GHDL, Kmila API and OpenAPI snapshot
-dotnet run -- list                        # cases and their variants
-dotnet run -- run                         # verbatim, in process, ratcheted by known-gaps.json
-dotnet run -- run --legacy-source         # golden master: legacy/kmila.vhdl, every case must pass
-dotnet run -- run --http --only 001-and   # through a running Kmila.Web (--api URL)
-dotnet run -- hash --legacy-source --check ../Tests/baseline/<date>/bench-kmila-vcd.sha256
+```mermaid
+flowchart LR
+  kmila["Kmila<br/>app · web · CLI"]
+  debugger["Debugger"]
+  interpreter["Interpreter"]
+  parser["Parser"]
+  librarycompiler["LibraryCompiler"]
+  timemachine["TimeMachine"]
+  practicevalidator["PracticeValidator"]
+  simulatorbench["SimulatorBench"]
+  tests["Tests"]
+  ghdl["GHDL 6<br/>(reference)"]
+  kmila-->debugger
+  kmila-->interpreter
+  kmila-->librarycompiler
+  debugger-->interpreter
+  interpreter-->parser
+  interpreter-->timemachine
+  interpreter-->librarycompiler
+  librarycompiler-->parser
+  practicevalidator-->kmila
+  simulatorbench-->kmila
+  tests-->kmila
+  practicevalidator-.->ghdl
+  simulatorbench-.->ghdl
+  classDef me fill:#3c82f6,stroke:#1d4ed8,color:#fff
+  classDef other fill:#475569,stroke:#334155,color:#fff
+  classDef ext fill:#94a3b8,stroke:#64748b,color:#0f172a
+  class kmila,debugger,interpreter,parser,librarycompiler,timemachine,practicevalidator,tests other
+  class ghdl ext
+  class simulatorbench me
+  click kmila "https://github.com/Kmila9s/Kmila"
+  click debugger "https://github.com/Kmila9s/Debugger"
+  click interpreter "https://github.com/Kmila9s/Interpreter"
+  click parser "https://github.com/Kmila9s/Parser"
+  click librarycompiler "https://github.com/Kmila9s/LibraryCompiler"
+  click timemachine "https://github.com/Kmila9s/TimeMachine"
+  click practicevalidator "https://github.com/Kmila9s/PracticeValidator"
+  click simulatorbench "https://github.com/Kmila9s/SimulatorBench"
+  click tests "https://github.com/Kmila9s/Tests"
 ```
 
-`run` is in process (`Kmila.TestKit`'s `InProcessKmilaRunner`, the same
-`HeadlessSimulator` the API calls); `--http` needs a host, e.g.
-`dotnet run --project ../App/Kmila/Kmila.Web -c Release -f net10.0 --no-launch-profile --urls http://127.0.0.1:5298`.
+<sub>Arrows point from a project to what it uses (project references). The highlighted box is this repository.</sub>
 
-## Case layout (v2)
+## Documentation
 
-```text
-Cases/<id>/
-  case.json                    # provenance + language-neutral spec: ports, timing, stimulus, clocks
-  variants/<lang>/variant.json # sources (analysis order), top (testbench), entity (DUT), standard
-  variants/<lang>/reference/   # the author's UNTOUCHED sources (DUT + testbench)
-  legacy/kmila.vhdl            # pre-verbatim re-implementation (golden master until v3.1.8)
-  results/<lang>/              # run outputs: golden.vcd, reference.log, verbatim/ and legacy/ (kmila.vcd, diff.json)
-```
+- [Technical reference (architecture, API, changelog)](docs/reference.md)
+- [User manual (PDF) and thesis](https://github.com/Kmila9s/Documentation/releases)
 
-A case passes only when **every supported HDL has a variant**, each variant's
-Kmila run matches its golden (strict: nine values, t=0 included) and the
-variants' goldens agree. A missing variant is a failure, never a skip.
-Kmila reads the reference sources verbatim — the bench never rewrites them
-(the only normalisation, `10ns` → `10 ns`, is applied to GHDL's private copy
-because GHDL rejects it). Verbatim failures must be listed in
-`known-gaps.json` (case, variant, category, reason, since): a failure not
-listed, or a listed variant that passes, fails the run, so the list only shrinks.
+## The Kmila family
 
-**Honesty constraint:** reference sources come from a public source (record
-`sourceUrl`, `license`). If a case cannot be reduced to a `(t, port, value)`
-stimulus table, set `skipReason` in `case.json` instead of generating a
-substitute testbench.
+| | | |
+|---|---|---|
+| <img src="https://github.com/Kmila9s/Kmila/raw/main/docs/assets/icon.png" width="28" alt=""> | [**Kmila**](https://github.com/Kmila9s/Kmila) | Write, simulate and debug HDL without an FPGA |
+| <img src="https://github.com/Kmila9s/Parser/raw/main/docs/assets/icon.png" width="28" alt=""> | [**Parser**](https://github.com/Kmila9s/Parser) | VHDL lexer and front-door parsing for Kmila |
+| <img src="https://github.com/Kmila9s/Interpreter/raw/main/docs/assets/icon.png" width="28" alt=""> | [**Interpreter**](https://github.com/Kmila9s/Interpreter) | Delta-cycle HDL simulation engine and synthesis |
+| <img src="https://github.com/Kmila9s/Debugger/raw/main/docs/assets/icon.png" width="28" alt=""> | [**Debugger**](https://github.com/Kmila9s/Debugger) | Structural checks and lint for VHDL designs |
+| <img src="https://github.com/Kmila9s/LibraryCompiler/raw/main/docs/assets/icon.png" width="28" alt=""> | [**LibraryCompiler**](https://github.com/Kmila9s/LibraryCompiler) | IEEE libraries, use clauses and primitive lowering |
+| <img src="https://github.com/Kmila9s/TimeMachine/raw/main/docs/assets/icon.png" width="28" alt=""> | [**TimeMachine**](https://github.com/Kmila9s/TimeMachine) | Discrete time base: ticks, clocks and events |
+| <img src="https://github.com/Kmila9s/PracticeValidator/raw/main/docs/assets/icon.png" width="28" alt=""> | [**PracticeValidator**](https://github.com/Kmila9s/PracticeValidator) | Validates every practice against GHDL |
+| <img src="https://github.com/Kmila9s/Tests/raw/main/docs/assets/icon.png" width="28" alt=""> | [**Tests**](https://github.com/Kmila9s/Tests) | Unit, end-to-end and performance suites |
+| <img src="https://github.com/Kmila9s/Documentation/raw/main/docs/assets/icon.png" width="28" alt=""> | [**Documentation**](https://github.com/Kmila9s/Documentation/releases) | Thesis and user manual (PDF) |
+
+## Contributing
+
+Issues and merge requests are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+MIT © 2026 Ulrich Tamayo Daniel. See [LICENSE](LICENSE).
+
+<sub>Developed as the degree project TT 2026-B059 at IPN ESCOM (Mexico).</sub>
