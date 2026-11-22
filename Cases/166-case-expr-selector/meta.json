@@ -1,0 +1,34 @@
+{
+  "id": "166-case-expr-selector",
+  "title": "case to_integer(unsigned(val)) expression selector in a process",
+  "sourceUrl": "internal: CaseStructure expression-selector fix 2026-10-11",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-10-11",
+  "entity": "case_expr_selector",
+  "topUnit": "case_expr_selector_tb",
+  "ports": [
+    { "name": "val", "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "seg", "dir": "out", "type": "std_logic_vector", "width": 7 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 330,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [
+    { "t": 0,   "port": "val", "value": "0000" },
+    { "t": 30,  "port": "val", "value": "0001" },
+    { "t": 60,  "port": "val", "value": "0010" },
+    { "t": 90,  "port": "val", "value": "0011" },
+    { "t": 120, "port": "val", "value": "0100" },
+    { "t": 150, "port": "val", "value": "0101" },
+    { "t": 180, "port": "val", "value": "0110" },
+    { "t": 210, "port": "val", "value": "0111" },
+    { "t": 240, "port": "val", "value": "1000" },
+    { "t": 270, "port": "val", "value": "1001" },
+    { "t": 300, "port": "val", "value": "1111" }
+  ],
+  "problemDescription": "A combinational 7-segment decoder whose case selector is the EXPRESSION to_integer(unsigned(val)), not a plain signal. Regression fence for the 2026-10-11 CaseStructure fix: before it, an expression case selector left the whole statement a no-op (not even `when others` fired), so the output stayed stuck. The input is driven directly so GHDL ground truth and Kmila decode identical inputs with no clock/reset races — every arm plus `others` must match.",
+  "referenceSources": ["case_expr_selector.vhdl", "case_expr_selector.test.vhdl"],
+  "kmilaSource": "kmila.vhdl",
+  "ghdlStd": "08"
+}

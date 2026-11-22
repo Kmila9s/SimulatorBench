@@ -1,0 +1,28 @@
+{
+  "id": "155-fn-case-mux",
+  "title": "User function body with top-level case — Tier 4.3 pass-4 item B",
+  "sourceUrl": "internal: Tier 4.3 body-synth arc 2026-07-28 (pass 4)",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-28",
+  "entity": "fn_case_mux",
+  "topUnit": "fn_case_mux_tb",
+  "ports": [
+    { "name": "sel", "dir": "in",  "type": "std_logic_vector", "width": 2 },
+    { "name": "y",   "dir": "out", "type": "std_logic_vector", "width": 4 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    { "t": 0,  "port": "sel", "value": "00" },
+    { "t": 20, "port": "sel", "value": "01" },
+    { "t": 40, "port": "sel", "value": "10" },
+    { "t": 60, "port": "sel", "value": "11" },
+    { "t": 80, "port": "sel", "value": "00" }
+  ],
+  "problemDescription": "Concurrent assign `y <= decode(sel);` where the user function body is a `case sel is ... end case;` whose arms all `return <literal>;`. Runtime already correct via DeferredUserFunction. Tier 4.3 pass-4 item B: the synth-time inliner accepts a case-terminal body, seeds the running net from the `others` return literal, and wraps each non-others arm in a MUX cell whose selector is `BuildChoiceCompare(sel, choice_literal)` (shared with the process-side `HandleCase` path so VHDL-2008 `case?` matching keeps its uniform behaviour). Bench passes on VCD equality regardless of which synth path took hold; the inlining is verified separately via the schematic viewer / audit-synth.",
+  "referenceSources": ["fn_case_mux.vhdl", "fn_case_mux.test.vhdl"],
+  "kmilaSource": "kmila.vhdl",
+  "ghdlStd": "08"
+}

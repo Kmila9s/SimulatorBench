@@ -1,0 +1,25 @@
+{
+  "id": "063-comp-n",
+  "title": "4-bit signed comparator (greater / less / equal)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "CompEntN",
+  "topUnit": "CompEntN_tb",
+  "ports": [
+    { "name": "a_i",   "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "b_i",   "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "may_o", "dir": "out", "type": "std_logic", "width": 1 },
+    { "name": "men_o", "dir": "out", "type": "std_logic", "width": 1 },
+    { "name": "igu_o", "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 15,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "4-bit signed integer comparator. may_o=1 when a>b, men_o=1 when a<b, igu_o=1 when a==b (treating a/b as 4-bit signed/2's-complement).",
+  "referenceSources": ["CompEntN.vhdl", "CompEntN_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

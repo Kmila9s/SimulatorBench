@@ -1,0 +1,25 @@
+{
+  "id": "068-summag",
+  "title": "3-bit unsigned adder with carry-in/out",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "SumMagN",
+  "topUnit": "SumMagN_tb",
+  "ports": [
+    { "name": "a_i",   "dir": "in",  "type": "std_logic_vector", "width": 3 },
+    { "name": "b_i",   "dir": "in",  "type": "std_logic_vector", "width": 3 },
+    { "name": "ci_i",  "dir": "in",  "type": "std_logic_vector", "width": 1 },
+    { "name": "sum_o", "dir": "out", "type": "std_logic_vector", "width": 3 },
+    { "name": "co_o",  "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 150,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "3-bit unsigned adder with carry-in. (sum_o, co_o) = a_i + b_i + ci_i (extended to 4 bits, then split).",
+  "referenceSources": ["SumMagN.vhdl", "SumMagN_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

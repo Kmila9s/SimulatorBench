@@ -1,0 +1,23 @@
+{
+  "id": "139-lfsr-through-fn",
+  "title": "LFSR routed through a user-defined function (regression fence for user-fn reactivity)",
+  "sourceUrl": "internal: memory project_user_fn_reactivity_gap — 2026-07-05 rgb-rainbow finding",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-20",
+  "entity": "lfsr_fn",
+  "topUnit": "tb_lfsr_fn",
+  "ports": [
+    { "name": "rst", "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "clk", "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "q",   "dir": "out", "type": "std_logic_vector", "width": 8 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 325,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "8-bit LFSR (same taps as 029-lfsr: 7,5,4,3) but the shift+xor step is wrapped in a user-declared function step(v). Pre-fix (memory project_user_fn_reactivity_gap), the interpreter evaluated step(state) at parse time and baked the result into a static Variable — subsequent process re-fires kept re-pushing that frozen value, so q transitioned once from 00000001 to 00000010 then stayed there forever. Fix: DeferredUserFunction wrapper (Interpreter/Models/DeferredUserFunction.cs) + Execute() branch + ShuntingYard allowlist. If this case regresses to a single q transition (all-zero mismatches from t=25ns onward), the fix has been broken.",
+  "referenceSources": ["lfsr_fn.vhd", "tb_lfsr_fn.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

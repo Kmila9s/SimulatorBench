@@ -1,0 +1,23 @@
+{
+  "id": "032-parity",
+  "title": "8-bit parity generator (even/odd, process+for-loop XOR fold)",
+  "sourceUrl": "https://github.com/fcayci/vhdl-digital-design",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "entity": "parity",
+  "topUnit": "tb_parity",
+  "ports": [
+    { "name": "a", "dir": "in",  "type": "std_logic_vector", "width": 8 },
+    { "name": "t", "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "p", "dir": "out", "type": "std_logic",        "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "8-bit parity. t=0 → even parity (p=XOR of all a bits); t=1 → odd parity (p=NOT even). Reference uses a process with for-loop variable XOR fold.",
+  "referenceSources": ["parity.vhd", "tb_parity.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

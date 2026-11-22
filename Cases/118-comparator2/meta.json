@@ -1,0 +1,25 @@
+{
+  "id": "118-comparator2",
+  "title": "2-bit magnitude comparator (b>a / b=a / b<a)",
+  "sourceUrl": "https://github.com/tomas-fryza/vhdl-examples",
+  "license": "MIT",
+  "fetchedAt": "2026-06-09",
+  "entity": "comparator",
+  "topUnit": "comparator_tb",
+  "ports": [
+    { "name": "b",      "dir": "in",  "type": "std_logic_vector", "width": 2 },
+    { "name": "a",      "dir": "in",  "type": "std_logic_vector", "width": 2 },
+    { "name": "b_gt",   "dir": "out", "type": "std_logic", "width": 1 },
+    { "name": "b_a_eq", "dir": "out", "type": "std_logic", "width": 1 },
+    { "name": "a_gt",   "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 550,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Combinational 2-bit magnitude comparator. b_gt='1' iff b>a, b_a_eq='1' iff b=a, a_gt='1' iff a>b. Inputs are unsigned 2-bit vectors.",
+  "referenceSources": ["comparator.vhd", "comparator_tb.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

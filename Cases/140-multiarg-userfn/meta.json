@@ -1,0 +1,23 @@
+{
+  "id": "140-multiarg-userfn",
+  "title": "Multi-arg user function inside clocked process (mirrors Ring 5 q_mul/q_div/q_pow/q_ln pattern)",
+  "sourceUrl": "internal: extension of 139-lfsr-through-fn to prove capstone A3/A4/A5/A7 unblock",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-20",
+  "entity": "multiarg_fn",
+  "topUnit": "tb_multiarg_fn",
+  "ports": [
+    { "name": "rst", "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "clk", "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "q",   "dir": "out", "type": "std_logic_vector", "width": 4 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 225,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "4-bit accumulator whose next-state comes from a user-declared 2-arg function `step_add(a, b)`. Same reactivity concern as capstone_calc's `q_mul(a,b)` / `q_div(a,b)` / `q_pow(a,n)` / `q_ln(a)` in fixed_point.vhd — those were flagged 'USR-FN GAP' pre-fix in Ring 5's testbench_full. Pre-fix, step_add(state, delta) would freeze at step_add(init_state, init_delta); post-fix, args re-parse against the live scope each fire so state accumulates: 0 → 3 → 6 → 9 → 12 → 15 → 2 (4-bit wrap) → 5 → 8 → 11 → 14 → 1 → …. If this case fails after --roundtrip, the DeferredUserFunction wrapper doesn't propagate correctly through Builder+Emitter for multi-arg calls.",
+  "referenceSources": ["multiarg_fn.vhd", "tb_multiarg_fn.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

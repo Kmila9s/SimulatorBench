@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>SimulatorBench</RootNamespace>
+    <AssemblyName>SimulatorBench</AssemblyName>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- The test kit (reference simulator, Kmila runners, VCD comparison) and,
+         through it, Kmila.Shared (block-editor round trip for `run - -roundtrip`).
+         Path relative to this csproj at the repo top level. -->
+    <ProjectReference Include="../App/Kmila/Kmila.TestKit/Kmila.TestKit.csproj" />
+  </ItemGroup>
+
+</Project>

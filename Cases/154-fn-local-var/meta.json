@@ -1,0 +1,30 @@
+{
+  "id": "154-fn-local-var",
+  "title": "User function body with local-variable write — Tier 4.3 pass-4 item A",
+  "sourceUrl": "internal: Tier 4.3 body-synth arc 2026-07-28 (pass 4)",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-28",
+  "entity": "fn_local_var",
+  "topUnit": "fn_local_var_tb",
+  "ports": [
+    { "name": "a", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "b", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "y", "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    { "t": 0,  "port": "a", "value": "0" },
+    { "t": 0,  "port": "b", "value": "0" },
+    { "t": 20, "port": "a", "value": "1" },
+    { "t": 40, "port": "a", "value": "0" },
+    { "t": 40, "port": "b", "value": "1" },
+    { "t": 60, "port": "a", "value": "1" }
+  ],
+  "problemDescription": "Concurrent assign `y <= nand2(a, b);` where the user function body writes an intermediate local `v := x and z;` and returns `not v`. Runtime already correct via DeferredUserFunction. Tier 4.3 pass-4 item A: the synth-time inliner accepts an Operation prefix that writes locals declared in the function, registers each write as a scope alias so subsequent reads (including the terminal return) pick up the driver net, and emits AND + NOT cells instead of an opaque UserFunction constant. Bench passes on VCD equality regardless of which synth path took hold; the inlining is verified separately via the schematic viewer / audit-synth.",
+  "referenceSources": ["fn_local_var.vhdl", "fn_local_var.test.vhdl"],
+  "kmilaSource": "kmila.vhdl",
+  "ghdlStd": "08"
+}

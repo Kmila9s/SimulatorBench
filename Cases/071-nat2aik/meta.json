@@ -1,0 +1,22 @@
+{
+  "id": "071-nat2aik",
+  "title": "BCD natural → Aiken (2-4-2-1) code converter",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "Nat2Aik",
+  "topUnit": "Nat2Aik_tb",
+  "ports": [
+    { "name": "n_i", "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "a_o", "dir": "out", "type": "std_logic_vector", "width": 4 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 20,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "BCD-to-Aiken decoder. If n_i < 5, a_o = n_i. Else a_o = n_i + 6.",
+  "referenceSources": ["Nat2Aik.vhdl", "Nat2Aik_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

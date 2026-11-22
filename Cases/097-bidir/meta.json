@@ -1,0 +1,26 @@
+{
+  "id": "097-bidir",
+  "title": "3-bit bidirectional counter (up/down) with sync reset + enable",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "contmpot2bidir",
+  "topUnit": "contmpot2bidir_tb",
+  "ports": [
+    { "name": "clk_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "rst_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "ena_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "up_i",  "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "q_o",   "dir": "out", "type": "std_logic_vector", "width": 3 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 310,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "3-bit bidirectional binary counter (mod-8). On rising clk: rst='1' clears to 0; ena='1' advances q by +1 (up_i='1') or -1 (up_i='0').",
+  "referenceSources": ["ContMpot2BiDir.vhdl", "ContMpot2BiDir_tb.vhdl"],
+  "t0Divergence": "kmila.vhdl declara el registro con valor inicial (q := \"000\"); el DUT de referencia no lo tiene y su salida nace en U. Verificado 2026-11-19: Kmila sobre la referencia da en t=0 lo mismo que GHDL (v3.1.5).",
+  "kmilaSource": "kmila.vhdl"
+}

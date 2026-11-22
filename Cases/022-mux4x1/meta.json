@@ -1,0 +1,26 @@
+{
+  "id": "022-mux4x1",
+  "title": "4-to-1 mux (with…select on scalar inputs)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "entity": "mux4x1",
+  "topUnit": "tb_mux4x1",
+  "ports": [
+    { "name": "a",   "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "b",   "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "c",   "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "d",   "dir": "in",  "type": "std_logic",        "width": 1 },
+    { "name": "sel", "dir": "in",  "type": "std_logic_vector", "width": 2 },
+    { "name": "o",   "dir": "out", "type": "std_logic",        "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 300,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "4-to-1 mux with scalar data inputs. o = a/b/c/d depending on sel.",
+  "referenceSources": ["mux4x1.vhd", "tb_mux4x1.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

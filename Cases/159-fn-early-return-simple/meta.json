@@ -1,0 +1,33 @@
+{
+  "id": "159-fn-early-return-simple",
+  "title": "User function body with early-return followed by terminal return — Tier 4.3 pass 20 canonicalizer",
+  "sourceUrl": "internal: Tier 4.3 pass 20 canonicalize-then-mux fence",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-30",
+  "entity": "fn_early_return_simple",
+  "topUnit": "fn_early_return_simple_tb",
+  "ports": [
+    { "name": "sel", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "a",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "b",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "y",   "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    { "t": 0,  "port": "sel", "value": "0" },
+    { "t": 0,  "port": "a",   "value": "0" },
+    { "t": 0,  "port": "b",   "value": "1" },
+    { "t": 20, "port": "sel", "value": "1" },
+    { "t": 40, "port": "sel", "value": "0" },
+    { "t": 40, "port": "a",   "value": "1" },
+    { "t": 40, "port": "b",   "value": "0" },
+    { "t": 60, "port": "sel", "value": "1" }
+  ],
+  "problemDescription": "Concurrent assign `y <= early(sel, a, b);` where `early(s,x,z)` has body `if s = '1' then return x; end if; return z;`. Pre-pass-20 this shape fell to UserFunctionBlackBox because the leading if lacks an else — the terminal-shape gate expected a single IfStructure with an else. Pass 20's canonicalizer folds this into `if s = '1' then return x else return z end if` before the terminal check, then TryInlineIfElseAsMux handles it. Same waveform as case 152 (fn-inline-mux2); different source pattern.",
+  "referenceSources": ["fn_early_return_simple.vhdl", "fn_early_return_simple.test.vhdl"],
+  "kmilaSource": "kmila.vhdl",
+  "ghdlStd": "08"
+}

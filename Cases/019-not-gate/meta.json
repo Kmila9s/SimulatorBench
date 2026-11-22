@@ -1,0 +1,22 @@
+{
+  "id": "019-not-gate",
+  "title": "6-bit vector inverter (NOT)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "entity": "not_gate",
+  "topUnit": "tb_not_gate",
+  "ports": [
+    { "name": "a", "dir": "in",  "type": "std_logic_vector", "width": 6 },
+    { "name": "o", "dir": "out", "type": "std_logic_vector", "width": 6 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Bit-wise inverter on a 6-bit vector. o <= not a.",
+  "referenceSources": ["not_gate.vhd", "tb_not_gate.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

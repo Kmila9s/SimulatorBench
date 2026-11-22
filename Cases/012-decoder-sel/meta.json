@@ -1,0 +1,22 @@
+{
+  "id": "012-decoder-sel",
+  "title": "3-to-8 decoder (selected signal assignment with transport after 50 ns on two choices)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/decoder",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "entity": "dec3x8_sel",
+  "topUnit": "dec3x8_sel_test",
+  "ports": [
+    { "name": "input",  "dir": "in",  "type": "std_logic_vector", "width": 3 },
+    { "name": "output", "dir": "out", "type": "std_logic_vector", "width": 8 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 600,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "3-to-8 decoder, same truth table. Reference uses `with input select … TRANSPORT … AFTER 50 ns WHEN \"000\"` — tests `with…select` plus `transport after` together.",
+  "referenceSources": ["dec3x8_sel.vhd", "dec3x8_sel_test.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

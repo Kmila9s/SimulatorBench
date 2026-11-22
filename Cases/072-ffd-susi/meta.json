@@ -1,0 +1,23 @@
+{
+  "id": "072-ffd-susi",
+  "title": "D flip-flop (rising-edge triggered)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "FFD",
+  "topUnit": "FFD_tb",
+  "ports": [
+    { "name": "d_i",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "clk_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "q_o",   "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Rising-edge-triggered D flip-flop. q_o captures d_i on rising clk_i.",
+  "referenceSources": ["FFD.vhdl", "FFD_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

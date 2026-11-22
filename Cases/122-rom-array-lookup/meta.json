@@ -1,0 +1,29 @@
+{
+  "id": "122-rom-array-lookup",
+  "title": "Indexed read from a constant std_logic_vector array",
+  "sourceUrl": "internal: Kmila constant-array indexing regression test",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-06-22",
+  "entity": "rom_array_lookup",
+  "topUnit": "rom_array_lookup_tb",
+  "ports": [
+    { "name": "clk",  "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "addr", "dir": "in",  "type": "std_logic_vector", "width": 3 },
+    { "name": "data", "dir": "out", "type": "std_logic_vector", "width": 8 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "autoStimulus": false,
+  "clocks": [{ "port": "clk" }],
+  "stimulus": [
+    { "t": 0,  "port": "addr", "value": "000" },
+    { "t": 20, "port": "addr", "value": "011" },
+    { "t": 40, "port": "addr", "value": "111" },
+    { "t": 60, "port": "addr", "value": "100" }
+  ],
+  "problemDescription": "8-entry constant std_logic_vector array indexed each clock by an external 3-bit addr. data should reflect rom_init(addr) one cycle after addr changes. Tests whether Kmila stores constant array literals as discrete 8-bit slots (correct) vs concatenated with padding (the suspected bug surfaced by case 121).",
+  "referenceSources": ["rom_array_lookup.vhdl", "rom_array_lookup.test.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

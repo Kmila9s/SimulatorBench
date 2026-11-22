@@ -1,0 +1,32 @@
+{
+  "id": "145-procedure-if-branch",
+  "title": "wait inside if branch inside procedure body \u2014 Phase 3 + Phase 2 composition fence",
+  "sourceUrl": "internal: STATUS.md \u00a71 \u2014 waits inside procedure bodies (Phase 3)",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-22",
+  "entity": "procedure_if_branch",
+  "topUnit": "tb_procedure_if_branch",
+  "ports": [
+    {
+      "name": "q",
+      "dir": "out",
+      "type": "std_logic_vector",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Exercises the composition of Phase 2 (waits inside if branches \u2014 F-G-13d) and Phase 3 (waits inside procedure bodies). Procedure `branch_wait` contains an if-else whose branches each carry a `wait for` before toggling a caller-side signal formal. Pre-Phase-3, the whole procedure body was dropped textually \u2014 the process ran zero-time through six calls and q slammed. Post-fix: ProcedureFrame runs the bound body, dispatches the IfStructure via RunTopIfFromEntryAsync, the BranchFrame yields on the wait, the frame-drain resumes both frames in order. Q alternates '0101'/'1010' with 20/10 ns dwells matching state's oscillation.",
+  "referenceSources": [
+    "procedure_if_branch.vhd",
+    "tb_procedure_if_branch.vhd"
+  ],
+  "kmilaSource": "kmila.vhdl",
+  "expectedSynthDiagnostics": [
+    "BlackboxProcess"
+  ]
+}

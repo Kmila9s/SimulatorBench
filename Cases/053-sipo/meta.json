@@ -1,0 +1,26 @@
+{
+  "id": "053-sipo",
+  "title": "4-bit shift register: shift-right, shift-left, or parallel load",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "entity": "sipo",
+  "topUnit": "sipo_tb",
+  "ports": [
+    { "name": "clk", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "se",  "dir": "in",  "type": "std_logic_vector", "width": 2 },
+    { "name": "D",   "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "Dl",  "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "Dr",  "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "Q",   "dir": "out", "type": "std_logic_vector", "width": 4 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 80,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Multi-mode 4-bit shift register. On rising clk: if se(0)='0' shift right (Qt <= Dl & Qt(3 downto 1)); elsif se(1)='1' shift left (Qt <= Qt(2 downto 0) & Dr); else parallel load Qt<=D. Output Q = Qt.",
+  "referenceSources": ["sipo.vhdl", "sipo_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

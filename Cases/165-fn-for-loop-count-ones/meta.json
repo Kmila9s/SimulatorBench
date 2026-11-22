@@ -1,0 +1,30 @@
+{
+  "id": "165-fn-for-loop-count-ones",
+  "title": "User function body — bounded for-loop over local vector, per-iteration bit write — pass 24",
+  "sourceUrl": "internal: Tier 4.3 pass 24 for-loop in fn body",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-30",
+  "entity": "fn_for_loop_count_ones",
+  "topUnit": "fn_for_loop_count_ones_tb",
+  "ports": [
+    { "name": "a", "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "b", "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "y", "dir": "out", "type": "std_logic_vector", "width": 4 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    { "t": 0,  "port": "a", "value": "0000" },
+    { "t": 0,  "port": "b", "value": "0000" },
+    { "t": 10, "port": "a", "value": "1010" },
+    { "t": 10, "port": "b", "value": "0011" },
+    { "t": 20, "port": "a", "value": "1111" },
+    { "t": 20, "port": "b", "value": "0110" }
+  ],
+  "problemDescription": "Function body has a bounded for-loop over local variable `r`. Each iteration writes `r(i) := x(i) xor z(i)`. Pass 24 accepts ForLoopStructure as a fn-body prefix task by delegating to ProcessSynthesizer.WalkTasks (pass-10 unroll machinery). This closes the pass-20 non-goal 'return-in-loop' for the subset that has no return inside the loop.",
+  "referenceSources": ["fn_for_loop_count_ones.vhdl", "fn_for_loop_count_ones.test.vhdl"],
+  "kmilaSource": "kmila.vhdl",
+  "ghdlStd": "08"
+}

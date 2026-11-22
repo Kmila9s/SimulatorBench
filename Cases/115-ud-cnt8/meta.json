@@ -1,0 +1,24 @@
+{
+  "id": "115-ud-cnt8",
+  "title": "8-bit up/down counter with enable",
+  "sourceUrl": "https://github.com/Aliflori/VHDL-Digital-Logic-Labs",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "entity": "experiment_2_3",
+  "topUnit": "experiment_2_3_Test_Bench",
+  "ports": [
+    { "name": "CLK",         "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "ENABLE",      "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "UP_DOWN",     "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "COUNTER_OUT", "dir": "out", "type": "std_logic_vector", "width": 8 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "8-bit synchronous up/down counter. ENABLE='1' on rising CLK increments (UP_DOWN='1') or decrements (UP_DOWN='0').",
+  "referenceSources": ["Ex_2_3.vhd", "Ex_2_3_TB.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

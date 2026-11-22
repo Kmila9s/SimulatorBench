@@ -1,0 +1,25 @@
+{
+  "id": "060-trans",
+  "title": "Serial popcount + bit-rotate (transmit/echo)",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "entity": "trans",
+  "topUnit": "trans_tb",
+  "ports": [
+    { "name": "A",   "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "clk", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "se",  "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "C",   "dir": "out", "type": "std_logic_vector", "width": 4 },
+    { "name": "sum", "dir": "out", "type": "std_logic_vector", "width": 3 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 120,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "se='1' loads A→a1. se='0' shifts a1 right one bit per cycle; whenever the shifted-out LSB is '1', increment ci (3-bit popcount). o accumulates the shifted bits from the MSB end. C = o, sum = ci.",
+  "referenceSources": ["trans.vhdl", "trans_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

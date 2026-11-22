@@ -1,0 +1,23 @@
+{
+  "id": "013-mux-cond",
+  "title": "8-to-1 mux (when…else conditional concurrent assignment, exhaustive nested-loop TB)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/mux",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "entity": "mux8x1_conditional",
+  "topUnit": "mux8x1_conditional_test",
+  "ports": [
+    { "name": "sel", "dir": "in",  "type": "std_logic_vector", "width": 3 },
+    { "name": "x",   "dir": "in",  "type": "std_logic_vector", "width": 8 },
+    { "name": "y",   "dir": "out", "type": "std_logic",        "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 4095,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Same 8-to-1 mux as case 010 but reference uses chained `x(i) when (sel = \"…\") else …` conditional assignment.",
+  "referenceSources": ["mux8x1_conditional.vhd", "mux8x1_conditional_test.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "163-fn-early-return-with-tail-ops",
+  "title": "Early-return followed by local writes then terminal return — pass 22",
+  "sourceUrl": "internal: Tier 4.3 pass 22 tail-Ops in canonicalizer",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-30",
+  "entity": "fn_early_return_tail_ops",
+  "topUnit": "fn_early_return_tail_ops_tb",
+  "ports": [
+    { "name": "sel", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "a",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "b",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "y",   "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    { "t": 0,  "port": "sel", "value": "0" },
+    { "t": 0,  "port": "a",   "value": "0" },
+    { "t": 0,  "port": "b",   "value": "1" },
+    { "t": 20, "port": "sel", "value": "1" },
+    { "t": 40, "port": "sel", "value": "0" },
+    { "t": 40, "port": "a",   "value": "1" },
+    { "t": 40, "port": "b",   "value": "0" },
+    { "t": 60, "port": "sel", "value": "1" }
+  ],
+  "problemDescription": "Function body has early return followed by side-effect local writes and a terminal return: `if s='1' then return x; end if; tmp := z; return tmp;`. Pass 22 extends the canonicalizer to fold trailing Ops into the synthesised else branch's task list — combined with pass-20's `[Op*, Return]` branch-shape relaxation, the whole body lowers to a 2-arm MUX cascade.",
+  "referenceSources": ["fn_early_return_tail_ops.vhdl", "fn_early_return_tail_ops.test.vhdl"],
+  "kmilaSource": "kmila.vhdl",
+  "ghdlStd": "08"
+}

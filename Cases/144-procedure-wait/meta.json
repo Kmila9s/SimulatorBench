@@ -1,0 +1,32 @@
+{
+  "id": "144-procedure-wait",
+  "title": "wait for N ns inside a procedure body \u2014 Phase 3 regression fence",
+  "sourceUrl": "internal: STATUS.md \u00a71 \u2014 waits inside procedure bodies (Phase 3)",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-22",
+  "entity": "procedure_wait",
+  "topUnit": "tb_procedure_wait",
+  "ports": [
+    {
+      "name": "q",
+      "dir": "out",
+      "type": "std_logic_vector",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "A process calls a procedure `step_state` whose body waits for 20 ns then toggles a signal formal. Pre-Phase-3, ProcedureCallStatement.ExecuteAsync only walked `report` and `<=` tokens in def.BodyRaw \u2014 every other token (including `wait`) was silently dropped, so the caller ran through the procedure body in zero time and `q` slammed to its post-wait value at t=0. Fix: ResolveBoundBody rebuilds the body per call with formal\u2192actual textual substitution, pushes a ProcedureFrame on the Process.Frames stack, and RunProcedureFromFrameAsync yields the entire process at the WaitForStatement inside the procedure. Q should step at 20/40/60/80/100/120 ns; pre-fix Kmila showed only the first transition at t=0.",
+  "referenceSources": [
+    "procedure_wait.vhd",
+    "tb_procedure_wait.vhd"
+  ],
+  "kmilaSource": "kmila.vhdl",
+  "expectedSynthDiagnostics": [
+    "BlackboxProcess"
+  ]
+}

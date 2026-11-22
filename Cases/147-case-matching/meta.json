@@ -1,0 +1,29 @@
+{
+  "id": "147-case-matching",
+  "title": "VHDL-2008 case? matching with `-` don't-care choices",
+  "sourceUrl": "internal: Tier 4.2 engine arc 2026-07-28",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-28",
+  "entity": "case_matching",
+  "topUnit": "case_matching_tb",
+  "ports": [
+    { "name": "clk", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "op",  "dir": "in",  "type": "std_logic_vector", "width": 4 },
+    { "name": "y",   "dir": "out", "type": "std_logic_vector", "width": 2 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "clocks": [{ "port": "clk" }],
+  "stimulus": [
+    { "t": 0,   "port": "op", "value": "1010" },
+    { "t": 40,  "port": "op", "value": "0101" },
+    { "t": 80,  "port": "op", "value": "1111" },
+    { "t": 120, "port": "op", "value": "0000" }
+  ],
+  "problemDescription": "case? statement with three wildcarded arms: '10--' catches 1000..1011, '0-01' catches 0001/0101 via a middle wildcard, and '1111' is an exact final arm. others falls through to '00'. Verifies both parser acceptance of `case?`/`is?` and interpreter's element-wise wildcard match.",
+  "referenceSources": ["case_matching.vhdl", "case_matching.test.vhdl"],
+  "kmilaSource": "kmila.vhdl",
+  "ghdlStd": "08"
+}

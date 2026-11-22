@@ -1,0 +1,26 @@
+{
+  "id": "024-flipflop-jk",
+  "title": "JK flip-flop with complementary output",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "entity": "jk_flip_flop",
+  "topUnit": "tb_jk_flip_flop",
+  "ports": [
+    { "name": "j",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "k",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "clk", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "q",   "dir": "out", "type": "std_logic", "width": 1 },
+    { "name": "nq",  "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 500,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "JK flip-flop. Transition table on rising clk edge: J=0,K=0→hold; 0,1→reset; 1,0→set; 1,1→toggle. nq is the complement of q.",
+  "referenceSources": ["jk_flip_flop.vhd", "tb_jk_flip_flop.vhd"],
+  "t0Divergence": "kmila.vhdl declara el registro con valor inicial (state := '0'); el DUT de referencia no lo tiene y su salida nace en U. Verificado 2026-11-19: Kmila sobre la referencia da en t=0 lo mismo que GHDL (v3.1.5).",
+  "kmilaSource": "kmila.vhdl"
+}

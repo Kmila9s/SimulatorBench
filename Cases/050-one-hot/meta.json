@@ -1,0 +1,22 @@
+{
+  "id": "050-one-hot",
+  "title": "7-input one-hot to 3-bit binary encoder",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "entity": "one_hot",
+  "topUnit": "one_hot_tb",
+  "ports": [
+    { "name": "si", "dir": "in",  "type": "std_logic_vector", "width": 7 },
+    { "name": "so", "dir": "out", "type": "std_logic_vector", "width": 3 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 30,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "7-bit one-hot encoder. Input bit index i (0..6) maps to binary (i+1) on so(2:0). Combinational.",
+  "referenceSources": ["one_hot.vhdl", "one_hot_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

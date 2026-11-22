@@ -1,0 +1,24 @@
+{
+  "id": "077-contsec",
+  "title": "3-bit custom-sequence counter (4→3→7→1→0→4…) with reset + self-correction",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "ContadorSec",
+  "topUnit": "ContadorSec_tb",
+  "ports": [
+    { "name": "rst_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "clk_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "q_o",   "dir": "out", "type": "std_logic_vector", "width": 3 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "3-bit counter walking a custom sequence: 100→011→111→001→000→100. Synchronous reset goes to 100. Any unused state self-corrects on next clk by mapping to one of the sequence states.",
+  "referenceSources": ["ContadorSec.vhdl", "ContadorSec_tb.vhdl"],
+  "t0Divergence": "kmila.vhdl declara el registro con valor inicial (q := \"100\"); el DUT de referencia no lo tiene y su salida nace en U. Verificado 2026-11-19: Kmila sobre la referencia da en t=0 lo mismo que GHDL (v3.1.5).",
+  "kmilaSource": "kmila.vhdl"
+}

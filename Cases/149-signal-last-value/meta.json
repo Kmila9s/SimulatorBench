@@ -1,0 +1,30 @@
+{
+  "id": "149-signal-last-value",
+  "title": "sig'last_value written to a clocked target — Tier 4.1 close-out fence",
+  "sourceUrl": "internal: Tier 4.1 signal-attribute arc close-out 2026-07-28",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-28",
+  "entity": "last_value_write",
+  "topUnit": "last_value_write_tb",
+  "ports": [
+    { "name": "clk",    "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "d",      "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "q",      "dir": "out", "type": "std_logic", "width": 1 },
+    { "name": "q_prev", "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 120,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "clocks": [{ "port": "clk" }],
+  "stimulus": [
+    { "t": 0,  "port": "d", "value": "0" },
+    { "t": 12, "port": "d", "value": "1" },
+    { "t": 32, "port": "d", "value": "0" },
+    { "t": 52, "port": "d", "value": "1" }
+  ],
+  "problemDescription": "Writes `d_reg'last_value` onto a clocked target `q_prev` inside a rising_edge(clk) process. Pre-close-out, this crashed at t=15 ns because ScheduledOperation.Execute never grew the DeferredAttribute dispatch branch (Operation.Execute did in Tier 4.1) and the RHS item silently dropped from the stack, tripping the malformed-expression guard. With the branch restored, the sim must run to completion and produce q_prev tracking d_reg's pre-transition value cycle by cycle.",
+  "referenceSources": ["last_value_write.vhdl", "last_value_write.test.vhdl"],
+  "kmilaSource": "kmila.vhdl",
+  "ghdlStd": "08"
+}

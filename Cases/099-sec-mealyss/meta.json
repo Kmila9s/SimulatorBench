@@ -1,0 +1,24 @@
+{
+  "id": "099-sec-mealyss",
+  "title": "Mealy '1011' detector WITHOUT overlap",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "Sec1011MealySS",
+  "topUnit": "Sec1011MealySS_tb",
+  "ports": [
+    { "name": "dat_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "rst_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "ckl_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "sal_o", "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Two-process Mealy '1011' detector WITHOUT overlap: from state D (saw 101), if dat=1 pulse sal=1 and return to A (no overlap); else return to A with sal=0.",
+  "referenceSources": ["Sec1011MealySS.vhdl", "Sec1011MealySS_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

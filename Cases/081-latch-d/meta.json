@@ -1,0 +1,24 @@
+{
+  "id": "081-latch-d",
+  "title": "D latch with enable (level-sensitive)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "LatchD",
+  "topUnit": "LatchD_tb",
+  "ports": [
+    { "name": "d_i",  "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "le_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "q_o",  "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Transparent D latch. While le_i='1', q follows d; while le_i='0', q holds (memory inferred by the partial when assignment).",
+  "referenceSources": ["LatchD.vhdl", "LatchD_tb.vhdl"],
+  "t0Divergence": "kmila.vhdl declara el registro con valor inicial (q := '0'); el DUT de referencia no lo tiene y su salida nace en U. Verificado 2026-11-19: Kmila sobre la referencia da en t=0 lo mismo que GHDL (v3.1.5).",
+  "kmilaSource": "kmila.vhdl"
+}

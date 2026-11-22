@@ -1,0 +1,24 @@
+{
+  "id": "054-abs1",
+  "title": "5-bit conditional XOR / 2's-complement converter",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "entity": "abs_1",
+  "topUnit": "abs_1_tb",
+  "ports": [
+    { "name": "si",  "dir": "in",  "type": "std_logic_vector", "width": 5 },
+    { "name": "smo", "dir": "out", "type": "std_logic_vector", "width": 5 },
+    { "name": "se",  "dir": "in",  "type": "std_logic_vector", "width": 1 },
+    { "name": "s",   "dir": "in",  "type": "std_logic_vector", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 30,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Combinational dual-mode converter. se='1' → smo = si XOR (s broadcast across all bits) [s='1' inverts, s='0' passes through]. se='0' → smo = 2's complement of si, computed bit-by-bit: bit i = (NOT si(i)) XOR (AND of all NOT si(j<i)) with bit 0 forced to si(0).",
+  "referenceSources": ["abs_1.vhdl", "abs_1_tb.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

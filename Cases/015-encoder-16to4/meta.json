@@ -1,0 +1,22 @@
+{
+  "id": "015-encoder-16to4",
+  "title": "16-to-4 priority encoder (chained when…else over 16 one-hot inputs)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/encoder",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "entity": "enc16x4",
+  "topUnit": "enc16x4_test",
+  "ports": [
+    { "name": "x", "dir": "in",  "type": "std_logic_vector", "width": 16 },
+    { "name": "y", "dir": "out", "type": "std_logic_vector", "width": 4 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 255,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "16-to-4 one-hot-to-binary encoder. Reference uses chained `when…else` over all 16 one-hot patterns. TB exhaustively sweeps x ∈ [0,65535] at 2ns each; bench duration caps at 256ns (128 transitions) to keep simulation tractable while still covering the meaningful one-hot patterns.",
+  "referenceSources": ["enc16x4.vhd", "enc16x4_test.vhd"],
+  "kmilaSource": "kmila.vhdl"
+}

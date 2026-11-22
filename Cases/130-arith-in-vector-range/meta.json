@@ -1,0 +1,22 @@
+{
+  "id": "130-arith-in-vector-range",
+  "title": "Vector range with arithmetic (W-1 downto 0) where W is a constant",
+  "sourceUrl": "internal: P4 lifo_stack generic-bound regression",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-06-23",
+  "entity": "arith_range",
+  "topUnit": "arith_range_tb",
+  "ports": [
+    { "name": "clk", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "data", "dir": "out", "type": "std_logic_vector", "width": 8 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 50,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "clocks": [{ "port": "clk" }],
+  "stimulus": [],
+  "problemDescription": "Signal declared with `std_logic_vector(W-1 downto 0)` where `W` is a local constant. After SourceElaborator's generic substitution, P4 ends up with `std_logic_vector(16-1 downto 0)` — Kmila's array-bound parser only handles literal ints. Fix: pre-evaluate arithmetic expressions in vector range bounds.",
+  "referenceSources": ["arith_range.vhdl", "arith_range.test.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}

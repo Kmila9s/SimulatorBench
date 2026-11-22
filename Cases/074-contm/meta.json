@@ -1,0 +1,26 @@
+{
+  "id": "074-contm",
+  "title": "Modulo-10 synchronous counter (4-bit) with reset, enable, terminal-count flag",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "entity": "ContM",
+  "topUnit": "ContM_tb",
+  "ports": [
+    { "name": "clk_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "rst_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "ena_i", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "tc_o",  "dir": "out", "type": "std_logic", "width": 1 },
+    { "name": "q_o",   "dir": "out", "type": "std_logic_vector", "width": 4 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 510,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "autoStimulus": true,
+  "stimulus": [],
+  "problemDescription": "Mod-10 synchronous counter. On rising clk: rst='1' clears to 0; else if ena='1', q advances 0→1→…→9→0 (wraps at 9). tc_o='1' iff q==9.",
+  "referenceSources": ["ContM.vhdl", "ContM_tb.vhdl"],
+  "t0Divergence": "kmila.vhdl declara el registro con valor inicial (q := (others => '0')); el DUT de referencia no lo tiene y su salida nace en U. Verificado 2026-11-19: Kmila sobre la referencia da en t=0 lo mismo que GHDL (v3.1.5).",
+  "kmilaSource": "kmila.vhdl"
+}

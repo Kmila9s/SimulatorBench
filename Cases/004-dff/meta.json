@@ -1,0 +1,31 @@
+{
+  "id": "004-dff",
+  "title": "D flip-flop (process with variable + rising_edge)",
+  "sourceUrl": "https://github.com/CodiieSB/VHDL-DFlipFlop",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-03",
+  "entity": "DFF",
+  "topUnit": "TB_DFF",
+  "ports": [
+    { "name": "clk", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "D",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "Q",   "dir": "out", "type": "std_logic", "width": 1 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "ghdlStd": "93c",
+  "clocks": [{ "port": "clk" }],
+  "stimulus": [
+    { "t": 0,   "port": "D", "value": "0" },
+    { "t": 35,  "port": "D", "value": "1" },
+    { "t": 73,  "port": "D", "value": "0" },
+    { "t": 123, "port": "D", "value": "1" },
+    { "t": 145, "port": "D", "value": "0" }
+  ],
+  "problemDescription": "Edge-triggered D flip-flop: on rising edge of clk, Q captures D; otherwise Q holds. Reference uses a process-local variable for the captured value.",
+  "referenceSources": ["DFF.vhd", "TB_DFF.vhd"],
+  "t0Divergence": "La referencia asigna Q desde una variable de proceso fuera del flanco (Q=0 en t=0); kmila.vhdl asigna Q solo dentro de rising_edge. Verificado 2026-11-19: Kmila sobre la referencia da Q=0 en t=0, como GHDL (v3.1.5).",
+  "kmilaSource": "kmila.vhdl"
+}

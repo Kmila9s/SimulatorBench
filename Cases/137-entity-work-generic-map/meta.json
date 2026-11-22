@@ -1,0 +1,26 @@
+{
+  "id": "137-entity-work-generic-map",
+  "title": "Top entity instantiates a parametric sub-entity via `entity work.X generic map (…) port map (…)`",
+  "sourceUrl": "internal: Kmila audit F-G-05 (2026-07-12) — direct-entity instantiation with generic override",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-12",
+  "entity": "gen_inst_top",
+  "topUnit": "gen_inst_top_tb",
+  "ports": [
+    { "name": "clk",   "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "n_rst", "dir": "in",  "type": "std_logic", "width": 1 },
+    { "name": "cout",  "dir": "out", "type": "std_logic_vector", "width": 8 }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "clocks": [{ "port": "clk" }],
+  "stimulus": [
+    { "t": 0,  "port": "n_rst", "value": "0" },
+    { "t": 10, "port": "n_rst", "value": "1" }
+  ],
+  "problemDescription": "Top entity `gen_inst_top` instantiates a parametric counter sub-entity using the VHDL-2008 direct-instantiation form with a `generic map` clause: `u_cnt : entity work.counter_n generic map (WIDTH => 8) port map (...)`. The generic overrides the child's WIDTH=4 default so the observable output matches case 132's 8-bit counter. Regression coverage for audit F-G-05 — the Kmila interpreter's `SyntetizeBehaviour` used to swallow the `entity` keyword and route the rest through the signal-assignment path, throwing `Unexpected token 'generic' after 'work.counter_n'`. Fix landed 2026-07-12: `case \"entity\":` added to the KEYWORDS switch in `Interpreter/Services/Architecture.cs`.",
+  "referenceSources": ["gen_inst_top.vhdl", "gen_inst_top.test.vhdl"],
+  "kmilaSource": "kmila.vhdl"
+}
