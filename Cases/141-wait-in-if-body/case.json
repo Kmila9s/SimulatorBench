@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "id": "141-wait-in-if-body",
+  "title": "wait for N ns inside an if branch body — F-G-13d regression fence",
+  "sourceUrl": "internal: STATUS.md §1 — waits inside if/case/nested-loop bodies",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-22",
+  "problemDescription": "A process with a self-driving if-else that waits inside each branch. Pre-fix, IfStructure.SyntetizeBranchBody dropped `wait` via ParseTrace.SkipWaitStatement — the process ran through without yielding and `state` slammed to '1' at t=0. Fix: capture wait as WaitForStatement task and route runtime through the process-aware RunTopIfFromEntryAsync path with a BranchFrame that resumes past the wait.",
+  "ports": [
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true,
+  "expectedSynthDiagnostics": [
+    "BlackboxProcess"
+  ]
+}

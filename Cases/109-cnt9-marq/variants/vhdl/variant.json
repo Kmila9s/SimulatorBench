@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ex06_counter_9bit.vhd",
+    "tb_ex06_counter_9bit.vhd"
+  ],
+  "top": "TB_Exercici_6",
+  "entity": "Exercici_6",
+  "portTypes": {
+    "clk": "std_logic",
+    "rst": "std_logic",
+    "Q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

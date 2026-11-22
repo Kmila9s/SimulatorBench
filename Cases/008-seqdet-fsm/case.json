@@ -1,0 +1,137 @@
+{
+  "version": 2,
+  "id": "008-seqdet-fsm",
+  "title": "Overlapping sequence detector FSM (detects '1001' or '1111')",
+  "sourceUrl": "https://github.com/MayElfkiy/Sequence-Detector-VHDL",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-03",
+  "problemDescription": "Overlapping sequence detector: asserts det_vld for one cycle whenever the most recent input bits form '1001' or '1111'. Synchronous, positive edge, active-high reset. Input bit stream: 01011110011001111... .",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "reset",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "seq",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "det_vld",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "reset",
+      "value": "0"
+    },
+    {
+      "t": 0,
+      "port": "seq",
+      "value": "0"
+    },
+    {
+      "t": 10,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 20,
+      "port": "seq",
+      "value": "0"
+    },
+    {
+      "t": 30,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 40,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 50,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 60,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 70,
+      "port": "seq",
+      "value": "0"
+    },
+    {
+      "t": 80,
+      "port": "seq",
+      "value": "0"
+    },
+    {
+      "t": 90,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 100,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 110,
+      "port": "seq",
+      "value": "0"
+    },
+    {
+      "t": 120,
+      "port": "seq",
+      "value": "0"
+    },
+    {
+      "t": 130,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 140,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 150,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 160,
+      "port": "seq",
+      "value": "1"
+    },
+    {
+      "t": 170,
+      "port": "seq",
+      "value": "1"
+    }
+  ],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

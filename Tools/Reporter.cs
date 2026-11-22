@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Kmila.Shared.Services.Vcd;
 
 namespace SimulatorBench.Tools;
@@ -9,6 +10,7 @@ public static class Reporter
     /// <summary>Indented JSON for every file the bench writes (report, diffs, audits).</summary>
     public static readonly JsonSerializerOptions Indented = new() { WriteIndented = true };
 
+    /// <summary>One case of a run: its verdict and each variant's result.</summary>
     public sealed class CaseResult
     {
         public string Id { get; set; } = "";
@@ -16,20 +18,38 @@ public static class Reporter
         public bool Pass { get; set; }
         public bool Skipped { get; set; }
         public string? SkipReason { get; set; }
-        /// <summary>Catalogued engine gap behind this case's mismatch (meta <c>knownGap</c>), or null.</summary>
+        /// <summary>Supported languages without a variant (the case fails).</summary>
+        public List<string> MissingVariants { get; set; } = new();
+        /// <summary>False when the variants' reference simulators disagree on the compared ports.</summary>
+        public bool GoldensAgree { get; set; } = true;
+        /// <summary>known-gaps.json reasons of this case's failing variants, or null.</summary>
         public string? KnownGap { get; set; }
+        public List<VariantResult> Variants { get; set; } = new();
+
+        /// <summary>Kmila time across variants.</summary>
+        [JsonIgnore] public long KmilaMs => Variants.Sum(v => v.KmilaMs);
+        [JsonIgnore] public int RoundTripRaws => Variants.Sum(v => v.RoundTripRaws);
+        [JsonIgnore] public int RoundTripDiags => Variants.Sum(v => v.RoundTripDiags);
+    }
+
+    /// <summary>One variant of a case: the comparison against its golden, or why it did not get that far.</summary>
+    public sealed class VariantResult
+    {
+        public string Language { get; set; } = "";
+        public bool Pass { get; set; }
         /// <summary>Per-port comparison against the golden dump (null when a simulator failed first).</summary>
         public List<SignalDiff>? Diff { get; set; }
-        public string? GhdlError { get; set; }
+        public string? ReferenceError { get; set; }
         public string? KmilaError { get; set; }
         public long KmilaMs { get; set; }
-        // 2026-07-20 Phase 21 — populated only when `run --roundtrip` was
-        // active; zero otherwise. Reported alongside the [PASS]/[FAIL]
-        // flag so triage can see which cases carried raw-fallback residue
-        // or silent-loss diagnostics through the round-trip.
+        /// <summary>Block-editor round trip (<c>--roundtrip</c>): raw fallbacks and silent-loss diagnostics carried through.</summary>
         public int RoundTripRaws { get; set; }
         public int RoundTripDiags { get; set; }
     }
+
+    /// <summary>The flag a case prints with.</summary>
+    public static string Flag(CaseResult r) =>
+        r.Skipped ? "SKIP" : r.Pass ? "PASS" : r.MissingVariants.Count > 0 ? "MISSING" : r.KnownGap != null ? "GAP" : "FAIL";
 
     public static void WriteConsoleSummary(IReadOnlyList<CaseResult> results)
     {
@@ -44,32 +64,20 @@ public static class Reporter
         Console.WriteLine(new string('=', 64));
         Console.WriteLine($" SimulatorBench summary");
         Console.WriteLine(new string('=', 64));
-        // Phase 21: any case carrying RT metrics implies --roundtrip was
-        // active. Show them inline on the PASS/FAIL line for at-a-glance
-        // triage.
         bool anyRt = results.Any(r => r.RoundTripRaws > 0 || r.RoundTripDiags > 0);
         foreach (var r in results)
         {
-            string flag = r.Skipped ? "SKIP" : r.Pass ? "PASS" : r.KnownGap != null ? "GAP" : "FAIL";
-            string rt = anyRt
-                ? $"  RT: {r.RoundTripRaws} raws / {r.RoundTripDiags} diags"
-                : "";
-            Console.WriteLine($"  [{flag}] {r.Id,-32} {r.Title}{rt}");
+            string rt = anyRt ? $"  RT: {r.RoundTripRaws} raws / {r.RoundTripDiags} diags" : "";
+            Console.WriteLine($"  [{Flag(r)}] {r.Id,-32} {r.Title}{rt}");
             if (r.Skipped) Console.WriteLine($"         skip: {r.SkipReason}");
+            if (r.MissingVariants.Count > 0) Console.WriteLine($"         missing variant: {string.Join(", ", r.MissingVariants)}");
+            if (!r.GoldensAgree) Console.WriteLine("         the variants' goldens disagree");
             if (r.KnownGap != null) Console.WriteLine($"         known gap: {r.KnownGap}");
-            if (!r.Skipped && !r.Pass && r.Diff != null)
+            if (r.Pass || r.Skipped) continue;
+            foreach (var (line, examples) in FailureLines(r))
             {
-                foreach (var pd in r.Diff.Where(p => !p.Equal))
-                {
-                    if (pd.Missing != MissingSide.None) Console.WriteLine($"         {pd.Signal}: skipped — {pd.MissingFrom("golden VCD", "kmila VCD")}");
-                    else
-                    {
-                        Console.WriteLine($"         {pd.Signal}: {pd.Mismatches}/{pd.Samples} mismatched");
-                        foreach (var ex in pd.Examples) Console.WriteLine($"           · {ExampleText(ex)}");
-                    }
-                }
-                if (!string.IsNullOrEmpty(r.GhdlError))  Console.WriteLine($"         ghdl:  {Truncate(r.GhdlError, 200)}");
-                if (!string.IsNullOrEmpty(r.KmilaError)) Console.WriteLine($"         kmila: {Truncate(r.KmilaError, 200)}");
+                Console.WriteLine($"         {line}");
+                foreach (var ex in examples) Console.WriteLine($"           · {ExampleText(ex)}");
             }
         }
         Console.WriteLine(new string('-', 64));
@@ -150,19 +158,11 @@ public static class Reporter
             sb.AppendLine();
             foreach (var f in failures)
             {
-                sb.AppendLine($"### `{f.Id}` — {f.Title}");
-                if (!string.IsNullOrEmpty(f.GhdlError))
-                    sb.AppendLine($"- **GHDL error**: `{Truncate(f.GhdlError, 200)}`");
-                if (!string.IsNullOrEmpty(f.KmilaError))
-                    sb.AppendLine($"- **Kmila error**: `{Truncate(f.KmilaError, 200)}`");
-                if (f.Diff != null)
-                    foreach (var pd in f.Diff.Where(p => !p.Equal))
-                    {
-                        if (pd.Missing != MissingSide.None)
-                            sb.AppendLine($"- port `{pd.Signal}` skipped — {pd.MissingFrom("golden VCD", "kmila VCD")}");
-                        else
-                            sb.AppendLine($"- port `{pd.Signal}` — {pd.Mismatches}/{pd.Samples} mismatched");
-                    }
+                sb.AppendLine($"### `{f.Id}` — {f.Title} ({Flag(f)})");
+                if (f.KnownGap != null) sb.AppendLine($"- **Known gap**: {f.KnownGap}");
+                foreach (var lang in f.MissingVariants) sb.AppendLine($"- **Missing variant**: `{lang}`");
+                foreach (var (line, _) in FailureLines(f))
+                    sb.AppendLine($"- {line}");
                 sb.AppendLine();
             }
         }
@@ -195,6 +195,21 @@ public static class Reporter
     }
 
     private static string Truncate(string s, int n) => s.Length <= n ? s : s.Substring(0, n) + "…";
+
+    /// <summary>
+    /// What went wrong in each failing variant of <paramref name="r"/>, one line per
+    /// port or error (with the port's first mismatches), for the console and the report.
+    /// </summary>
+    private static IEnumerable<(string Line, IReadOnlyList<ValueMismatch> Examples)> FailureLines(CaseResult r)
+    {
+        foreach (var v in r.Variants.Where(v => !v.Pass))
+        {
+            foreach (var pd in v.Diff?.Where(p => !p.Equal) ?? [])
+                yield return ($"[{v.Language}] {pd.Describe("golden", "kmila", firstMismatch: false)}", pd.Examples);
+            if (!string.IsNullOrEmpty(v.ReferenceError)) yield return ($"[{v.Language}] reference: {Truncate(v.ReferenceError, 200)}", []);
+            if (!string.IsNullOrEmpty(v.KmilaError)) yield return ($"[{v.Language}] kmila: {Truncate(v.KmilaError, 200)}", []);
+        }
+    }
 
     /// <summary>One mismatch as the bench has always printed it.</summary>
     public static string ExampleText(ValueMismatch m) => $"t={m.TimeFs}fs  golden={m.Expected}  kmila={m.Actual}";

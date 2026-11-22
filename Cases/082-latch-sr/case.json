@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "082-latch-sr",
+  "title": "SR latch with reset priority",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "SR latch with reset priority. r='1' forces q=0 (highest priority); s='1' forces q=1; both 0 → q holds.",
+  "ports": [
+    {
+      "name": "r_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "s_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

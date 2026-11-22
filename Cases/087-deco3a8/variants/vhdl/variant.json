@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Deco3a8.vhdl",
+    "Deco3a8_tb.vhdl"
+  ],
+  "top": "Deco3a8_tb",
+  "entity": "Deco3a8",
+  "portTypes": {
+    "a_i": "std_logic_vector",
+    "ena_i": "std_logic",
+    "y_o": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

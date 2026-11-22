@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "id": "033-priority",
+  "title": "32-to-5 priority encoder (highest-index-set wins, process+for-loop)",
+  "sourceUrl": "https://github.com/fcayci/vhdl-digital-design",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "32-to-5 priority encoder. Reference loops i=0..31 and assigns b <= i whenever a(i)='1' — the highest index with a '1' wins (because later assignments override). Output is 5-bit binary index, or 0 if no bit is set.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 32
+    },
+    {
+      "name": "b",
+      "dir": "out",
+      "width": 5
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 140,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

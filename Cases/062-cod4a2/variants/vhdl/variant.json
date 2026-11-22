@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Cod4a2.vhdl",
+    "Cod4a2_tb.vhdl"
+  ],
+  "top": "Cod4a2_tb",
+  "entity": "Cod4a2",
+  "portTypes": {
+    "i_i": "std_logic_vector",
+    "y_o": "std_logic_vector",
+    "g_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

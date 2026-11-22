@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "sipo.vhdl",
+    "sipo_tb.vhdl"
+  ],
+  "top": "sipo_tb",
+  "entity": "sipo",
+  "portTypes": {
+    "clk": "std_logic",
+    "se": "std_logic_vector",
+    "D": "std_logic_vector",
+    "Dl": "std_logic",
+    "Dr": "std_logic",
+    "Q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

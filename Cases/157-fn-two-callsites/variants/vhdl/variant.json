@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_two_callsites.vhdl",
+    "fn_two_callsites.test.vhdl"
+  ],
+  "top": "fn_two_callsites_tb",
+  "entity": "fn_two_callsites",
+  "standard": "08",
+  "portTypes": {
+    "a": "std_logic",
+    "b": "std_logic",
+    "y1": "std_logic",
+    "y2": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

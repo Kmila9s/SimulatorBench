@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "half_adder.vhd",
+    "full_adder.vhd",
+    "tb_full_adder.vhd"
+  ],
+  "top": "tb_full_adder",
+  "entity": "full_adder",
+  "portTypes": {
+    "a": "std_logic",
+    "b": "std_logic",
+    "cin": "std_logic",
+    "s": "std_logic",
+    "cout": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "process_local_ram.vhdl",
+    "process_local_ram.test.vhdl"
+  ],
+  "top": "process_local_ram_tb",
+  "entity": "process_local_ram",
+  "portTypes": {
+    "clk": "std_logic",
+    "we": "std_logic",
+    "addr": "std_logic_vector",
+    "din": "std_logic_vector",
+    "dout": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

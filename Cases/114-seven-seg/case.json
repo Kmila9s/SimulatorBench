@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "114-seven-seg",
+  "title": "Hexadecimal 7-segment decoder (with…select truth table)",
+  "sourceUrl": "https://github.com/Aliflori/VHDL-Digital-Logic-Labs",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "Hex (0-F) to 7-segment-with-decimal-point decoder. outSelect mirrors inSelect (pass-through). out7Seg is the 8-bit common-anode encoding of inDigit's hex value.",
+  "ports": [
+    {
+      "name": "inDigit",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "inSelect",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "outSelect",
+      "dir": "out",
+      "width": 4
+    },
+    {
+      "name": "out7Seg",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 80,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

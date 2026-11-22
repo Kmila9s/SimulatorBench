@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ex05_demux_1to4.vhd",
+    "tb_ex05_demux_1to4.vhd"
+  ],
+  "top": "TB_Exercici_5",
+  "entity": "Exercici_5",
+  "portTypes": {
+    "D": "std_logic",
+    "sel": "std_logic_vector",
+    "Y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "one_hot.vhdl",
+    "one_hot_tb.vhdl"
+  ],
+  "top": "one_hot_tb",
+  "entity": "one_hot",
+  "portTypes": {
+    "si": "std_logic_vector",
+    "so": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

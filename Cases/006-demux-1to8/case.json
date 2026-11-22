@@ -1,0 +1,87 @@
+{
+  "version": 2,
+  "id": "006-demux-1to8",
+  "title": "1-to-8 demultiplexer (per-bit with...select + after 20 ns)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/demux",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-03",
+  "problemDescription": "1-to-8 demux: y(sel) <= x; other outputs '0'. Bits 0 and 1 carry a 20 ns inertial/transport delay; bits 2-7 are instantaneous. Exercises both per-bit with…select (bug #5/#9 path) and `after N ns` (bug #8 path) at the same time.",
+  "ports": [
+    {
+      "name": "x",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "sel",
+      "dir": "in",
+      "width": 3
+    },
+    {
+      "name": "y",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 500,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "x",
+      "value": "0"
+    },
+    {
+      "t": 0,
+      "port": "sel",
+      "value": "000"
+    },
+    {
+      "t": 100,
+      "port": "x",
+      "value": "1"
+    },
+    {
+      "t": 150,
+      "port": "x",
+      "value": "0"
+    },
+    {
+      "t": 180,
+      "port": "x",
+      "value": "1"
+    },
+    {
+      "t": 200,
+      "port": "x",
+      "value": "0"
+    },
+    {
+      "t": 300,
+      "port": "sel",
+      "value": "001"
+    },
+    {
+      "t": 300,
+      "port": "x",
+      "value": "1"
+    },
+    {
+      "t": 350,
+      "port": "x",
+      "value": "0"
+    },
+    {
+      "t": 380,
+      "port": "x",
+      "value": "1"
+    },
+    {
+      "t": 400,
+      "port": "x",
+      "value": "0"
+    }
+  ]
+}

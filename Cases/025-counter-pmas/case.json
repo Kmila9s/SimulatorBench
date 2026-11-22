@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "025-counter-pmas",
+  "title": "10-bit counter with load + clock-enable + reset (pmassolino)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "10-bit synchronous counter with load + clock-enable + sync reset. Standard rising-edge clocked design with priority: rst > load > ce.",
+  "ports": [
+    {
+      "name": "d",
+      "dir": "in",
+      "width": 10
+    },
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "ce",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "load",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 10
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 1000,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

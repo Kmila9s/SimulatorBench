@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "061-compar-fsm",
+  "title": "Serial 2-bit comparator FSM (a vs b, MSB-first)",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "Sticky serial comparator FSM. ab(0)=a-bit, ab(1)=b-bit, MSB-first. Three states (equal, a>b, b>a). Once we have evidence one side leads, the FSM stays there unless the other side gets a decisive bit. o reports current verdict: 00=equal, 10=a wins, 01=b wins.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "reset",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "ab",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "o",
+      "dir": "out",
+      "width": 2
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 240,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

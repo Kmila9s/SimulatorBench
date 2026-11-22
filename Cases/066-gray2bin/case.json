@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "id": "066-gray2bin",
+  "title": "4-bit Gray-to-binary converter",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "Gray-to-binary code converter (4-bit). Binary MSB = Gray MSB; each lower binary bit = XOR of previous binary bit and Gray bit at that position. Inverse of binary-to-Gray.",
+  "ports": [
+    {
+      "name": "g_i",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "b_o",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 20,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

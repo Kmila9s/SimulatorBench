@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_case_arm_local_var.vhdl",
+    "fn_case_arm_local_var.test.vhdl"
+  ],
+  "top": "fn_case_arm_local_var_tb",
+  "entity": "fn_case_arm_local_var",
+  "standard": "08",
+  "portTypes": {
+    "sel": "std_logic_vector",
+    "a": "std_logic_vector",
+    "b": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

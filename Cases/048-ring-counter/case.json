@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "048-ring-counter",
+  "title": "Ring counter (one-hot) + Johnson counter, 4-bit each",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "Two parallel shift registers clocked by clk. Q is a one-hot ring counter initialized to 0001 that rotates each cycle. Q2 is a Johnson counter initialized to 0000 that shifts in the negation of its MSB.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "Q",
+      "dir": "out",
+      "width": 4
+    },
+    {
+      "name": "Q2",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

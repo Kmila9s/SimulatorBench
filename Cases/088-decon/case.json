@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "088-decon",
+  "title": "2-to-4 decoder with active-high enable (TB sets N=2)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "2-to-4 decoder. ena_i='0' → y_o=0000. Otherwise y_o has a single '1' at position a_i.",
+  "ports": [
+    {
+      "name": "a_i",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "ena_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "y_o",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 20,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

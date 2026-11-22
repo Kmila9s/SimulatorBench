@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "020-xor-gate",
+  "title": "8-bit vector XOR",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "Bitwise XOR of two 8-bit vectors. c <= a xor b.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "c",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

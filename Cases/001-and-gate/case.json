@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "id": "001-and-gate",
+  "title": "AND gate with assertion-checked testbench",
+  "sourceUrl": "https://github.com/Kreijstal/AND-gate-cosim-madness/tree/master/ghdl_IEEE",
+  "license": "unspecified (repo has no LICENSE file as of 2026-06-02; reference/ not redistributed if license review fails)",
+  "fetchedAt": "2026-06-02",
+  "problemDescription": "Two-input combinational AND gate. y = a AND b. Reference TB runs an exhaustive 4-input sweep with 1ns assertion windows after a 100ns warm-up.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "y",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "a",
+      "value": "0"
+    },
+    {
+      "t": 0,
+      "port": "b",
+      "value": "0"
+    },
+    {
+      "t": 101,
+      "port": "b",
+      "value": "1"
+    },
+    {
+      "t": 102,
+      "port": "a",
+      "value": "1"
+    },
+    {
+      "t": 102,
+      "port": "b",
+      "value": "0"
+    },
+    {
+      "t": 103,
+      "port": "b",
+      "value": "1"
+    }
+  ]
+}

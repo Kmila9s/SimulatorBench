@@ -1,0 +1,13 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "procedure_if_branch.vhd",
+    "tb_procedure_if_branch.vhd"
+  ],
+  "top": "tb_procedure_if_branch",
+  "entity": "procedure_if_branch",
+  "portTypes": {
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

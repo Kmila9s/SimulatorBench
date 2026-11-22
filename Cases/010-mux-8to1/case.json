@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "010-mux-8to1",
+  "title": "8-to-1 multiplexer (concurrent SOP, nested-loop exhaustive TB)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/mux",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-04",
+  "problemDescription": "8-to-1 mux: y = x(to_integer(unsigned(sel))). Reference TB sweeps every combination of sel ∈ [0,7] and x ∈ [0,255] at 2 ns each — 2048 transitions, ~4096 ns total. autoStimulus derives the input transitions from GHDL's golden VCD; transcribing the nested loops by hand would be error-prone.",
+  "ports": [
+    {
+      "name": "sel",
+      "dir": "in",
+      "width": 3
+    },
+    {
+      "name": "x",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "y",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 4095,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "and_gate.vhdl",
+    "and_gate_tb.vhdl"
+  ],
+  "top": "and_gate_tb",
+  "entity": "and_gate",
+  "portTypes": {
+    "a": "std_logic",
+    "b": "std_logic",
+    "y": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fsm.vhd",
+    "tb_fsm.vhd"
+  ],
+  "top": "tb_fsm",
+  "entity": "fsm",
+  "portTypes": {
+    "clk": "std_logic",
+    "a": "std_logic",
+    "b": "std_logic",
+    "mealy": "std_logic",
+    "moore": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

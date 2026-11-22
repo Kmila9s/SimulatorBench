@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "092-sec-mealy",
+  "title": "Mealy-state '101' detector (fires on next dat=1 → 1011)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "Two-process Mealy FSM. 4 states (A=initial, B=saw 1, C=saw 10, D=saw 101). sal_o pulses '1' on the transition from D when dat_i='1' (i.e. when the 4th bit completes 1011). Allows overlap.",
+  "ports": [
+    {
+      "name": "dat_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "sal_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

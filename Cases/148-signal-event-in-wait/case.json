@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "148-signal-event-in-wait",
+  "title": "clk'event and clk='1' idiom — Tier 4.1 DeferredAttribute regression fence",
+  "sourceUrl": "internal: Tier 4.1 signal-attribute arc 2026-07-28",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-28",
+  "problemDescription": "4-bit counter using the pre-2008 `if clk'event and clk='1' then` idiom instead of `rising_edge(clk)`. Before Tier 4.1, clk'event was baked as a static Variable literal at synth time and never refreshed across process executions. With DeferredAttribute in place, this must produce the same VCD as the equivalent rising_edge(clk) form.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "n_rst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "count",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "n_rst",
+      "value": "0"
+    },
+    {
+      "t": 10,
+      "port": "n_rst",
+      "value": "1"
+    }
+  ],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

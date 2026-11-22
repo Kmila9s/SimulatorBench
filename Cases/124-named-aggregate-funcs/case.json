@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "id": "124-named-aggregate-funcs",
+  "title": "Constant array with named-association aggregate + user-defined function elements + others fallback",
+  "sourceUrl": "internal: Kmila constant-array named-aggregate regression (handoff §5 P2A shape)",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-06-22",
+  "problemDescription": "ROM initialized with named-association aggregate `(0 => pack(3), 1 => pack(5), ..., others => (others => '0'))` where `pack` is a user-defined function defined in the architecture declarative part. Indexed read each cycle. Mirrors P2A's rom_init shape. Tests: (a) named-association aggregate parsing, (b) user-defined function evaluation at constant-init time, (c) `others =>` fallback fill for unspecified slots, (d) cooperates with the positional-aggregate path shipped in 122/123.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "addr",
+      "dir": "in",
+      "width": 3
+    },
+    {
+      "name": "data",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "addr",
+      "value": "000"
+    },
+    {
+      "t": 20,
+      "port": "addr",
+      "value": "011"
+    },
+    {
+      "t": 40,
+      "port": "addr",
+      "value": "111"
+    },
+    {
+      "t": 60,
+      "port": "addr",
+      "value": "101"
+    }
+  ],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

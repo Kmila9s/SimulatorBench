@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "others_rhs_clocked_reset.vhdl",
+    "others_rhs_clocked_reset.test.vhdl"
+  ],
+  "top": "others_rhs_clocked_reset_tb",
+  "entity": "others_rhs_clocked_reset",
+  "portTypes": {
+    "clk": "std_logic",
+    "rst": "std_logic",
+    "d": "std_logic_vector",
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

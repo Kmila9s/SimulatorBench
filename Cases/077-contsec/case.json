@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "077-contsec",
+  "title": "3-bit custom-sequence counter (4→3→7→1→0→4…) with reset + self-correction",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "3-bit counter walking a custom sequence: 100→011→111→001→000→100. Synchronous reset goes to 100. Any unused state self-corrects on next clk by mapping to one of the sequence states.",
+  "ports": [
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 3
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

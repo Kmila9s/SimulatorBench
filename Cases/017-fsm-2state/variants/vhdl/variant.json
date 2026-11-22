@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "problem_9_2_3.vhd",
+    "problem_9_2_3_test.vhd"
+  ],
+  "top": "problem_9_2_3_test",
+  "entity": "problem_9_2_3",
+  "portTypes": {
+    "clock": "std_logic",
+    "din": "std_logic",
+    "reset": "std_logic",
+    "dout": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

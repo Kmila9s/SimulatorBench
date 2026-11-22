@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "035-fsm-fcayci",
+  "title": "Mealy+Moore FSM (3 architectures: rtla/rtlb/rtlc; TB instantiates all three)",
+  "sourceUrl": "https://github.com/fcayci/vhdl-digital-design",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "3-state FSM with both Moore (depends on state) and Mealy (depends on state + input) outputs. States S0/S1/S2; transitions on a + b. Reference has 3 architectures (3-process, 2-process, 1-process); the TB instantiates all three.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "mealy",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "moore",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 500,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

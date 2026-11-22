@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "parity.vhd",
+    "tb_parity.vhd"
+  ],
+  "top": "tb_parity",
+  "entity": "parity",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "t": "std_logic",
+    "p": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "id": "143-wait-in-nested-loop",
+  "title": "wait inside a nested for-loop body — F-G-13d regression fence",
+  "sourceUrl": "internal: STATUS.md §1 — waits inside if/case/nested-loop bodies",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-22",
+  "problemDescription": "Two nested for loops; the innermost body has a wait. Session 23 F-G-13c handled waits in a single loop's Tasks. Phase 2 extends the resumable loop executor to route nested for/while dispatch through the same process-aware path so nested-body waits suspend the whole process stack. Post-fix q should step 0→1→2→3→4 at 10 ns cadence.",
+  "ports": [
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true,
+  "expectedSynthDiagnostics": [
+    "BlackboxProcess"
+  ]
+}

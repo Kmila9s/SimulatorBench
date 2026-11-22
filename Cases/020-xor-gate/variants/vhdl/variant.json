@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "xor_gate.vhd",
+    "tb_xor_gate.vhd"
+  ],
+  "top": "tb_xor_gate",
+  "entity": "xor_gate",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "b": "std_logic_vector",
+    "c": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

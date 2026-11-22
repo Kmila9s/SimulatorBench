@@ -1,0 +1,13 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "procedure_time_formal.vhd",
+    "tb_procedure_time_formal.vhd"
+  ],
+  "top": "tb_procedure_time_formal",
+  "entity": "procedure_time_formal",
+  "portTypes": {
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

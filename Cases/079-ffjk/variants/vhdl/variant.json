@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "FFJK_cl_ps.vhdl",
+    "FFJK_cl_ps_tb.vhdl"
+  ],
+  "top": "FFJK_cl_ps_tb",
+  "entity": "FFJK_cl_ps",
+  "portTypes": {
+    "j_i": "std_logic",
+    "k_i": "std_logic",
+    "clk_i": "std_logic",
+    "cl_i": "std_logic",
+    "ps_i": "std_logic",
+    "q_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "132-entity-work-inst",
+  "title": "Top entity instantiates a sub-entity via direct `entity work.X(arch) port map(...)`",
+  "sourceUrl": "internal: Kmila Gap B (handoff) — direct entity instantiation form",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-06-23",
+  "problemDescription": "Top entity `ent_inst_top` instantiates a counter sub-entity using the canonical VHDL'93+ direct-instantiation form `dut : entity work.counter8(rtl) port map (...)` — no `component ... end component;` declaration in the parent. SourceElaborator's InstanceRe regex already recognises this form; this case locks in that the full path (parser + elaborator + sim) works end to end.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "n_rst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "cout",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "n_rst",
+      "value": "0"
+    },
+    {
+      "t": 10,
+      "port": "n_rst",
+      "value": "1"
+    }
+  ],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

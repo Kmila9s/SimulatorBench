@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "id": "146-procedure-time-formal",
+  "title": "type time as a procedure formal — Session 27 follow-up fence",
+  "sourceUrl": "internal: STATUS.md §1 — Phase 3 follow-up (type time parameter)",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-23",
+  "problemDescription": "Case 144's original draft had `constant delay_ns : in time` as a procedure formal and the process's declarative-part parse mishandled it, leaving `state` uninitialized so q emitted '0000'. Simplified to a signal-only formal to unblock Phase 3 shipping; this case is the regression fence for the eventual fix. Expected behaviour: identical to 144 (state alternates between '0' and '1' at 20 ns cadence, q alternates '0101'/'1010').",
+  "ports": [
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true,
+  "expectedSynthDiagnostics": [
+    "BlackboxProcess"
+  ]
+}

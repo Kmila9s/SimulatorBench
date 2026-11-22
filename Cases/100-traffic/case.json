@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "100-traffic",
+  "title": "Traffic-light controller (Moore FSM, 3 states)",
+  "sourceUrl": "https://github.com/Mohamedsalem80/VHDL-tutorial",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "3-state Moore traffic light FSM. reset='1' goes to red; enable='1' on each rising clk advances red→yellow→green→red.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "reset",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "enable",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "red",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "yellow",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "green",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 260,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

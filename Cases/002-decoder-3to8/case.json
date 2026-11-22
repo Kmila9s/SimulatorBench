@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "id": "002-decoder-3to8",
+  "title": "3-to-8 line decoder (concurrent SOP)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/decoder",
+  "license": "unspecified (repo has no LICENSE file as of 2026-06-02)",
+  "fetchedAt": "2026-06-02",
+  "problemDescription": "3-to-8 line decoder: output(i) = 1 iff input == i (binary). Pure SOP combinational.",
+  "ports": [
+    {
+      "name": "input",
+      "dir": "in",
+      "width": 3
+    },
+    {
+      "name": "output",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 20,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "input",
+      "value": "000"
+    },
+    {
+      "t": 2,
+      "port": "input",
+      "value": "001"
+    },
+    {
+      "t": 4,
+      "port": "input",
+      "value": "010"
+    },
+    {
+      "t": 6,
+      "port": "input",
+      "value": "011"
+    },
+    {
+      "t": 8,
+      "port": "input",
+      "value": "100"
+    },
+    {
+      "t": 10,
+      "port": "input",
+      "value": "101"
+    },
+    {
+      "t": 12,
+      "port": "input",
+      "value": "110"
+    },
+    {
+      "t": 14,
+      "port": "input",
+      "value": "111"
+    }
+  ]
+}

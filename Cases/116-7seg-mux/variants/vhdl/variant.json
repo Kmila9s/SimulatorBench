@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Ex_2_2.vhd",
+    "Ex_2_2_TB.vhd"
+  ],
+  "top": "experiment_2_2_TB",
+  "entity": "experiment_2_2",
+  "portTypes": {
+    "CLK": "std_logic",
+    "DATA_IN": "std_logic_vector",
+    "SEG_SEL": "std_logic_vector",
+    "SEG_OUT": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

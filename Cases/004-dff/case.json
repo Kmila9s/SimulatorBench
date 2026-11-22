@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "id": "004-dff",
+  "title": "D flip-flop (process with variable + rising_edge)",
+  "sourceUrl": "https://github.com/CodiieSB/VHDL-DFlipFlop",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-03",
+  "problemDescription": "Edge-triggered D flip-flop: on rising edge of clk, Q captures D; otherwise Q holds. Reference uses a process-local variable for the captured value.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "D",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "Q",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "D",
+      "value": "0"
+    },
+    {
+      "t": 35,
+      "port": "D",
+      "value": "1"
+    },
+    {
+      "t": 73,
+      "port": "D",
+      "value": "0"
+    },
+    {
+      "t": 123,
+      "port": "D",
+      "value": "1"
+    },
+    {
+      "t": 145,
+      "port": "D",
+      "value": "0"
+    }
+  ],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

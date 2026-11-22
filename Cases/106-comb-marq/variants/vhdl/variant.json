@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ex03_comb_logic.vhd",
+    "tb_ex03_comb_logic.vhd"
+  ],
+  "top": "TB_Exercici_3",
+  "entity": "Exercici_3",
+  "portTypes": {
+    "A": "std_logic",
+    "B": "std_logic",
+    "C": "std_logic",
+    "Q": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

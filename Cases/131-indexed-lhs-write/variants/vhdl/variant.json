@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "indexed_lhs_write.vhdl",
+    "indexed_lhs_write.test.vhdl"
+  ],
+  "top": "indexed_lhs_write_tb",
+  "entity": "indexed_lhs_write",
+  "portTypes": {
+    "clk": "std_logic",
+    "we": "std_logic",
+    "addr": "std_logic_vector",
+    "din": "std_logic_vector",
+    "dout": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

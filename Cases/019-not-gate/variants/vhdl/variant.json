@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "not_gate.vhd",
+    "tb_not_gate.vhd"
+  ],
+  "top": "tb_not_gate",
+  "entity": "not_gate",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "o": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

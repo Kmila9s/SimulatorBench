@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Mux4.vhdl",
+    "Mux4_tb.vhdl"
+  ],
+  "top": "Mux4_tb",
+  "entity": "Mux4",
+  "portTypes": {
+    "i_i": "std_logic_vector",
+    "sel_i": "std_logic_vector",
+    "y_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "RegSinc.vhd",
+    "RegSinc_tb.vhd"
+  ],
+  "top": "RegSinc_tb",
+  "entity": "RegSinc",
+  "portTypes": {
+    "clk_i": "std_logic",
+    "rst_i": "std_logic",
+    "d_i": "std_logic_vector",
+    "q_o": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

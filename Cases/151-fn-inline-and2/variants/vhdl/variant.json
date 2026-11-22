@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_inline_and2.vhdl",
+    "fn_inline_and2.test.vhdl"
+  ],
+  "top": "fn_inline_and2_tb",
+  "entity": "fn_inline_and2",
+  "standard": "08",
+  "portTypes": {
+    "a": "std_logic",
+    "b": "std_logic",
+    "y": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

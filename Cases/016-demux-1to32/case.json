@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "016-demux-1to32",
+  "title": "1-to-32 demultiplexer (per-bit when…else, exhaustive sel sweep TB)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/demux",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "1-to-32 demux. Reference uses 32 per-bit `y(i) <= x when (sel = …) else '0'` concurrent statements — exercises per-bit conditional concurrent assignment scaled to 32 sibling outputs.",
+  "ports": [
+    {
+      "name": "x",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "sel",
+      "dir": "in",
+      "width": 5
+    },
+    {
+      "name": "y",
+      "dir": "out",
+      "width": 32
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 127,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

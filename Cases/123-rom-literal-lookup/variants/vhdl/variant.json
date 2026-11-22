@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "rom_literal_lookup.vhdl",
+    "rom_literal_lookup.test.vhdl"
+  ],
+  "top": "rom_literal_lookup_tb",
+  "entity": "rom_literal_lookup",
+  "portTypes": {
+    "clk": "std_logic",
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

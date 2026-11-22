@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "arith_range.vhdl",
+    "arith_range.test.vhdl"
+  ],
+  "top": "arith_range_tb",
+  "entity": "arith_range",
+  "portTypes": {
+    "clk": "std_logic",
+    "data": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

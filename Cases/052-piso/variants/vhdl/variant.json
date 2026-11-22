@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "piso.vhdl",
+    "piso_tb.vhdl"
+  ],
+  "top": "piso_tb",
+  "entity": "piso",
+  "portTypes": {
+    "clk": "std_logic",
+    "se": "std_logic_vector",
+    "D": "std_logic_vector",
+    "Din": "std_logic",
+    "Q": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

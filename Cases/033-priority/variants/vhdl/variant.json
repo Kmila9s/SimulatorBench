@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "priority.vhd",
+    "tb_priority.vhd"
+  ],
+  "top": "tb_priority",
+  "entity": "priority",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "b": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

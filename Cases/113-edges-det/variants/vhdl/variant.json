@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "edges_detection.vhd",
+    "edges_detection_tb.vhd"
+  ],
+  "top": "edges_detection_tb",
+  "entity": "edges_detection",
+  "portTypes": {
+    "clk": "std_logic",
+    "reset": "std_logic",
+    "trig_inv": "std_logic",
+    "triggers_vector": "std_logic_vector",
+    "triggers_vector_pulse": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

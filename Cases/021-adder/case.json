@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "021-adder",
+  "title": "8-bit adder with carry in/out (numeric_std resize+unsigned)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "8-bit adder. Computes (a + b + cin), splits into 8-bit sum o and 1-bit carry cout. Reference uses numeric_std `resize(unsigned(…), 9) + …`.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "cin",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "o",
+      "dir": "out",
+      "width": 8
+    },
+    {
+      "name": "cout",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 500,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

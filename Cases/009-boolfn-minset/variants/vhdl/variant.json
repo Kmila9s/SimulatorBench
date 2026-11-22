@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "problem_5_2_3.vhd",
+    "problem_5_2_3_test.vhd"
+  ],
+  "top": "problem_5_2_3_test",
+  "entity": "problem_5_2_3",
+  "portTypes": {
+    "abcd": "std_logic_vector",
+    "f": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

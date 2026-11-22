@@ -1,0 +1,13 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "procedure_wait.vhd",
+    "tb_procedure_wait.vhd"
+  ],
+  "top": "tb_procedure_wait",
+  "entity": "procedure_wait",
+  "portTypes": {
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

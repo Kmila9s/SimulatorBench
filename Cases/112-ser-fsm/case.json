@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "112-ser-fsm",
+  "title": "8-bit serializer FSM (10-state, MSB-first)",
+  "sourceUrl": "https://github.com/AlbertoMarquillas/vhdl-dsp-building-blocks",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "10-state Moore serializer: idle until start='1', then latches data_in into data_reg and walks SEND_bit7→…→SEND_bit0→DONE→idle. serial_out emits each bit MSB-first; done pulses '1' in the DONE state.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "start",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "data_in",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "serial_out",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "done",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 300,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

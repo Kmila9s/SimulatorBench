@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "multiplex_1.vhdl",
+    "multiplex_1_tb.vhdl"
+  ],
+  "top": "multiplex_1_tb",
+  "entity": "multiplex_1",
+  "portTypes": {
+    "smi": "std_logic_vector",
+    "smo": "std_logic",
+    "se": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "d_ff.vhd",
+    "tb_ff.vhd"
+  ],
+  "top": "tb_d_ff",
+  "entity": "d_ff",
+  "portTypes": {
+    "clk": "std_logic",
+    "rst": "std_logic",
+    "d": "std_logic",
+    "q": "std_logic",
+    "q_bar": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

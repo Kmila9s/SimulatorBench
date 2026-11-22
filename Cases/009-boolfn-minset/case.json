@@ -1,0 +1,107 @@
+{
+  "version": 2,
+  "id": "009-boolfn-minset",
+  "title": "4-bit boolean function f=Σ(4,5,7,12,13,15) (process+if with to_unsigned literals)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/problems",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-03",
+  "problemDescription": "Boolean function f(a,b,c,d) = 1 iff abcd ∈ {0100, 0101, 0111, 1100, 1101, 1111}, else 0. Reference uses `to_unsigned(N, abcd'length)` integer-to-vector conversions inside the IF comparison — exercises Kmila's numeric_std conversion path differently from case 007.",
+  "ports": [
+    {
+      "name": "abcd",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "f",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 31,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "abcd",
+      "value": "0000"
+    },
+    {
+      "t": 2,
+      "port": "abcd",
+      "value": "0001"
+    },
+    {
+      "t": 4,
+      "port": "abcd",
+      "value": "0010"
+    },
+    {
+      "t": 6,
+      "port": "abcd",
+      "value": "0011"
+    },
+    {
+      "t": 8,
+      "port": "abcd",
+      "value": "0100"
+    },
+    {
+      "t": 10,
+      "port": "abcd",
+      "value": "0101"
+    },
+    {
+      "t": 12,
+      "port": "abcd",
+      "value": "0110"
+    },
+    {
+      "t": 14,
+      "port": "abcd",
+      "value": "0111"
+    },
+    {
+      "t": 16,
+      "port": "abcd",
+      "value": "1000"
+    },
+    {
+      "t": 18,
+      "port": "abcd",
+      "value": "1001"
+    },
+    {
+      "t": 20,
+      "port": "abcd",
+      "value": "1010"
+    },
+    {
+      "t": 22,
+      "port": "abcd",
+      "value": "1011"
+    },
+    {
+      "t": 24,
+      "port": "abcd",
+      "value": "1100"
+    },
+    {
+      "t": 26,
+      "port": "abcd",
+      "value": "1101"
+    },
+    {
+      "t": 28,
+      "port": "abcd",
+      "value": "1110"
+    },
+    {
+      "t": 30,
+      "port": "abcd",
+      "value": "1111"
+    }
+  ]
+}

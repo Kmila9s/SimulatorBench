@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "mux8x1.vhd",
+    "mux8x1_test.vhd"
+  ],
+  "top": "mux8x1_concurrent_test",
+  "entity": "mux8x1_concurrent",
+  "portTypes": {
+    "sel": "std_logic_vector",
+    "x": "std_logic_vector",
+    "y": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

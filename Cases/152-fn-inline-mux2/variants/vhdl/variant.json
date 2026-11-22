@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_inline_mux2.vhdl",
+    "fn_inline_mux2.test.vhdl"
+  ],
+  "top": "fn_inline_mux2_tb",
+  "entity": "fn_inline_mux2",
+  "standard": "08",
+  "portTypes": {
+    "sel": "std_logic",
+    "a": "std_logic",
+    "b": "std_logic",
+    "y": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

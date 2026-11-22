@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "multi_hop_synced_rom.vhdl",
+    "multi_hop_synced_rom.test.vhdl"
+  ],
+  "top": "multi_hop_synced_rom_tb",
+  "entity": "multi_hop_synced_rom",
+  "portTypes": {
+    "clk": "std_logic",
+    "reset": "std_logic",
+    "start": "std_logic",
+    "done": "std_logic",
+    "acc_out": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

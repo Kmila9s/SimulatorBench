@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "id": "036-fsm-counter",
+  "title": "FSM + counter PWM-style sequence generator",
+  "sourceUrl": "https://github.com/fcayci/vhdl-digital-design",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "FSM with internal counter producing a PWM-like sequence. State S1 emits o='1' while cnt < trgt, then transitions to S2. State S2 emits o='0' until cnt reaches 15, increments trgt, and goes back to S1. Continuously generates pulses of increasing width.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 1000,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

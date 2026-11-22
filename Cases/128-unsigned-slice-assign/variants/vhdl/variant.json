@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "unsigned_slice_assign.vhdl",
+    "unsigned_slice_assign.test.vhdl"
+  ],
+  "top": "unsigned_slice_assign_tb",
+  "entity": "unsigned_slice_assign",
+  "portTypes": {
+    "clk": "std_logic",
+    "word": "std_logic_vector",
+    "go": "std_logic",
+    "data": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

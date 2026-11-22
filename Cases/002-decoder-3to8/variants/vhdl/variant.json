@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "dec3x8_concurrent.vhd",
+    "dec3x8_concurrent_test.vhd"
+  ],
+  "top": "dec3x8_concurrent_test",
+  "entity": "dec3x8_concurrent",
+  "portTypes": {
+    "input": "std_logic_vector",
+    "output": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

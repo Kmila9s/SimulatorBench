@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "seq_det.vhdl",
+    "seq_det_tb.vhdl"
+  ],
+  "top": "seq_det_tb",
+  "entity": "seq_det",
+  "portTypes": {
+    "clk": "std_logic",
+    "reset": "std_logic",
+    "seq": "std_logic",
+    "det": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

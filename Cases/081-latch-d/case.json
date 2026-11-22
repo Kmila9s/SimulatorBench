@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "081-latch-d",
+  "title": "D latch with enable (level-sensitive)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "Transparent D latch. While le_i='1', q follows d; while le_i='0', q holds (memory inferred by the partial when assignment).",
+  "ports": [
+    {
+      "name": "d_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "le_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

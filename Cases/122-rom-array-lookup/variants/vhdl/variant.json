@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "rom_array_lookup.vhdl",
+    "rom_array_lookup.test.vhdl"
+  ],
+  "top": "rom_array_lookup_tb",
+  "entity": "rom_array_lookup",
+  "portTypes": {
+    "clk": "std_logic",
+    "addr": "std_logic_vector",
+    "data": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

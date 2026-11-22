@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "enum_eq_conditional.vhdl",
+    "enum_eq_conditional.test.vhdl"
+  ],
+  "top": "enum_eq_conditional_tb",
+  "entity": "enum_eq_conditional",
+  "portTypes": {
+    "clk": "std_logic",
+    "go": "std_logic",
+    "flag": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

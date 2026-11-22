@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fsm_counter.vhd",
+    "tb_fsm_counter.vhd"
+  ],
+  "top": "tb_fsm_counter",
+  "entity": "fsm_counter",
+  "portTypes": {
+    "clk": "std_logic",
+    "o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

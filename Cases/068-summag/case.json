@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "068-summag",
+  "title": "3-bit unsigned adder with carry-in/out",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "3-bit unsigned adder with carry-in. (sum_o, co_o) = a_i + b_i + ci_i (extended to 4 bits, then split).",
+  "ports": [
+    {
+      "name": "a_i",
+      "dir": "in",
+      "width": 3
+    },
+    {
+      "name": "b_i",
+      "dir": "in",
+      "width": 3
+    },
+    {
+      "name": "ci_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "sum_o",
+      "dir": "out",
+      "width": 3
+    },
+    {
+      "name": "co_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 150,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

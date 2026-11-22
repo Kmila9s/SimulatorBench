@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "003-counter-8bit",
+  "title": "8-bit synchronous counter with active-low reset",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/test",
+  "license": "unspecified (repo has no LICENSE file as of 2026-06-02)",
+  "fetchedAt": "2026-06-02",
+  "problemDescription": "8-bit binary up-counter. Async active-low reset clears to 0; otherwise increments by 1 on each rising clock edge. Reference TB uses 100 MHz clk (5ns half-period) and deasserts n_rst at t=10ns.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "n_rst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "cout",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "n_rst",
+      "value": "0"
+    },
+    {
+      "t": 10,
+      "port": "n_rst",
+      "value": "1"
+    }
+  ],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

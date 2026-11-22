@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "065-mux4-suc",
+  "title": "4-channel 1-bit mux with 2-bit select",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "4-channel multiplexer. sel_i picks one of i_i(0..3) bits onto y_o.",
+  "ports": [
+    {
+      "name": "i_i",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "sel_i",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "y_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 80,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "034-hamming",
+  "title": "Hamming-distance counter (XOR + 1-bit popcount via function)",
+  "sourceUrl": "https://github.com/fcayci/vhdl-digital-design",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "Hamming distance: diff = i_a XOR i_b, o_dist = popcount(diff) as 8-bit unsigned. Reference declares a parameterized `sum_bits` function and uses generic M (set to 16 in the TB).",
+  "ports": [
+    {
+      "name": "i_a",
+      "dir": "in",
+      "width": 16
+    },
+    {
+      "name": "i_b",
+      "dir": "in",
+      "width": 16
+    },
+    {
+      "name": "o_dist",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 65,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

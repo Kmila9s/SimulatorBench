@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "id": "126-case-ident-hex",
+  "title": "Case statement matching constants declared with hex literals",
+  "sourceUrl": "internal: P2A FSM dispatch regression (hex variant)",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-06-22",
+  "problemDescription": "Same as 125 but constants are declared with hex literals (x\"0B\" etc.) — the exact shape P2A's CPU FSM uses.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "op",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "out_reg",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "op",
+      "value": "00001011"
+    },
+    {
+      "t": 20,
+      "port": "op",
+      "value": "00000111"
+    },
+    {
+      "t": 40,
+      "port": "op",
+      "value": "00001100"
+    },
+    {
+      "t": 60,
+      "port": "op",
+      "value": "00001111"
+    }
+  ],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

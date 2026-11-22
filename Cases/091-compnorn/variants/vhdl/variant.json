@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "CompNORn.vhdl",
+    "CompNORn_tb.vhdl"
+  ],
+  "top": "CompNORn_tb",
+  "entity": "CompNORn",
+  "portTypes": {
+    "entrada_i": "std_logic_vector",
+    "salida_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

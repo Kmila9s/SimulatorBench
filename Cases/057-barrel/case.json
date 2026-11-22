@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "057-barrel",
+  "title": "4-bit barrel shifter (logical-left + rotate-right modes)",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "Registered 4-bit selector with two outputs. se selects how many LSBs are dropped: Q zero-fills cleared positions, Q2 sign-extends with I(3). se=00 passes through; se=01 clears Q(0) and shifts I(3:1) into Q2(2:0) with I(3) prepended; se=10 clears Q(1:0) and Q2 sign-extends two bits; se=11 keeps only I(3) in Q's MSB / replicates I(3) across all of Q2.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "se",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "I",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "Q",
+      "dir": "out",
+      "width": 4
+    },
+    {
+      "name": "Q2",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 90,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "id": "145-procedure-if-branch",
+  "title": "wait inside if branch inside procedure body — Phase 3 + Phase 2 composition fence",
+  "sourceUrl": "internal: STATUS.md §1 — waits inside procedure bodies (Phase 3)",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-22",
+  "problemDescription": "Exercises the composition of Phase 2 (waits inside if branches — F-G-13d) and Phase 3 (waits inside procedure bodies). Procedure `branch_wait` contains an if-else whose branches each carry a `wait for` before toggling a caller-side signal formal. Pre-Phase-3, the whole procedure body was dropped textually — the process ran zero-time through six calls and q slammed. Post-fix: ProcedureFrame runs the bound body, dispatches the IfStructure via RunTopIfFromEntryAsync, the BranchFrame yields on the wait, the frame-drain resumes both frames in order. Q alternates '0101'/'1010' with 20/10 ns dwells matching state's oscillation.",
+  "ports": [
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true,
+  "expectedSynthDiagnostics": [
+    "BlackboxProcess"
+  ]
+}

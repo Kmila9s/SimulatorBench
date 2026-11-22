@@ -1,0 +1,13 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "case_wait.vhd",
+    "tb_case_wait.vhd"
+  ],
+  "top": "tb_case_wait",
+  "entity": "case_wait",
+  "portTypes": {
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

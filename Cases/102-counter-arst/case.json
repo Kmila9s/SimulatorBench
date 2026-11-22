@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "102-counter-arst",
+  "title": "8-bit counter with async reset + synchronous enable",
+  "sourceUrl": "https://github.com/peioazk/counter",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "8-bit counter (TB sets size=8). Async active-high reset to 0; on rising clk_i with en_i='1' increments q_o.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "arst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "en_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 510,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

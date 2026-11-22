@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ex09_serializer_fsm.vhd",
+    "tb_ex09_serializer_fsm.vhd"
+  ],
+  "top": "TB_Exercici_9",
+  "entity": "Serializador",
+  "portTypes": {
+    "clk": "std_logic",
+    "rst": "std_logic",
+    "start": "std_logic",
+    "data_in": "std_logic_vector",
+    "serial_out": "std_logic",
+    "done": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

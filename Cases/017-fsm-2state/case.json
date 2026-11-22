@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "017-fsm-2state",
+  "title": "4-state FSM with enumerated state_type (synchronous, active-high reset)",
+  "sourceUrl": "https://github.com/JulyWitch/vhdl_ghdl_examples/tree/master/problems",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "Another small Moore FSM with 4 states {S0,S1,S2,S3} using an enumerated state_type. Synchronous, active-high reset; din toggles every 2 clock periods (20 ns). Exercises Kmila's user-defined-enum state register independently from case 008's std_logic_vector encoding.",
+  "ports": [
+    {
+      "name": "clock",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "din",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "reset",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "dout",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

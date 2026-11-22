@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "dec3x8_conditional.vhd",
+    "dec3x8_conditional_test.vhd"
+  ],
+  "top": "dec3x8_conditional_test",
+  "entity": "dec3x8_conditional",
+  "portTypes": {
+    "x": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

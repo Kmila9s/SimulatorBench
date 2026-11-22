@@ -1,4 +1,5 @@
-using System.Text.Json;
+using Kmila.Frontend;
+using Kmila.TestKit.Cases;
 using Interpreter.Synthesis;
 
 namespace SimulatorBench.Tools;
@@ -53,35 +54,19 @@ public static class SynthAuditor
             BenchRoot = benchRoot
         };
 
-        var caseDirs = Directory.GetDirectories(casesRoot)
-            .OrderBy(p => Path.GetFileName(p), StringComparer.Ordinal)
-            .ToArray();
-
-        foreach (var caseDir in caseDirs)
+        foreach (var loaded in CaseLoader.LoadAll(casesRoot))
         {
-            var caseId = Path.GetFileName(caseDir);
+            var caseId = loaded.Spec.Id;
             if (only != null && !string.Equals(only, caseId, StringComparison.OrdinalIgnoreCase))
                 continue;
 
-            var vhdlPath = Path.Combine(caseDir, "kmila.vhdl");
+            // The synthesizer reads VHDL: audit the VHDL variant's legacy re-implementation.
+            if (loaded.Variants.For(HdlLanguages.Vhdl) is not { LegacySource: { } legacy }) continue;
+            var vhdlPath = Path.Combine(loaded.Dir, legacy);
             if (!File.Exists(vhdlPath)) continue;
 
-            // Pass 25 (2026-07-30): read expectedSynthDiagnostics from
-            // meta.json (best-effort; missing file = no expectations).
-            var expected = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            var metaPath = Path.Combine(caseDir, "meta.json");
-            if (File.Exists(metaPath))
-            {
-                try
-                {
-                    var meta = JsonSerializer.Deserialize<CaseMeta>(File.ReadAllText(metaPath));
-                    if (meta?.ExpectedSynthDiagnostics != null)
-                    {
-                        foreach (var k in meta.ExpectedSynthDiagnostics) expected.Add(k);
-                    }
-                }
-                catch { /* best-effort; malformed meta.json → no expectations */ }
-            }
+            // Synth diagnostic kinds the case declares as permanent (demoted to Info).
+            var expected = new HashSet<string>(loaded.Spec.ExpectedSynthDiagnostics, StringComparer.OrdinalIgnoreCase);
 
             report.TotalCases++;
             var caseFindings = new List<Finding>();

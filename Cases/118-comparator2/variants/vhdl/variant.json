@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "comparator.vhd",
+    "comparator_tb.vhd"
+  ],
+  "top": "comparator_tb",
+  "entity": "comparator",
+  "portTypes": {
+    "b": "std_logic_vector",
+    "a": "std_logic_vector",
+    "b_gt": "std_logic",
+    "b_a_eq": "std_logic",
+    "a_gt": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

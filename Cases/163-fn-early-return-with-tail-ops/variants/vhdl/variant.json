@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_early_return_tail_ops.vhdl",
+    "fn_early_return_tail_ops.test.vhdl"
+  ],
+  "top": "fn_early_return_tail_ops_tb",
+  "entity": "fn_early_return_tail_ops",
+  "standard": "08",
+  "portTypes": {
+    "sel": "std_logic",
+    "a": "std_logic",
+    "b": "std_logic",
+    "y": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

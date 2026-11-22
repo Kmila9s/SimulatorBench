@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "enc8x3_sel.vhd",
+    "enc8x3_sel_test.vhd"
+  ],
+  "top": "enc8x3_sel_test",
+  "entity": "enc8x3_sel",
+  "portTypes": {
+    "x": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

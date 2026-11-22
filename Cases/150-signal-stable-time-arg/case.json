@@ -1,0 +1,57 @@
+{
+  "version": 2,
+  "id": "150-signal-stable-time-arg",
+  "title": "sig'stable(T ns) time-argument fence — Tier 4.1 close-out",
+  "sourceUrl": "internal: Tier 4.1 signal-attribute arc close-out 2026-07-28",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-28",
+  "problemDescription": "Gates `stable_out` on `data'stable(20 ns)` inside a clocked process. Pre-close-out, Operation.TryConsumeStableTimeArg pre-scaled ns*1000 assuming 1 ns per tick; SignalScheduler defaults to 10 ns/tick, so the internal comparison was off by 10×. The Tier 4.1 close-out moves the scaling into SignalAttributeHandler.GetStable(sig, ns) using the engine's registered TickResolutionNs. With tickResNs=1 in this case the fix is a no-op numerically but the same code path is exercised.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "data",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "stable_out",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 160,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "data",
+      "value": "0"
+    },
+    {
+      "t": 40,
+      "port": "data",
+      "value": "1"
+    },
+    {
+      "t": 55,
+      "port": "data",
+      "value": "0"
+    },
+    {
+      "t": 105,
+      "port": "data",
+      "value": "1"
+    }
+  ],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

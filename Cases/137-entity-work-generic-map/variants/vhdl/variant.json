@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "gen_inst_top.vhdl",
+    "gen_inst_top.test.vhdl"
+  ],
+  "top": "gen_inst_top_tb",
+  "entity": "gen_inst_top",
+  "portTypes": {
+    "clk": "std_logic",
+    "n_rst": "std_logic",
+    "cout": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

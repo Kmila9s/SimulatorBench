@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "proc_in_fn.vhdl",
+    "proc_in_fn.test.vhdl"
+  ],
+  "top": "proc_in_fn_tb",
+  "entity": "proc_in_fn",
+  "standard": "08",
+  "portTypes": {
+    "a": "std_logic",
+    "b": "std_logic",
+    "y": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}
