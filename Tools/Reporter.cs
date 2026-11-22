@@ -205,9 +205,7 @@ public static class Reporter
         foreach (var v in r.Variants.Where(v => !v.Pass))
         {
             foreach (var pd in v.Diff?.Where(p => !p.Equal) ?? [])
-                yield return pd.Missing != MissingSide.None
-                    ? ($"[{v.Language}] {pd.Signal}: skipped — {pd.MissingFrom("golden VCD", "kmila VCD")}", [])
-                    : ($"[{v.Language}] {pd.Signal}: {pd.Mismatches}/{pd.Samples} mismatched", pd.Examples);
+                yield return ($"[{v.Language}] {pd.Describe("golden", "kmila", firstMismatch: false)}", pd.Examples);
             if (!string.IsNullOrEmpty(v.ReferenceError)) yield return ($"[{v.Language}] reference: {Truncate(v.ReferenceError, 200)}", []);
             if (!string.IsNullOrEmpty(v.KmilaError)) yield return ($"[{v.Language}] kmila: {Truncate(v.KmilaError, 200)}", []);
         }

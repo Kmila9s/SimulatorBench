@@ -36,6 +36,7 @@ public static class Program
             "run"             => await RunAsync(api, root, only, keep, roundtrip, http, mode, token),
             "hash"            => Hash(root, mode, ArgValue(args, "--check"), ArgValue(args, "--write")),
             "list"            => ListCases(root),
+            "fixtures"        => await RegenerateFixturesAsync(ArgValue(args, "--fixtures") ?? Path.Combine(root, "..", "Tests", "Unit", "Kmila.Shared.Tests", "Fixtures", "Cases")),
             "audit-concepts"  => AuditConcepts(conceptsRoot, only),
             "audit-synth"     => AuditSynth(root, only),
             "report"          => ReportAccuracy(root),
@@ -285,6 +286,36 @@ public static class Program
 
     private const string KnownGapsFile = "known-gaps.json";
 
+    /// <summary>
+    /// Regenerates the committed goldens of the unit-test fixture cases
+    /// (<c>variants/&lt;lang&gt;/expected.vcd</c>) with each language's reference simulator,
+    /// so the xUnit fixtures compare Kmila against a reference without needing one installed.
+    /// </summary>
+    private static async Task<int> RegenerateFixturesAsync(string fixturesRoot)
+    {
+        int written = 0, failed = 0;
+        foreach (var c in CaseLoader.FindAll(fixturesRoot))
+        {
+            foreach (var lang in c.Variants.Languages)
+            {
+                var v = c.Variants.For(lang)!;
+                var reference = ReferenceSimulators.For(lang);
+                var run = reference is null ? null : await reference.RunAsync(CaseSimulation.Reference(c.Spec, v));
+                if (run is not { Ok: true })
+                {
+                    failed++;
+                    Console.Error.WriteLine($"  ✗ {c.Spec.Id} [{lang.Id}]: {(run is null ? "no reference simulator" : "reference exit=" + run.ExitCode)}");
+                    continue;
+                }
+                File.WriteAllText(v.ExpectedVcdPath, run.Vcd);
+                written++;
+                Console.WriteLine($"  ✓ {c.Spec.Id} [{lang.Id}]");
+            }
+        }
+        Console.WriteLine($"[fixtures] {written} golden(s) written under {fixturesRoot}, {failed} failed");
+        return failed == 0 ? 0 : 1;
+    }
+
     private static string DefaultRoot()
     {
         // Resolves relative to the bench .csproj location at run-time. Walk
@@ -325,6 +356,7 @@ public static class Program
             Usage:
               dotnet run --project SimulatorBench -- verify [--api URL]
               dotnet run --project SimulatorBench -- list
+              dotnet run --project SimulatorBench -- fixtures [--fixtures PATH]
               dotnet run --project SimulatorBench -- run    [--legacy-source] [--http] [--api URL] [--only ID] [--keep] [--roundtrip]
               dotnet run --project SimulatorBench -- hash   [--legacy-source] [--check FILE] [--write FILE]
               dotnet run --project SimulatorBench -- audit-concepts [--concepts-root PATH] [--only LANG]

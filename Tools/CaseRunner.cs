@@ -1,11 +1,9 @@
 using System.Text.Json;
 using Kmila.Frontend;
-using Kmila.Shared.Services.Api;
 using Kmila.Shared.Services.Vcd;
 using Kmila.TestKit.Cases;
 using Kmila.TestKit.Reference;
 using Kmila.TestKit.Runners;
-using Kmila.TestKit.Stimulus;
 
 namespace SimulatorBench.Tools;
 
@@ -72,7 +70,7 @@ public sealed class CaseRunner(IKmilaRunner kmila, SourceMode mode, bool roundtr
                 r.ReferenceError = $"no reference simulator for {v.Language.DisplayName}";
                 return (r, null);
             }
-            var run = await reference.RunAsync(new ReferenceRequest(v.SourcePaths, v.Top, c.Spec.DurationNs, v.Standard));
+            var run = await reference.RunAsync(CaseSimulation.Reference(c.Spec, v));
             File.WriteAllText(Path.Combine(langDir, "reference.log"), run.Log);
             if (!run.Ok)
             {
@@ -82,16 +80,13 @@ public sealed class CaseRunner(IKmilaRunner kmila, SourceMode mode, bool roundtr
             File.WriteAllText(Path.Combine(langDir, "golden.vcd"), run.Vcd);
             var golden = VcdReader.Parse(run.Vcd!);
 
-            // 2. Kmila on the chosen sources, with the case's stimulus.
-            var sources = KmilaSources(c, v, r);
-            var sim = await kmila.SimulateAsync(sources, Request(c.Spec, v, golden));
+            // 2. Kmila on the chosen sources, with the case's stimulus; 3. strict comparison on the outputs.
+            bool ignoreT0 = mode == SourceMode.Legacy && v.LegacyT0Divergence != null;
+            var (sim, diff) = await CaseSimulation.RunAsync(kmila, c.Spec, v, KmilaSources(c, v, r), golden, ignoreT0);
             r.KmilaMs = sim.DurationMs;
             r.KmilaError = sim.Error;
+            r.Diff = diff;
             File.WriteAllText(Path.Combine(outDir, "kmila.vcd"), sim.Vcd);
-
-            // 3. Strict comparison on the output ports.
-            bool ignoreT0 = mode == SourceMode.Legacy && v.LegacyT0Divergence != null;
-            r.Diff = WaveformComparer.Compare(golden, VcdReader.Parse(sim.Vcd), CompareOptions.Strict(c.Spec.Outputs, ignoreT0));
             r.Pass = sim.Error is null && r.Diff.All(d => d.Equal);
             File.WriteAllText(Path.Combine(outDir, "diff.json"), JsonSerializer.Serialize(r.Diff, Reporter.Indented));
             return (r, golden);
@@ -109,7 +104,7 @@ public sealed class CaseRunner(IKmilaRunner kmila, SourceMode mode, bool roundtr
         var paths = mode == SourceMode.Legacy
             ? [Path.Combine(c.Dir, v.LegacySource ?? throw new InvalidOperationException($"{c.Spec.Id}/{v.Language.Id}: no legacySource"))]
             : v.SourcePaths;
-        var files = paths.Select(p => new SourceFile(Path.GetFileName(p), File.ReadAllText(p))).ToList();
+        var files = CaseSimulation.Read(paths);
         if (!roundtrip) return files;
         // Block-editor round trip: a FAIL that passes without it is block-editor semantic drift.
         return files.Select(f =>
@@ -121,27 +116,5 @@ public sealed class CaseRunner(IKmilaRunner kmila, SourceMode mode, bool roundtr
             r.RoundTripDiags += emitter.LastDiagnostics.Count;
             return f with { Content = emitted };
         }).ToList();
-    }
-
-    /// <summary>
-    /// The simulate request: the golden dump's input changes (autoStimulus)
-    /// followed by the hand-written moments, the declared clocks, and each input's
-    /// initial value taken from the testbench signal that drives it.
-    /// </summary>
-    private static SimulateRequest Request(CaseSpec spec, CaseVariant v, VcdDocument golden)
-    {
-        var moments = spec.AutoStimulus ? StimulusDeriver.FromGolden(golden, spec.Inputs.Select(p => p.Name)) : new List<ApiPortMoment>();
-        moments.AddRange(spec.Stimulus);
-        return new SimulateRequest
-        {
-            EntryPoint = v.Entity,
-            TimeScale = spec.TimeScale,
-            Duration = spec.DurationNs,
-            SystemClockMhz = spec.SystemClockMhz,
-            TickResNs = spec.TickResNs,
-            PortMoments = moments,
-            Clocks = spec.Clocks,
-            PortInitials = TestbenchInitials.Read(v.SourcePaths, spec.Inputs.Select(p => (p.Name, p.Width))),
-        };
     }
 }
