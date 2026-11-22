@@ -1,0 +1,38 @@
+# CI for kmila-9s/SimulatorBench (Fase 0, v3.0.12): Kmila vs GHDL 6 on the 149
+# cases, with GHDL from ci-templates' .ghdl-6.
+include:
+    - project: 'kmila-9s/ci-templates'
+      file: '/auto-merge.yml'
+    - project: 'kmila-9s/ci-templates'
+      file: '/ghdl.yml'
+
+stages:
+    - test
+    - merge
+
+variables:
+    GIT_DEPTH: "20"
+
+bench:
+    stage: test
+    extends: .ghdl-6
+    script:
+        # Siblings at the layout the ProjectReferences expect (../App/Kmila, ../<engine repo>)
+        # plus Tests (golden-master baselines and the unit-test fixture cases).
+        - rm -rf ../Parser ../LibraryCompiler ../Interpreter ../TimeMachine ../Debugger ../App ../Tests
+        - for r in Parser LibraryCompiler Interpreter TimeMachine Debugger Tests; do git clone --depth 20 "http://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}:8083/${CI_PROJECT_NAMESPACE}/$r.git" ../$r; done
+        - mkdir -p ../App && git clone --depth 20 "http://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}:8083/${CI_PROJECT_NAMESPACE}/Kmila.git" ../App/Kmila
+        - dotnet build -c Release -p:TargetFrameworks=net10.0
+        # Golden master: the legacy re-implementations, every case passes and the VCD
+        # hashes equal the newest dated baseline in kmila-9s/Tests.
+        - dotnet run -c Release --no-build -- run --legacy-source
+        - BASELINE=$(ls -d ../Tests/baseline/*/bench-kmila-vcd.sha256 | sort | tail -1)
+        - dotnet run -c Release --no-build -- hash --legacy-source --check "$BASELINE"
+        # Verbatim: the reference sources unmodified, ratcheted by known-gaps.json.
+        - dotnet run -c Release --no-build -- run
+    artifacts:
+        when: always
+        paths:
+            - report.json
+            - report.legacy.json
+        expire_in: 2 weeks
