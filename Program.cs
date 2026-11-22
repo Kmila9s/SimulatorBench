@@ -358,7 +358,7 @@ public static class Program
               SHA-256 of every results/<lang>/<legacy|verbatim>/kmila.vcd without its $date block.
               --check FILE compares with a baseline (Tests/baseline/<date>/bench-kmila-vcd.sha256);
               --write FILE creates one and refuses to overwrite an existing file.
-              Practice starters are audited by PracticeValidator --audit-starters.
+              Practice solutions, starters and the GHDL oracle are checked by PracticeValidator.
 
             audit-concepts:
               Walks Concepts/manifest.json + Concepts/{lang}/**. Reports three
