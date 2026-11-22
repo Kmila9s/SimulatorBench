@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "SumMagN.vhdl",
+    "SumMagN_tb.vhdl"
+  ],
+  "top": "SumMagN_tb",
+  "entity": "SumMagN",
+  "portTypes": {
+    "a_i": "std_logic_vector",
+    "b_i": "std_logic_vector",
+    "ci_i": "std_logic_vector",
+    "sum_o": "std_logic_vector",
+    "co_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,13 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "nested_loop_wait.vhd",
+    "tb_nested_loop_wait.vhd"
+  ],
+  "top": "tb_nested_loop_wait",
+  "entity": "nested_loop_wait",
+  "portTypes": {
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "SeqDetecTFSM.vhd",
+    "TestBenchFSM.vhd"
+  ],
+  "top": "tbmain",
+  "entity": "fsm",
+  "portTypes": {
+    "clk": "std_logic",
+    "reset": "std_logic",
+    "seq": "std_logic",
+    "det_vld": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

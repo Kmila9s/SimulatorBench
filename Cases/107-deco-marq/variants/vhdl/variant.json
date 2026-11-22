@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ex04_decoder_2to4.vhd",
+    "tb_ex04_decoder_2to4.vhd"
+  ],
+  "top": "TB_Exercici_4",
+  "entity": "Exercici_4",
+  "portTypes": {
+    "sel": "std_logic_vector",
+    "out_dec": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

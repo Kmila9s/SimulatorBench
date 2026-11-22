@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ContM.vhdl",
+    "ContM_tb.vhdl"
+  ],
+  "top": "ContM_tb",
+  "entity": "ContM",
+  "portTypes": {
+    "clk_i": "std_logic",
+    "rst_i": "std_logic",
+    "ena_i": "std_logic",
+    "tc_o": "std_logic",
+    "q_o": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl",
+  "legacyT0Divergence": "kmila.vhdl declara el registro con valor inicial (q := (others => '0')); el DUT de referencia no lo tiene y su salida nace en U. Verificado 2026-11-19: Kmila sobre la referencia da en t=0 lo mismo que GHDL (v3.1.5)."
+}

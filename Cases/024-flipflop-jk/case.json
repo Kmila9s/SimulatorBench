@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "024-flipflop-jk",
+  "title": "JK flip-flop with complementary output",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "JK flip-flop. Transition table on rising clk edge: J=0,K=0→hold; 0,1→reset; 1,0→set; 1,1→toggle. nq is the complement of q.",
+  "ports": [
+    {
+      "name": "j",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "k",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "nq",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 500,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

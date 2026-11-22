@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ex02_half_adder.vhd",
+    "tb_ex02_half_adder.vhd"
+  ],
+  "top": "TB_Exercici_2",
+  "entity": "Exercici_2",
+  "portTypes": {
+    "A": "std_logic",
+    "B": "std_logic",
+    "SUM": "std_logic",
+    "CARRY": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

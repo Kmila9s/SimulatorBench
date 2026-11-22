@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_xor_literal_vector.vhdl",
+    "fn_xor_literal_vector.test.vhdl"
+  ],
+  "top": "fn_xor_literal_vector_tb",
+  "entity": "fn_xor_literal_vector",
+  "standard": "08",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

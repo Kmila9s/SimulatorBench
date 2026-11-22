@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "074-contm",
+  "title": "Modulo-10 synchronous counter (4-bit) with reset, enable, terminal-count flag",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "Mod-10 synchronous counter. On rising clk: rst='1' clears to 0; else if ena='1', q advances 0→1→…→9→0 (wraps at 9). tc_o='1' iff q==9.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "ena_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "tc_o",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 510,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

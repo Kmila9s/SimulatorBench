@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "multi_hop_pure.vhdl",
+    "multi_hop_pure.test.vhdl"
+  ],
+  "top": "multi_hop_pure_tb",
+  "entity": "multi_hop_pure",
+  "portTypes": {
+    "clk": "std_logic",
+    "n_rst": "std_logic",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

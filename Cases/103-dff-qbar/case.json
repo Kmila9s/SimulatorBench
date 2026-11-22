@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "103-dff-qbar",
+  "title": "D flip-flop with synchronous reset + complementary q/q_bar outputs",
+  "sourceUrl": "https://github.com/tomas-fryza/vhdl-examples",
+  "license": "MIT",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "D flip-flop with synchronous reset and complementary outputs. On rising clk: rst='1' clears q to 0; else q captures d. q_bar = NOT q.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "d",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "q_bar",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

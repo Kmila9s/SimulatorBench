@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "022-mux4x1",
+  "title": "4-to-1 mux (with…select on scalar inputs)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "4-to-1 mux with scalar data inputs. o = a/b/c/d depending on sel.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "c",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "d",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "sel",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 300,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

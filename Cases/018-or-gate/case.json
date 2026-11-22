@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "018-or-gate",
+  "title": "2-input OR gate (assertion-checked TB sweep)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "Two-input OR gate. TB exhaustively sweeps (a,b) ∈ {00, 01, 11, 10} with assertion checks.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "c",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 60,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

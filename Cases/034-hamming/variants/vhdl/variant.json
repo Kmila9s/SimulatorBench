@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "hamming.vhd",
+    "tb_hamming.vhd"
+  ],
+  "top": "tb_hamming",
+  "entity": "hamming",
+  "portTypes": {
+    "i_a": "std_logic_vector",
+    "i_b": "std_logic_vector",
+    "o_dist": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

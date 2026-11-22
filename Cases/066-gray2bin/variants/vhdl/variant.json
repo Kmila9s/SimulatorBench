@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Gray2BinN.vhdl",
+    "Gray2BinN_tb.vhdl"
+  ],
+  "top": "Gray2BinN_tb",
+  "entity": "Gray2BinN",
+  "portTypes": {
+    "g_i": "std_logic_vector",
+    "b_o": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "id": "107-deco-marq",
+  "title": "2-to-4 decoder (process + case)",
+  "sourceUrl": "https://github.com/AlbertoMarquillas/vhdl-dsp-building-blocks",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "2-to-4 decoder. sel selects which of the 4 one-hot output lines is asserted: 00→0001, 01→0010, 10→0100, 11→1000.",
+  "ports": [
+    {
+      "name": "sel",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "out_dec",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 80,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

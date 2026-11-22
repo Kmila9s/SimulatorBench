@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "trans.vhdl",
+    "trans_tb.vhdl"
+  ],
+  "top": "trans_tb",
+  "entity": "trans",
+  "portTypes": {
+    "A": "std_logic_vector",
+    "clk": "std_logic",
+    "se": "std_logic",
+    "C": "std_logic_vector",
+    "sum": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

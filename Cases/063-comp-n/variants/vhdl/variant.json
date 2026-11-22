@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "CompEntN.vhdl",
+    "CompEntN_tb.vhdl"
+  ],
+  "top": "CompEntN_tb",
+  "entity": "CompEntN",
+  "portTypes": {
+    "a_i": "std_logic_vector",
+    "b_i": "std_logic_vector",
+    "may_o": "std_logic",
+    "men_o": "std_logic",
+    "igu_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

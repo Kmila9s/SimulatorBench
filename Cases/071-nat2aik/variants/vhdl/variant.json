@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Nat2Aik.vhdl",
+    "Nat2Aik_tb.vhdl"
+  ],
+  "top": "Nat2Aik_tb",
+  "entity": "Nat2Aik",
+  "portTypes": {
+    "n_i": "std_logic_vector",
+    "a_o": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

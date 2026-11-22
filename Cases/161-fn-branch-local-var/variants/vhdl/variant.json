@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_branch_local_var.vhdl",
+    "fn_branch_local_var.test.vhdl"
+  ],
+  "top": "fn_branch_local_var_tb",
+  "entity": "fn_branch_local_var",
+  "standard": "08",
+  "portTypes": {
+    "sel": "std_logic",
+    "a": "std_logic_vector",
+    "b": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

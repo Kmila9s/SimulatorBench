@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "code_det.vhdl",
+    "code_det_tb.vhdl"
+  ],
+  "top": "code_det_tb",
+  "entity": "code_det",
+  "portTypes": {
+    "clk": "std_logic",
+    "I": "std_logic_vector",
+    "O": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "109-cnt9-marq",
+  "title": "9-bit synchronous counter with synchronous reset",
+  "sourceUrl": "https://github.com/AlbertoMarquillas/vhdl-dsp-building-blocks",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "9-bit synchronous binary counter. On rising clk: rst='1' clears to 0; else counter += 1.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "Q",
+      "dir": "out",
+      "width": 9
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 300,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

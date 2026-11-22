@@ -3,7 +3,9 @@
 GHDL-vs-Kmila accuracy harness. See `Documentacion/HANDOFF_simulator_bench_api.md`
 for the master plan.
 
-**Status 2026-11-16:** 149/149 PASS (fuente legada `kmila.vhdl`). Usado como *golden master* del refactor multi-HDL (Fase 0): los VCD de Kmila deben salir byte-idénticos a `Tests/baseline/2026-11-15/bench-kmila-vcd.sha256`. Pendiente (plan multi-HDL, Paso 5b): layout multi-variante y simular la fuente original *verbatim*.
+**Status 2026-11-21 (v3.0.8, layout v2):** verbatim **138/149**; los 11 restantes están catalogados en `known-gaps.json` (G84, G85, G86; repros en `Documentacion/handoffs/repros_gaps_2026-11-16/v308/`) y se corrigen en v3.1.8. *Golden master* del refactor: `run --legacy-source` 149/149 con `hash --legacy-source --check Tests/baseline/2026-11-20-v316/bench-kmila-vcd.sha256` idéntico, en proceso y por HTTP.
+
+**Status 2026-11-16:** 149/149 PASS (fuente legada `kmila.vhdl`), golden master del refactor multi-HDL.
 
 **Status 2026-08-03:** 148/148 PASS = 100%, 0 skipped (per `report.json`). Corpus grew to 148 cases (ids up to 165) with the function/procedure body-inlining, local-variable, and early-return tiers (154-165).
 
@@ -45,39 +47,39 @@ Setup/install-deps.sh        # brew install ghdl gtkwave (macOS)
 ## Usage
 
 ```sh
-# Verify GHDL + Kmila API are both reachable
-dotnet run -- verify
-
-# List discovered cases
-dotnet run -- list
-
-# Run the whole corpus (or just one case)
-dotnet run -- run
-dotnet run -- run --only 001-and-gate --keep
+dotnet run -- verify                      # GHDL, Kmila API and OpenAPI snapshot
+dotnet run -- list                        # cases and their variants
+dotnet run -- run                         # verbatim, in process, ratcheted by known-gaps.json
+dotnet run -- run --legacy-source         # golden master: legacy/kmila.vhdl, every case must pass
+dotnet run -- run --http --only 001-and   # through a running Kmila.Web (--api URL)
+dotnet run -- hash --legacy-source --check ../Tests/baseline/<date>/bench-kmila-vcd.sha256
 ```
 
-The bench expects `Kmila.Web` running on `http://127.0.0.1:5298` (override
-with `--api URL` or `$KMILA_API`). Launch with:
+`run` is in process (`Kmila.TestKit`'s `InProcessKmilaRunner`, the same
+`HeadlessSimulator` the API calls); `--http` needs a host, e.g.
+`dotnet run --project ../App/Kmila/Kmila.Web -c Release -f net10.0 --no-launch-profile --urls http://127.0.0.1:5298`.
 
-```sh
-cd ../App/Kmila
-dotnet run --project Kmila.Web -f net9.0 --no-launch-profile --urls http://127.0.0.1:5298
-```
-
-## Adding a case
+## Case layout (v2)
 
 ```text
 Cases/<id>/
-  meta.json        # provenance + problem spec (ports, stimulus, duration)
-  reference/       # author's UNTOUCHED GHDL files (DUT + testbench)
-  kmila.vhdl       # MY independent implementation of the same problem
-  results/         # populated at run-time: ghdl/golden.vcd, kmila.vcd, diff.json
+  case.json                    # provenance + language-neutral spec: ports, timing, stimulus, clocks
+  variants/<lang>/variant.json # sources (analysis order), top (testbench), entity (DUT), standard
+  variants/<lang>/reference/   # the author's UNTOUCHED sources (DUT + testbench)
+  legacy/kmila.vhdl            # pre-verbatim re-implementation (golden master until v3.1.8)
+  results/<lang>/              # run outputs: golden.vcd, reference.log, verbatim/ and legacy/ (kmila.vcd, diff.json)
 ```
 
-**Honesty constraint** (HANDOFF §3): the reference files come from a public
-source (record `sourceUrl`, `license`). `kmila.vhdl` must be written from the
-problem spec, not by reading the reference VHDL. The bench compares only
-declared `out`/`inout` ports — internal signals and auto-clocks are ignored.
+A case passes only when **every supported HDL has a variant**, each variant's
+Kmila run matches its golden (strict: nine values, t=0 included) and the
+variants' goldens agree. A missing variant is a failure, never a skip.
+Kmila reads the reference sources verbatim — the bench never rewrites them
+(the only normalisation, `10ns` → `10 ns`, is applied to GHDL's private copy
+because GHDL rejects it). Verbatim failures must be listed in
+`known-gaps.json` (case, variant, category, reason, since): a failure not
+listed, or a listed variant that passes, fails the run, so the list only shrinks.
 
-If a case cannot be reduced to a `(t, port, value)` stimulus table, set
-`skipReason` in `meta.json` instead of generating a substitute testbench.
+**Honesty constraint:** reference sources come from a public source (record
+`sourceUrl`, `license`). If a case cannot be reduced to a `(t, port, value)`
+stimulus table, set `skipReason` in `case.json` instead of generating a
+substitute testbench.

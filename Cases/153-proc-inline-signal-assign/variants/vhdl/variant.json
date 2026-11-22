@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "proc_inline_signal_assign.vhdl",
+    "proc_inline_signal_assign.test.vhdl"
+  ],
+  "top": "proc_inline_signal_assign_tb",
+  "entity": "proc_inline_signal_assign",
+  "standard": "08",
+  "portTypes": {
+    "clk": "std_logic",
+    "d": "std_logic",
+    "q": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

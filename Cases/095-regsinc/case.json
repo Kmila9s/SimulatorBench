@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "095-regsinc",
+  "title": "4-bit synchronous register with synchronous reset",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "4-bit register. On rising clk_i: rst='1' clears to 0; else q captures d_i.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "d_i",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

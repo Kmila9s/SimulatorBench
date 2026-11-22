@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "056-code-det",
+  "title": "4-digit code-sequence detector FSM (recognizes 9-7-2-1)",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "FSM that watches a 4-bit input each clock and asserts O='1' for one cycle when the sequence 9,7,2,(anything) is observed. State A waits for I=9 to advance to B; B waits for I=7 (else back to A); C waits for I=2 (else holds C); D unconditionally returns to A with O='1'.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "I",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "O",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "106-comb-marq",
+  "title": "3-input combinational logic: Q = (A OR B) AND C",
+  "sourceUrl": "https://github.com/AlbertoMarquillas/vhdl-dsp-building-blocks",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "Q = (A OR B) AND C. Reference uses an intermediate signal S = A OR B and then Q = S AND C.",
+  "ports": [
+    {
+      "name": "A",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "B",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "C",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "Q",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 80,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "named_aggregate_funcs.vhdl",
+    "named_aggregate_funcs.test.vhdl"
+  ],
+  "top": "named_aggregate_funcs_tb",
+  "entity": "named_aggregate_funcs",
+  "portTypes": {
+    "clk": "std_logic",
+    "addr": "std_logic_vector",
+    "data": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

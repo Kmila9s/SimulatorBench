@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "traffic_light_system_moore.vhdl",
+    "traffic_light_system_moore_tb.vhdl"
+  ],
+  "top": "traffic_light_system_moore_tb",
+  "entity": "traffic_light_system_moore",
+  "portTypes": {
+    "clk": "std_logic",
+    "reset": "std_logic",
+    "enable": "std_logic",
+    "red": "std_logic",
+    "yellow": "std_logic",
+    "green": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

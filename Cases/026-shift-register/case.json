@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "026-shift-register",
+  "title": "5-stage serial-in serial-out shift register",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "5-stage SISO shift register: on each rising clk edge, the internal 5-bit state shifts left and d is loaded into bit 0; q is bit 4 (5-cycle delayed echo of d).",
+  "ports": [
+    {
+      "name": "d",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 500,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

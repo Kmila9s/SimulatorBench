@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "LatchSR_rstPr.vhdl",
+    "LatchSR_rstPr_tb.vhdl"
+  ],
+  "top": "LatchSR_rstPr_tb",
+  "entity": "LatchSR_rstPr",
+  "portTypes": {
+    "r_i": "std_logic",
+    "s_i": "std_logic",
+    "q_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

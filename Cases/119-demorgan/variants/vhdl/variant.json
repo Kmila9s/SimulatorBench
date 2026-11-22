@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "demorgan.vhd",
+    "demorgan_tb.vhd"
+  ],
+  "top": "demorgan_tb",
+  "entity": "demorgan",
+  "portTypes": {
+    "c": "std_logic",
+    "b": "std_logic",
+    "a": "std_logic",
+    "f_org": "std_logic",
+    "f_nand": "std_logic",
+    "f_nor": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

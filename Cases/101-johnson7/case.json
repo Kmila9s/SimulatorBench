@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "101-johnson7",
+  "title": "4-bit Johnson counter (mod-7, odd modulus) with auto-correction",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "Odd-modulus Johnson counter (mod-7). On rising clk: rst='1' OR illegal-state (q(1)=0, q(0)=1) → q=0000. Else shift right, feeding (q(0) NOR q(1)) into MSB.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 210,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

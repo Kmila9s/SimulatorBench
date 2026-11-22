@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "priority_encoder_4in.vhd",
+    "priority_encoder_4in_tb.vhd"
+  ],
+  "top": "priority_encoder_4in_tb",
+  "entity": "priority_encoder_4in",
+  "portTypes": {
+    "inputs": "std_logic_vector",
+    "valid": "std_logic",
+    "result": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

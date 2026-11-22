@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "barrel.vhdl",
+    "barrel_tb.vhdl"
+  ],
+  "top": "barrel_tb",
+  "entity": "barrel",
+  "portTypes": {
+    "clk": "std_logic",
+    "se": "std_logic_vector",
+    "I": "std_logic_vector",
+    "Q": "std_logic_vector",
+    "Q2": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

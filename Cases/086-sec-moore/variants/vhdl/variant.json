@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Sec1011MooreCS.vhdl",
+    "Sec1011MooreCS_tb.vhdl"
+  ],
+  "top": "Sec1011MooreCS_tb",
+  "entity": "Sec1011MooreCS",
+  "portTypes": {
+    "clk_i": "std_logic",
+    "rst_i": "std_logic",
+    "dat_i": "std_logic",
+    "sal_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

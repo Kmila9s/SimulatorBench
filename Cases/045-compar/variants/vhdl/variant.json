@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "compar.vhdl",
+    "compar_tb.vhdl"
+  ],
+  "top": "compar_tb",
+  "entity": "compar",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "b": "std_logic_vector",
+    "so_a": "std_logic",
+    "so_b": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

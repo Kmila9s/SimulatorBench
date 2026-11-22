@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "id": "142-wait-in-case-arm",
+  "title": "wait for N ns inside a case-when arm body — F-G-13d regression fence",
+  "sourceUrl": "internal: STATUS.md §1 — waits inside if/case/nested-loop bodies",
+  "license": "internal regression test",
+  "fetchedAt": "2026-07-22",
+  "problemDescription": "A process with a self-driving case machine that waits inside each arm. Mirrors case 141 but exercises CaseStructure's SyntetizeBranchBody. Fix runs case bodies through RunTopCaseFromEntryAsync + BranchFrame.",
+  "ports": [
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 2
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true,
+  "expectedSynthDiagnostics": [
+    "BlackboxProcess"
+  ]
+}

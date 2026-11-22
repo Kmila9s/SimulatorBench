@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "079-ffjk",
+  "title": "JK flip-flop with async clear + preset",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "JK flip-flop. Async cl_i='1' forces q=0; async ps_i='1' forces q=1; otherwise on rising clk_i: q <= (j and not q) or (not k and q).",
+  "ports": [
+    {
+      "name": "j_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "k_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "cl_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "ps_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

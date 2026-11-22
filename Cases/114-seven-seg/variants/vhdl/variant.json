@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Seven_Segment.vhd",
+    "Seven_Segment_TB.vhd"
+  ],
+  "top": "Seven_Segment_TB",
+  "entity": "Seven_Segment",
+  "portTypes": {
+    "inDigit": "std_logic_vector",
+    "inSelect": "std_logic_vector",
+    "outSelect": "std_logic_vector",
+    "out7Seg": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

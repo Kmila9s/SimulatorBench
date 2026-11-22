@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "023-flipflop-d",
+  "title": "D flip-flop with clock-enable + sync reset (pmassolino)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-05",
+  "problemDescription": "D flip-flop with clock-enable and synchronous active-low reset. q captures d on rising_edge(clk) when ce='1' and rst='1'.",
+  "ports": [
+    {
+      "name": "d",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "ce",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 500,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

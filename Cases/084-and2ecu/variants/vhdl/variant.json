@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "AND2ecu.vhdl",
+    "AND2ecu_tb.vhdl"
+  ],
+  "top": "AND2ecu_tb",
+  "entity": "AND2ecu",
+  "portTypes": {
+    "a_i": "std_logic",
+    "b_i": "std_logic",
+    "y_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

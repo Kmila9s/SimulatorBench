@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "multi_caller_top.vhdl",
+    "multi_caller_top.test.vhdl"
+  ],
+  "top": "multi_caller_top_tb",
+  "entity": "multi_caller_top",
+  "portTypes": {
+    "a1": "std_logic_vector",
+    "a2": "std_logic_vector",
+    "kin1": "std_logic_vector",
+    "kin2": "std_logic_vector",
+    "o1": "std_logic_vector",
+    "o2": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ring_counter.vhdl",
+    "ring_counter_tb.vhdl"
+  ],
+  "top": "ring_counter_tb",
+  "entity": "ring_counter",
+  "portTypes": {
+    "clk": "std_logic",
+    "Q": "std_logic_vector",
+    "Q2": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

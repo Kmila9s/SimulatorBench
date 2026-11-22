@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "027-add-sub",
+  "title": "8-bit adder/subtractor (add=1 → sum; add=0 → diff; numeric_std + conditional concurrent)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "8-bit adder/subtractor. Mode select `add`: '1' computes a+b+cin; '0' computes a-b-cin. Reference uses `value when cond else value` over numeric_std unsigned arithmetic.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "cin",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "add",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "o",
+      "dir": "out",
+      "width": 8
+    },
+    {
+      "name": "cout",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 1000,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

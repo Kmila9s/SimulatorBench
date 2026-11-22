@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "id": "091-compnorn",
+  "title": "4-input NOR gate",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "4-input NOR gate. salida_o = NOT (OR of all 4 bits) — '1' iff all bits are '0'.",
+  "ports": [
+    {
+      "name": "entrada_i",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "salida_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 20,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "stable_gate.vhdl",
+    "stable_gate.test.vhdl"
+  ],
+  "top": "stable_gate_tb",
+  "entity": "stable_gate",
+  "standard": "08",
+  "portTypes": {
+    "clk": "std_logic",
+    "data": "std_logic",
+    "stable_out": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

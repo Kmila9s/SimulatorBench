@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "046-dff-lemur",
+  "title": "D flip-flop with async high reset",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "D flip-flop with async active-high reset. Q captures D on rising clk edge; r='1' forces Q=0 asynchronously.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "r",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "D",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "Q",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

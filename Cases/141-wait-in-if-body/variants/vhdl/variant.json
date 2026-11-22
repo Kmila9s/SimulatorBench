@@ -1,0 +1,13 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "if_wait.vhd",
+    "tb_if_wait.vhd"
+  ],
+  "top": "tb_if_wait",
+  "entity": "if_wait",
+  "portTypes": {
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "id": "123-rom-literal-lookup",
+  "title": "Literal-index read from a constant std_logic_vector array",
+  "sourceUrl": "internal: Kmila constant-array literal-index regression",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-06-22",
+  "problemDescription": "Direct literal index into a constant array. Each clock loads rom_init(3) into q_reg. Tests storage + literal-index lookup independent of any to_integer/unsigned plumbing.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 50,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "clocks": [
+    {
+      "port": "clk"
+    }
+  ]
+}

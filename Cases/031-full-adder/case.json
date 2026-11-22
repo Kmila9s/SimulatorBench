@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "031-full-adder",
+  "title": "1-bit full adder (XOR cascade + carry OR)",
+  "sourceUrl": "https://github.com/fcayci/vhdl-digital-design",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "1-bit full adder. Reference defines two architectures (behavioral and structural-via-half_adder) and the TB instantiates both. Kmila side uses a single behavioral version: s = a XOR b XOR cin, cout = (a AND b) OR (cin AND (a XOR b)).",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "cin",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "s",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "cout",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 30,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

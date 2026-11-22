@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "id": "037-adder4",
+  "title": "4-bit ripple-carry adder (4 full_adders chained, with overflow)",
+  "sourceUrl": "https://github.com/fcayci/vhdl-digital-design",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "4-bit ripple-carry adder. s = a + b + cin, with overflow v = c(2) XOR c(3). Reference instantiates four `full_adder` cells (mixing the bhv and str architectures).",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "cin",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "s",
+      "dir": "out",
+      "width": 4
+    },
+    {
+      "name": "v",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "cout",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

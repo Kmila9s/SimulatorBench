@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "abs_1.vhdl",
+    "abs_1_tb.vhdl"
+  ],
+  "top": "abs_1_tb",
+  "entity": "abs_1",
+  "portTypes": {
+    "si": "std_logic_vector",
+    "smo": "std_logic_vector",
+    "se": "std_logic_vector",
+    "s": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

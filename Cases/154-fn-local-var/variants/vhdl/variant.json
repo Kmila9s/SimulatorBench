@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_local_var.vhdl",
+    "fn_local_var.test.vhdl"
+  ],
+  "top": "fn_local_var_tb",
+  "entity": "fn_local_var",
+  "standard": "08",
+  "portTypes": {
+    "a": "std_logic",
+    "b": "std_logic",
+    "y": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

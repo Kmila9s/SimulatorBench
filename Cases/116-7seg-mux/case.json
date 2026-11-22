@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "116-7seg-mux",
+  "title": "Time-multiplexed 2-digit 7-segment display driver",
+  "sourceUrl": "https://github.com/Aliflori/VHDL-Digital-Logic-Labs",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "Time-multiplexed 2-digit 7-segment display. On each rising CLK alternates between SEG_SEL=0001 (showing low nibble of DATA_IN) and SEG_SEL=0010 (showing high nibble). SEG_OUT is the active-low common-anode encoding of the chosen nibble.",
+  "ports": [
+    {
+      "name": "CLK",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "DATA_IN",
+      "dir": "in",
+      "width": 8
+    },
+    {
+      "name": "SEG_SEL",
+      "dir": "out",
+      "width": 4
+    },
+    {
+      "name": "SEG_OUT",
+      "dir": "out",
+      "width": 8
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 200,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

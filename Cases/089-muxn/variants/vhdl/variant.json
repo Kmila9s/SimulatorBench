@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "MuxN.vhdl",
+    "MuxN_tb.vhdl"
+  ],
+  "top": "MuxN_tb",
+  "entity": "MuxN",
+  "portTypes": {
+    "i_i": "std_logic_vector",
+    "sel_i": "std_logic_vector",
+    "ena_i": "std_logic",
+    "y_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

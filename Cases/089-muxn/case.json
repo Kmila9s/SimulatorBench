@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "089-muxn",
+  "title": "4-input multiplexer with active-high enable (TB sets N=2)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "4-input multiplexer with active-high enable. y_o = i_i[sel_i] AND ena_i.",
+  "ports": [
+    {
+      "name": "i_i",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "sel_i",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "ena_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "y_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 80,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

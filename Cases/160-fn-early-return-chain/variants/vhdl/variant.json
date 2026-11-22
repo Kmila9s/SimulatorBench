@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_early_return_chain.vhdl",
+    "fn_early_return_chain.test.vhdl"
+  ],
+  "top": "fn_early_return_chain_tb",
+  "entity": "fn_early_return_chain",
+  "standard": "08",
+  "portTypes": {
+    "r0": "std_logic",
+    "r1": "std_logic",
+    "r2": "std_logic",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

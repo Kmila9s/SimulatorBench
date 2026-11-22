@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "case_expr_selector.vhdl",
+    "case_expr_selector.test.vhdl"
+  ],
+  "top": "case_expr_selector_tb",
+  "entity": "case_expr_selector",
+  "standard": "08",
+  "portTypes": {
+    "val": "std_logic_vector",
+    "seg": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

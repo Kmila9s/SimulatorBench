@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Sec1011MealySS.vhdl",
+    "Sec1011MealySS_tb.vhdl"
+  ],
+  "top": "Sec1011MealySS_tb",
+  "entity": "Sec1011MealySS",
+  "portTypes": {
+    "dat_i": "std_logic",
+    "rst_i": "std_logic",
+    "ckl_i": "std_logic",
+    "sal_o": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

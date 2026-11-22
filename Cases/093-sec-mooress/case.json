@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "093-sec-mooress",
+  "title": "Moore-state '1011' detector WITHOUT overlap (resets on accept)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "Two-process Moore FSM detecting '1011' WITHOUT overlap. After reaching the accepting state E, the next dat_i=1 goes back to B (start new), dat_i=0 goes to A (idle) — does not allow the trailing 1 to count as the start of a new overlapping match.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "dat_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "sal_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

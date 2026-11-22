@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "ex01_signal_assignment.vhd",
+    "tb_ex01_signal_assignment.vhd"
+  ],
+  "top": "TB_Exercici_1",
+  "entity": "Exercici_1",
+  "portTypes": {
+    "x": "std_logic",
+    "y": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

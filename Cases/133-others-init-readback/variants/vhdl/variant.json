@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "others_init_readback.vhdl",
+    "others_init_readback.test.vhdl"
+  ],
+  "top": "others_init_readback_tb",
+  "entity": "others_init_readback",
+  "portTypes": {
+    "clk": "std_logic",
+    "enable": "std_logic",
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

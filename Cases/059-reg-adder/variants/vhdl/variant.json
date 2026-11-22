@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "reg_adder.vhdl",
+    "reg_adder_tb.vhdl"
+  ],
+  "top": "reg_adder_tb",
+  "entity": "reg_adder",
+  "portTypes": {
+    "A": "std_logic_vector",
+    "B": "std_logic_vector",
+    "clk": "std_logic",
+    "se": "std_logic",
+    "C": "std_logic_vector",
+    "over": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

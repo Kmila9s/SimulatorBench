@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "id": "117-buffer",
+  "title": "1-bit buffer (y = x)",
+  "sourceUrl": "https://github.com/AlbertoMarquillas/vhdl-dsp-building-blocks",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-08",
+  "problemDescription": "Pure 1-bit pass-through (y <= x).",
+  "ports": [
+    {
+      "name": "x",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "y",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 50,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

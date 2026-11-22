@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "052-piso",
+  "title": "4-bit parallel-in serial-out shift register",
+  "sourceUrl": "https://github.com/LemurPwned/classic-fpga",
+  "license": "GPL-3.0",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "Parallel-in serial-out shift register. On rising clk: if se(0)='1' load Qt<=D; else shift left, feeding Din into LSB (Qt <= Qt(2 downto 0) & Din). Output Q = Qt(3).",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "se",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "D",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "Din",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "Q",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 160,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "demux1x8.vhd",
+    "demux1x8_test.vhdl"
+  ],
+  "top": "demux1x8_test",
+  "entity": "Demux1x8",
+  "portTypes": {
+    "x": "std_logic",
+    "sel": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

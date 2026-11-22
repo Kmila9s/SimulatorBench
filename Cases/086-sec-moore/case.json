@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "id": "086-sec-moore",
+  "title": "Moore-state '1011' overlapping sequence detector",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "Two-process Moore FSM that asserts sal_o=1 in state E (reached after observing '1011' on dat_i over four prior clk cycles, with overlap allowed). States: A=initial; B=saw 1; C=saw 10; D=saw 101; E=saw 1011.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "dat_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "sal_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,14 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "enc16x4.vhd",
+    "enc16x4_test.vhd"
+  ],
+  "top": "enc16x4_test",
+  "entity": "enc16x4",
+  "portTypes": {
+    "x": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

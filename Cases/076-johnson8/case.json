@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "076-johnson8",
+  "title": "4-bit Johnson counter with auto-correction (mod-8)",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "4-bit Johnson counter (mod-8). On rising clk: rst='1' OR illegal state (auxQ(1)='0' AND auxQ(0)='1') → clear to 0000. Otherwise shift right, feeding NOT auxQ(0) into MSB. Walks through 0000→1000→1100→1110→1111→0111→0011→0001→0000.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 210,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

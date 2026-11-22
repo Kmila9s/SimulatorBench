@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "073-ffd-clen",
+  "title": "D flip-flop with async clear and enable",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "D flip-flop with async active-high clear (cl_i='1' forces q=0) and synchronous enable (en_i='1' captures d_i on rising clk_i; otherwise q holds).",
+  "ports": [
+    {
+      "name": "d_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "cl_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "en_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

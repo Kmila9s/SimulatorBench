@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "mul_width_tripwire.vhdl",
+    "mul_width_tripwire.test.vhdl"
+  ],
+  "top": "mul_width_tripwire_tb",
+  "entity": "mul_width_tripwire",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "b": "std_logic_vector",
+    "out9": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

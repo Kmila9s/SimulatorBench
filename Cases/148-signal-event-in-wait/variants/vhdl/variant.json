@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "event_in_wait.vhdl",
+    "event_in_wait.test.vhdl"
+  ],
+  "top": "event_in_wait_tb",
+  "entity": "event_in_wait",
+  "standard": "08",
+  "portTypes": {
+    "clk": "std_logic",
+    "n_rst": "std_logic",
+    "count": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

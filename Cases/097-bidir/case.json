@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "097-bidir",
+  "title": "3-bit bidirectional counter (up/down) with sync reset + enable",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "3-bit bidirectional binary counter (mod-8). On rising clk: rst='1' clears to 0; ena='1' advances q by +1 (up_i='1') or -1 (up_i='0').",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "ena_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "up_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 3
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 310,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

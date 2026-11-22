@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_for_loop_count_ones.vhdl",
+    "fn_for_loop_count_ones.test.vhdl"
+  ],
+  "top": "fn_for_loop_count_ones_tb",
+  "entity": "fn_for_loop_count_ones",
+  "standard": "08",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "b": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

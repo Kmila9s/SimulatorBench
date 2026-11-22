@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "state_machine.vhd",
+    "tb_state_machine.vhd"
+  ],
+  "top": "tb_state_machine",
+  "entity": "state_machine",
+  "portTypes": {
+    "clk": "std_logic",
+    "arst": "std_logic",
+    "i": "std_logic",
+    "j": "std_logic",
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

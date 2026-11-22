@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "id": "080-contmpot2",
+  "title": "3-bit binary counter (mod-8) with synchronous reset",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "3-bit synchronous binary counter (mod-8). On rising clk: rst_i='1' clears q to 0; otherwise q advances 0→1→…→7→0.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 3
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 250,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

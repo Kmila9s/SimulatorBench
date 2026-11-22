@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "028-state-machine",
+  "title": "Moore FSM with async reset (3-process style, enumerated state_type)",
+  "sourceUrl": "https://github.com/pmassolino/vhdl-examples",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-06",
+  "problemDescription": "4-state FSM with async-low reset. State register (clk + arst), output logic (depends on actual_state + i), next-state logic (depends on actual_state + j). Async reset to S0.",
+  "ports": [
+    {
+      "name": "clk",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "arst",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "j",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q",
+      "dir": "out",
+      "width": 3
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 500,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "DecoN.vhdl",
+    "DecoN_tb.vhdl"
+  ],
+  "top": "DecoN_tb",
+  "entity": "DecoN",
+  "portTypes": {
+    "a_i": "std_logic_vector",
+    "ena_i": "std_logic",
+    "y_o": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

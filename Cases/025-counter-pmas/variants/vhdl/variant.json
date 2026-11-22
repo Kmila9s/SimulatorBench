@@ -1,0 +1,18 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "counter.vhd",
+    "tb_counter.vhd"
+  ],
+  "top": "tb_counter",
+  "entity": "counter",
+  "portTypes": {
+    "d": "std_logic_vector",
+    "clk": "std_logic",
+    "ce": "std_logic",
+    "load": "std_logic",
+    "rst": "std_logic",
+    "q": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

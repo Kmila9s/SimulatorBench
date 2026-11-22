@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "id": "098-tcqrs",
+  "title": "3-bit synchronous binary counter (mod-8) with reset, enable, terminal-count",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "3-bit synchronous binary counter (mod-8). rst='1' clears to 0; ena='1' increments q (wraps at 8). tc_o='1' iff q==7.",
+  "ports": [
+    {
+      "name": "clk_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "rst_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "ena_i",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "q_o",
+      "dir": "out",
+      "width": 3
+    },
+    {
+      "name": "tc_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 300,
+  "tickResNs": 1,
+  "systemClockMhz": 50,
+  "stimulus": [],
+  "autoStimulus": true
+}

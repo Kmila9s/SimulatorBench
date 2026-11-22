@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "adder.vhd",
+    "tb_adder.vhd"
+  ],
+  "top": "tb_adder",
+  "entity": "adder",
+  "portTypes": {
+    "a": "std_logic_vector",
+    "b": "std_logic_vector",
+    "cin": "std_logic_vector",
+    "o": "std_logic_vector",
+    "cout": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

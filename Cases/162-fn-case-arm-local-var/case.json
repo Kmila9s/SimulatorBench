@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "id": "162-fn-case-arm-local-var",
+  "title": "User function body — case arms with variable := prefix then return — pass 21",
+  "sourceUrl": "internal: Tier 4.3 pass 21 case-arm branch-shape relaxation",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-30",
+  "problemDescription": "Function body is a case where every arm is `[variable := expr; return variable]`. Pass 21 relaxes TryInlineCaseAsMux to accept `[Operation*, ReturnStatement]` arms (mirror of pass-20's if/else relax). Per-arm PushScope isolates writes so arm A's tmp binding doesn't leak into arm B.",
+  "ports": [
+    {
+      "name": "sel",
+      "dir": "in",
+      "width": 2
+    },
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "y",
+      "dir": "out",
+      "width": 4
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "sel",
+      "value": "00"
+    },
+    {
+      "t": 0,
+      "port": "a",
+      "value": "1010"
+    },
+    {
+      "t": 0,
+      "port": "b",
+      "value": "0101"
+    },
+    {
+      "t": 10,
+      "port": "sel",
+      "value": "01"
+    },
+    {
+      "t": 20,
+      "port": "sel",
+      "value": "10"
+    },
+    {
+      "t": 30,
+      "port": "sel",
+      "value": "11"
+    }
+  ]
+}

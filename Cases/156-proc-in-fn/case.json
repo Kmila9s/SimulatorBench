@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "id": "156-proc-in-fn",
+  "title": "Procedure call from inside a function body — Tier 4.3 pass-8",
+  "sourceUrl": "internal: Tier 4.3 body-synth arc 2026-07-28 (pass 8)",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-28",
+  "problemDescription": "Concurrent assign `y <= invoke_xor(a, b);` where the user function body calls a procedure `xor_p(x, z, t)` that writes an out-mode variable parameter, then returns `not t`. Pass-8 adds ProcedureCallStatement.ResolveBoundBodyAgainstScope: builds rename map, substitutes formals in BodyRaw, reparses against the runtime's localScope + cloned procedure locals. FunctionExecutor.ExecuteFunctionBody dispatches ProcedureCallStatement through this new resolver so out-mode variable writes reach caller-scope Variables. Complements pass-5's synth-side scaffold. Bench passes on VCD equality against GHDL byte-for-byte.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "y",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "a",
+      "value": "0"
+    },
+    {
+      "t": 0,
+      "port": "b",
+      "value": "0"
+    },
+    {
+      "t": 20,
+      "port": "a",
+      "value": "1"
+    },
+    {
+      "t": 40,
+      "port": "a",
+      "value": "0"
+    },
+    {
+      "t": 40,
+      "port": "b",
+      "value": "1"
+    },
+    {
+      "t": 60,
+      "port": "a",
+      "value": "1"
+    }
+  ]
+}

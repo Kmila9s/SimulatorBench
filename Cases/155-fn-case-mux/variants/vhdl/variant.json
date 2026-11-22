@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "fn_case_mux.vhdl",
+    "fn_case_mux.test.vhdl"
+  ],
+  "top": "fn_case_mux_tb",
+  "entity": "fn_case_mux",
+  "standard": "08",
+  "portTypes": {
+    "sel": "std_logic_vector",
+    "y": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

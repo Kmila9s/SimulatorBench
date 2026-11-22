@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "case_slice_selector.vhdl",
+    "case_slice_selector.test.vhdl"
+  ],
+  "top": "case_slice_selector_tb",
+  "entity": "case_slice_selector",
+  "portTypes": {
+    "clk": "std_logic",
+    "word": "std_logic_vector",
+    "out_reg": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,11 +1,9 @@
 using System.Text.Json;
 using Kmila.Shared.Services;
-using Kmila.Shared.Services.Api;
-using Kmila.Shared.Services.Vcd;
 using Kmila.TestKit;
+using Kmila.TestKit.Cases;
 using Kmila.TestKit.Reference;
 using Kmila.TestKit.Runners;
-using Kmila.TestKit.Stimulus;
 using SimulatorBench.Tools;
 
 namespace SimulatorBench;
@@ -23,7 +21,8 @@ public static class Program
         string conceptsRoot = ArgOrEnv(args, "--concepts-root", "CONCEPTS_ROOT", SharedContentPaths.Find("Concepts") ?? "");
         bool keep      = HasFlag(args, "--keep");
         bool roundtrip = HasFlag(args, "--roundtrip");
-        bool inProcess = HasFlag(args, "--in-process");
+        bool http = HasFlag(args, "--http");
+        var mode = HasFlag(args, "--legacy-source") ? SourceMode.Legacy : SourceMode.Verbatim;
 
         if (args.Length == 0 || args[0] is "help" or "--help" or "-h")
         {
@@ -34,8 +33,8 @@ public static class Program
         return args[0] switch
         {
             "verify"          => await VerifyAsync(api, token),
-            "run"             => await RunAsync(api, root, only, keep, roundtrip, inProcess, token),
-            "hash"            => Hash(root, ArgValue(args, "--check"), ArgValue(args, "--write")),
+            "run"             => await RunAsync(api, root, only, keep, roundtrip, http, mode, token),
+            "hash"            => Hash(root, mode, ArgValue(args, "--check"), ArgValue(args, "--write")),
             "list"            => ListCases(root),
             "audit-concepts"  => AuditConcepts(conceptsRoot, only),
             "audit-synth"     => AuditSynth(root, only),
@@ -113,18 +112,21 @@ public static class Program
     }
 
     /// <summary>
-    /// The golden master of the last <c>run</c>: SHA-256 of each <c>results/kmila.vcd</c>
-    /// without its <c>$date</c> block. <c>--check</c> compares against a baseline file,
-    /// <c>--write</c> creates one (only for a NEW dated baseline folder).
+    /// SHA-256 of each Kmila VCD of the last <c>run</c> in <paramref name="mode"/>, without
+    /// its <c>$date</c> block. Legacy hashes are keyed by case (one legacy source per case:
+    /// the golden master); verbatim ones by <c>case/lang</c>. <c>--check</c> compares with a
+    /// baseline file, <c>--write</c> creates one (only for a NEW dated baseline folder).
     /// </summary>
-    private static int Hash(string root, string? check, string? write)
+    private static int Hash(string root, SourceMode mode, string? check, string? write)
     {
         var current = new Dictionary<string, string>(StringComparer.Ordinal);
-        foreach (var caseDir in Directory.EnumerateDirectories(Path.Combine(root, "Cases")))
-        {
-            var vcd = Path.Combine(caseDir, "results", "kmila.vcd");
-            if (File.Exists(vcd)) current[Path.GetFileName(caseDir)] = GoldenHashes.Of(File.ReadAllText(vcd));
-        }
+        foreach (var c in CaseLoader.LoadAll(Path.Combine(root, "Cases")))
+            foreach (var lang in c.Variants.Languages)
+            {
+                var vcd = Path.Combine(CaseRunner.ModeDir(c.Dir, lang, mode), "kmila.vcd");
+                if (!File.Exists(vcd)) continue;
+                current[mode == SourceMode.Legacy ? c.Spec.Id : $"{c.Spec.Id}/{lang.Id}"] = GoldenHashes.Of(File.ReadAllText(vcd));
+            }
         string text = GoldenHashes.Format(current);
         if (write != null)
         {
@@ -147,10 +149,15 @@ public static class Program
         Console.WriteLine($"[verify] api={api}");
         using var client = new KmilaApiClient(api, token: token);
         bool kOk = await client.HealthAsync();
-        Console.WriteLine($"  Kmila API:    {(kOk ? "OK" : "UNREACHABLE")}");
+        Console.WriteLine($"  Kmila API:      {(kOk ? "OK" : "UNREACHABLE")}");
 
-        var (gOk, gVer) = await new GhdlReferenceSimulator().VersionAsync();
-        Console.WriteLine($"  GHDL:         {(gOk ? "OK — " + gVer : "MISSING (run Setup/install-deps.sh)")}");
+        bool gOk = true;
+        foreach (var reference in ReferenceSimulators.Registered)
+        {
+            var (installed, version) = await reference.VersionAsync();
+            gOk &= installed;
+            Console.WriteLine($"  {reference.Language.DisplayName + " reference:",-16}{(installed ? "OK — " + version : "MISSING (run Setup/install-deps.sh)")}");
+        }
 
         // Tier 5.2 Phase B rev 2 — drift check between the host's live
         // OpenAPI output and the committed wwwroot/openapi/v1.json snapshot.
@@ -191,7 +198,7 @@ public static class Program
                 }
             }
         }
-        Console.WriteLine($"  OpenAPI snap: {docDrift}");
+        Console.WriteLine($"  OpenAPI snap:   {docDrift}");
 
         // Drift is a soft failure — return non-zero so CI catches it, but
         // don't gate the base kOk/gOk pass. Users can rerun `verify` after
@@ -226,168 +233,57 @@ public static class Program
     {
         var dir = Path.Combine(root, "Cases");
         if (!Directory.Exists(dir)) { Console.WriteLine("(no Cases/ dir)"); return 0; }
-        foreach (var sub in Directory.EnumerateDirectories(dir).OrderBy(p => p))
-        {
-            var metaPath = Path.Combine(sub, "meta.json");
-            if (!File.Exists(metaPath)) continue;
-            var meta = JsonSerializer.Deserialize<CaseMeta>(File.ReadAllText(metaPath))!;
-            Console.WriteLine($"  {meta.Id,-32}  {meta.Title}{(meta.SkipReason != null ? "  [SKIP: " + meta.SkipReason + "]" : "")}");
-        }
+        foreach (var c in CaseLoader.LoadAll(dir))
+            Console.WriteLine($"  {c.Spec.Id,-32}  [{string.Join(",", c.Variants.Languages.Select(l => l.Id))}]  {c.Spec.Title}"
+                + (c.Spec.SkipReason != null ? "  [SKIP: " + c.Spec.SkipReason + "]" : ""));
         return 0;
     }
 
-    private static async Task<int> RunAsync(string api, string root, string? only, bool keep, bool roundtrip, bool inProcess, string? token)
+    private static async Task<int> RunAsync(string api, string root, string? only, bool keep, bool roundtrip, bool http, SourceMode mode, string? token)
     {
-        if (roundtrip) Console.WriteLine("[run] --roundtrip: kmila.vhdl → VhdlBlockBuilder → VhdlBlockEmitter → submit");
-        var ghdl = new GhdlReferenceSimulator();
-        using var client = new KmilaApiClient(api, token: token);
-        IKmilaRunner kmila;
-        if (inProcess)
+        Console.WriteLine($"[run] Kmila on the {(mode == SourceMode.Legacy ? "legacy re-implementations (golden master)" : "reference sources, verbatim")}"
+            + $", {(http ? "over HTTP at " + api : "in process")}{(roundtrip ? ", through the block editor" : "")}");
+        using var client = http ? new KmilaApiClient(api, token: token) : null;
+        if (client != null && !await client.HealthAsync())
         {
-            Console.WriteLine("[run] Kmila in process (HeadlessSimulator, no server)");
-            kmila = new InProcessKmilaRunner(keep);
+            Console.Error.WriteLine($"[run] Kmila API unreachable at {api}");
+            return 2;
         }
-        else
-        {
-            if (!await client.HealthAsync())
-            {
-                Console.Error.WriteLine($"[run] Kmila API unreachable at {api}");
-                return 2;
-            }
-            kmila = new HttpKmilaRunner(client, keep);
-        }
+        IKmilaRunner kmila = client != null ? new HttpKmilaRunner(client, keep) : new InProcessKmilaRunner(keep);
+        var runner = new CaseRunner(kmila, mode, roundtrip);
 
         var casesDir = Path.Combine(root, "Cases");
         if (!Directory.Exists(casesDir)) { Console.Error.WriteLine($"[run] no Cases/ at {casesDir}"); return 2; }
-
         var results = new List<Reporter.CaseResult>();
-        foreach (var caseDir in Directory.EnumerateDirectories(casesDir).OrderBy(p => p))
+        foreach (var c in CaseLoader.LoadAll(casesDir))
+            if (only == null || c.Spec.Id.Contains(only, StringComparison.OrdinalIgnoreCase))
+                results.Add(await runner.RunAsync(c));
+
+        // Verbatim failures are ratcheted by known-gaps.json (variant failures only:
+        // a missing variant or disagreeing goldens always fail); legacy must pass outright.
+        var violations = new List<string>();
+        if (mode == SourceMode.Verbatim)
         {
-            var metaPath = Path.Combine(caseDir, "meta.json");
-            if (!File.Exists(metaPath)) continue;
-            var meta = JsonSerializer.Deserialize<CaseMeta>(File.ReadAllText(metaPath))!;
-            if (only != null && !meta.Id.Contains(only, StringComparison.OrdinalIgnoreCase)) continue;
-
-            var result = new Reporter.CaseResult { Id = meta.Id, Title = meta.Title };
-            if (meta.SkipReason != null)
-            {
-                result.Skipped = true; result.SkipReason = meta.SkipReason;
-                results.Add(result); continue;
-            }
-
-            try { await EvaluateCaseAsync(meta, caseDir, ghdl, kmila, roundtrip, result); }
-            catch (Exception ex) { result.KmilaError = ex.Message; }
-            results.Add(result);
+            var (ratchet, reasons) = KnownGaps.Apply(KnownGaps.Load(Path.Combine(root, KnownGapsFile)),
+                results.Where(r => !r.Skipped).SelectMany(r => r.Variants.Select(v => (r.Id, v.Language, v.Pass))));
+            violations = ratchet;
+            foreach (var r in results) r.KnownGap = reasons.GetValueOrDefault(r.Id);
         }
+        bool ok = violations.Count == 0 && results.All(r => r.Skipped || r.Pass
+            || (mode == SourceMode.Verbatim && r.KnownGap != null && r.MissingVariants.Count == 0 && r.GoldensAgree));
 
         Reporter.WriteConsoleSummary(results);
-        Reporter.WriteJson(Path.Combine(root, "report.json"), results);
-        Console.WriteLine($"[run] wrote {Path.Combine(root, "report.json")}");
-
-        bool allOk = results.All(r => r.Skipped || r.Pass);
-        return allOk ? 0 : 1;
+        string reportPath = Path.Combine(root, mode == SourceMode.Legacy ? "report.legacy.json" : "report.json");
+        Reporter.WriteJson(reportPath, results);
+        Console.WriteLine($"[run] wrote {reportPath}");
+        foreach (var v in violations) Console.WriteLine($"  ✗ {v}");
+        Console.WriteLine(!ok ? "[run] FAILED"
+            : mode == SourceMode.Verbatim ? "[run] ratchet OK: every failure is a listed known gap"
+            : "[run] golden master: all cases pass");
+        return ok ? 0 : 1;
     }
 
-    private static async Task EvaluateCaseAsync(
-        CaseMeta meta, string caseDir,
-        IReferenceSimulator ghdl, IKmilaRunner kmila,
-        bool roundtrip, Reporter.CaseResult result)
-    {
-        // 1. Run GHDL against the reference sources (author's untouched code).
-        var refDir = Path.Combine(caseDir, "reference");
-        var resultsDir = Path.Combine(caseDir, "results");
-        Directory.CreateDirectory(resultsDir);
-
-        if (!Directory.Exists(refDir))
-        {
-            result.GhdlError = "missing reference/ directory";
-            return;
-        }
-        // The meta's order: `library work` analyzes dependencies before dependents.
-        var refSources = meta.ReferenceSources.Select(s => Path.Combine(refDir, s)).ToList();
-        if (refSources.Count == 0)
-        {
-            result.GhdlError = "meta.json lists no referenceSources";
-            return;
-        }
-
-        var ghdlRun = await ghdl.RunAsync(new ReferenceRequest(
-            refSources,
-            string.IsNullOrEmpty(meta.TopUnit) ? meta.Entity : meta.TopUnit,
-            meta.DurationNs,
-            meta.GhdlStd));
-        string ghdlDir = Path.Combine(resultsDir, "ghdl");
-        if (Directory.Exists(ghdlDir)) Directory.Delete(ghdlDir, recursive: true);
-        Directory.CreateDirectory(ghdlDir);
-        File.WriteAllText(Path.Combine(ghdlDir, "ghdl.log"), ghdlRun.Log);
-        if (!ghdlRun.Ok)
-        {
-            result.GhdlError = $"ghdl exit={ghdlRun.ExitCode}";
-            return;
-        }
-        File.WriteAllText(Path.Combine(ghdlDir, "golden.vcd"), ghdlRun.Vcd);
-        var golden = VcdReader.Parse(ghdlRun.Vcd!);
-
-        // 2. Run Kmila on the case's own kmila.vhdl.
-        var kmilaPath = Path.Combine(caseDir, meta.KmilaSource);
-        if (!File.Exists(kmilaPath))
-        {
-            result.KmilaError = $"missing {meta.KmilaSource}";
-            return;
-        }
-        string kmilaVhdl = File.ReadAllText(kmilaPath);
-
-        // Phase 21 round trip through the block editor: a FAIL here that passes
-        // in a plain `run` is block-editor semantic drift.
-        if (roundtrip)
-        {
-            var builder = new Kmila.Shared.Services.VhdlBlockBuilder();
-            var emitter = new Kmila.Shared.Services.VhdlBlockEmitter();
-            var v1 = emitter.Emit(builder.Build(kmilaVhdl));
-            result.RoundTripRaws  = builder.LastRawCount;
-            result.RoundTripDiags = emitter.LastDiagnostics.Count;
-            File.WriteAllText(Path.Combine(resultsDir, "kmila.roundtripped.vhdl"), v1);
-            kmilaVhdl = v1;
-        }
-
-        // Stimulus: the golden dump's input changes (autoStimulus) followed by the
-        // hand-written list (which may tag an initial value the testbench left implicit).
-        var inputs = meta.Ports.Where(p => p.Dir.Equals("in", StringComparison.OrdinalIgnoreCase)).ToList();
-        var portMoments = meta.AutoStimulus
-            ? StimulusDeriver.FromGolden(golden, inputs.Select(p => p.Name))
-            : new List<ApiPortMoment>();
-        portMoments.AddRange(meta.Stimulus);
-
-        var sim = await kmila.SimulateAsync(
-            [new SourceFile(meta.KmilaSource, kmilaVhdl)],
-            new SimulateRequest
-            {
-                EntryPoint = meta.Entity,
-                TimeScale = meta.TimeScale,
-                Duration = meta.DurationNs,
-                SystemClockMhz = meta.SystemClockMhz,
-                TickResNs = meta.TickResNs,
-                PortMoments = portMoments,
-                Clocks = meta.Clocks,
-                PortInitials = TestbenchInitials.Read(refSources, inputs.Select(p => (p.Name, p.Width))),
-            });
-        result.KmilaMs = sim.DurationMs;
-        File.WriteAllText(Path.Combine(resultsDir, "kmila.vcd"), sim.Vcd);
-
-        // 3. Strict comparison on the declared output ports.
-        var outputPorts = meta.Ports
-            .Where(p => p.Dir.Equals("out", StringComparison.OrdinalIgnoreCase)
-                     || p.Dir.Equals("inout", StringComparison.OrdinalIgnoreCase))
-            .Select(p => p.Name);
-        var diff = WaveformComparer.Compare(golden, VcdReader.Parse(sim.Vcd),
-            CompareOptions.Strict(outputPorts, ignoreT0: meta.T0Divergence != null));
-        bool pass = diff.All(d => d.Equal);
-        result.KnownGap = pass ? null : meta.KnownGap;
-        result.Diff = diff;
-        result.Pass = pass;
-        File.WriteAllText(Path.Combine(resultsDir, "diff.json"),
-            JsonSerializer.Serialize(diff, Reporter.Indented));
-    }
+    private const string KnownGapsFile = "known-gaps.json";
 
     private static string DefaultRoot()
     {
@@ -429,8 +325,8 @@ public static class Program
             Usage:
               dotnet run --project SimulatorBench -- verify [--api URL]
               dotnet run --project SimulatorBench -- list
-              dotnet run --project SimulatorBench -- run    [--api URL] [--in-process] [--only ID] [--keep] [--roundtrip]
-              dotnet run --project SimulatorBench -- hash   [--check FILE] [--write FILE]
+              dotnet run --project SimulatorBench -- run    [--legacy-source] [--http] [--api URL] [--only ID] [--keep] [--roundtrip]
+              dotnet run --project SimulatorBench -- hash   [--legacy-source] [--check FILE] [--write FILE]
               dotnet run --project SimulatorBench -- audit-concepts [--concepts-root PATH] [--only LANG]
               dotnet run --project SimulatorBench -- audit-synth    [--root PATH] [--only ID]
               dotnet run --project SimulatorBench -- report
@@ -439,7 +335,9 @@ public static class Program
               --api URL           Kmila Web API base. Default $KMILA_API or http://127.0.0.1:5298
               --token TOKEN       Bearer token for a host with KMILA_LOCAL_API_TOKEN. Default $KMILA_TOKEN
               --root PATH         Bench root (Cases/ tree). Default $BENCH_ROOT or the project's own directory
-              --in-process        Run Kmila in this process (HeadlessSimulator) instead of over HTTP
+              --legacy-source     Simulate legacy/kmila.vhdl (the golden master) instead of the
+                                  reference sources verbatim
+              --http              Run Kmila through a host's /api/v1 instead of in this process
               --concepts-root PATH  Concepts corpus root. Default $CONCEPTS_ROOT or the checkout's
                                   App/Kmila/Kmila.Shared/wwwroot/Concepts/
               --only ID           Run only cases/exercises whose id contains the substring
@@ -448,8 +346,16 @@ public static class Program
                                   (VhdlBlockBuilder + VhdlBlockEmitter) first: a FAIL means
                                   the round trip altered simulation semantics.
 
+            run:
+              Cases/<id>/case.json (ports, timing, stimulus) + variants/<lang>/variant.json
+              (reference/ sources, testbench top, DUT entity, legacySource). Each variant runs
+              the reference simulator on the testbench and Kmila on the DUT; a case passes when
+              every supported language has a variant, each matches its golden and the goldens
+              agree. Verbatim failures must be listed in known-gaps.json (the list only shrinks);
+              with --legacy-source every case must pass. Outputs: results/<lang>/.
+
             hash:
-              SHA-256 of every Cases/*/results/kmila.vcd without its $date block.
+              SHA-256 of every results/<lang>/<legacy|verbatim>/kmila.vcd without its $date block.
               --check FILE compares with a baseline (Tests/baseline/<date>/bench-kmila-vcd.sha256);
               --write FILE creates one and refuses to overwrite an existing file.
               Practice starters are audited by PracticeValidator --audit-starters.

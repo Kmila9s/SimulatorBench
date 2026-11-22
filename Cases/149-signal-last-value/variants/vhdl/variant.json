@@ -1,0 +1,17 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "last_value_write.vhdl",
+    "last_value_write.test.vhdl"
+  ],
+  "top": "last_value_write_tb",
+  "entity": "last_value_write",
+  "standard": "08",
+  "portTypes": {
+    "clk": "std_logic",
+    "d": "std_logic",
+    "q": "std_logic",
+    "q_prev": "std_logic"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

@@ -1,0 +1,77 @@
+{
+  "version": 2,
+  "id": "152-fn-inline-mux2",
+  "title": "User function body with if/else return inlined as MUX — Tier 4.3 B1 expansion",
+  "sourceUrl": "internal: Tier 4.3 body-synth arc 2026-07-28",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-28",
+  "problemDescription": "Concurrent assign `y <= pick(sel, a, b);` where `pick(s,x,z)` has body `if s = '1' then return x; else return z; end if;`. Tier 4.3 B1 expansion folds this into a MUX cell with S=sel, D1=a, D0=b. Runtime already correct via DeferredUserFunction; this case fences the synth-side inlining of if/else bodies.",
+  "ports": [
+    {
+      "name": "sel",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "y",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "sel",
+      "value": "0"
+    },
+    {
+      "t": 0,
+      "port": "a",
+      "value": "0"
+    },
+    {
+      "t": 0,
+      "port": "b",
+      "value": "1"
+    },
+    {
+      "t": 20,
+      "port": "sel",
+      "value": "1"
+    },
+    {
+      "t": 40,
+      "port": "sel",
+      "value": "0"
+    },
+    {
+      "t": 40,
+      "port": "a",
+      "value": "1"
+    },
+    {
+      "t": 40,
+      "port": "b",
+      "value": "0"
+    },
+    {
+      "t": 60,
+      "port": "sel",
+      "value": "1"
+    }
+  ]
+}

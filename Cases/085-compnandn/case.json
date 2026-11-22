@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "id": "085-compnandn",
+  "title": "4-input NAND gate",
+  "sourceUrl": "https://github.com/susanacanel/proyectos-vhdl",
+  "license": "unspecified",
+  "fetchedAt": "2026-06-07",
+  "problemDescription": "4-input NAND gate. salida_o = NOT (AND of all 4 bits) — equivalently, '1' if any bit is '0'.",
+  "ports": [
+    {
+      "name": "entrada_i",
+      "dir": "in",
+      "width": 4
+    },
+    {
+      "name": "salida_o",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 20,
+  "tickResNs": 1,
+  "systemClockMhz": 0,
+  "stimulus": [],
+  "autoStimulus": true
+}

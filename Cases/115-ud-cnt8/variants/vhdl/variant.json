@@ -1,0 +1,16 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "Ex_2_3.vhd",
+    "Ex_2_3_TB.vhd"
+  ],
+  "top": "experiment_2_3_Test_Bench",
+  "entity": "experiment_2_3",
+  "portTypes": {
+    "CLK": "std_logic",
+    "ENABLE": "std_logic",
+    "UP_DOWN": "std_logic",
+    "COUNTER_OUT": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

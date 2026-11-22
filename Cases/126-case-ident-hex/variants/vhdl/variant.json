@@ -1,0 +1,15 @@
+{
+  "language": "vhdl",
+  "sources": [
+    "case_ident_hex.vhdl",
+    "case_ident_hex.test.vhdl"
+  ],
+  "top": "case_ident_hex_tb",
+  "entity": "case_ident_hex",
+  "portTypes": {
+    "clk": "std_logic",
+    "op": "std_logic_vector",
+    "out_reg": "std_logic_vector"
+  },
+  "legacySource": "legacy/kmila.vhdl"
+}

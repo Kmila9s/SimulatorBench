@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "id": "157-fn-two-callsites",
+  "title": "Same user function called from two concurrent-assign sites — Tier 4.3 pass-13 fence",
+  "sourceUrl": "internal: Tier 4.3 body-synth arc 2026-07-29 (pass 13)",
+  "license": "internal regression test, no external reference",
+  "fetchedAt": "2026-07-29",
+  "problemDescription": "Two concurrent assigns `y1 <= invert(a); y2 <= invert(b);` share the same user function. Regression fence for pass-13's shared-CachedScope contract: FunctionExecutor.ExecuteFunction reuses function.CachedScope across the two calls, RefreshScopeArgs rebinds parameter values in-place before each body execution, and DeltaCycleEngine runs Operations serially within a delta cycle so the two writes don't cross-contaminate. Synth-time BeginInline/EndInline (SynthesisContext.cs) is name-scoped and cleared between calls — two independent cell chains render, sharing input nets a/b. Any future refactor that makes fn execution async or concurrent within a delta would race on the shared CachedScope; this fence catches that.",
+  "ports": [
+    {
+      "name": "a",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "b",
+      "dir": "in",
+      "width": 1
+    },
+    {
+      "name": "y1",
+      "dir": "out",
+      "width": 1
+    },
+    {
+      "name": "y2",
+      "dir": "out",
+      "width": 1
+    }
+  ],
+  "timeScale": "NS",
+  "durationNs": 100,
+  "tickResNs": 1,
+  "systemClockMhz": 100,
+  "stimulus": [
+    {
+      "t": 0,
+      "port": "a",
+      "value": "0"
+    },
+    {
+      "t": 0,
+      "port": "b",
+      "value": "0"
+    },
+    {
+      "t": 20,
+      "port": "a",
+      "value": "1"
+    },
+    {
+      "t": 40,
+      "port": "a",
+      "value": "0"
+    },
+    {
+      "t": 40,
+      "port": "b",
+      "value": "1"
+    },
+    {
+      "t": 60,
+      "port": "a",
+      "value": "1"
+    }
+  ]
+}
