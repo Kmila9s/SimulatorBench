@@ -60,10 +60,9 @@ public static class SynthAuditor
             if (only != null && !string.Equals(only, caseId, StringComparison.OrdinalIgnoreCase))
                 continue;
 
-            // The synthesizer reads VHDL: audit the VHDL variant's legacy re-implementation.
-            if (loaded.Variants.For(HdlLanguages.Vhdl) is not { LegacySource: { } legacy }) continue;
-            var vhdlPath = Path.Combine(loaded.Dir, legacy);
-            if (!File.Exists(vhdlPath)) continue;
+            // The synthesizer reads VHDL: audit the author's DUT (the VHDL variant's entity,
+            // elaborated from its reference sources, as the simulation reads it).
+            if (loaded.Variants.For(HdlLanguages.Vhdl) is not { } variant) continue;
 
             // Synth diagnostic kinds the case declares as permanent (demoted to Info).
             var expected = new HashSet<string>(loaded.Spec.ExpectedSynthDiagnostics, StringComparer.OrdinalIgnoreCase);
@@ -72,9 +71,12 @@ public static class SynthAuditor
             var caseFindings = new List<Finding>();
             try
             {
-                var parser = new Debugger.Repositories.Parser(vhdlPath);
-                parser.ParseFile();
-                foreach (var entity in parser.Entities)
+                var design = Frontends.For(HdlLanguages.Vhdl).LoadDesign(new DesignRequest
+                {
+                    Files = variant.SourcePaths, Entry = variant.Entity, EntryIsExplicit = true, Elaborate = true,
+                });
+                design.ThrowIfFailed();
+                foreach (var entity in design.Top is { } top ? [top] : design.Entities)
                 {
                     Netlist netlist;
                     try
@@ -122,7 +124,7 @@ public static class SynthAuditor
                     Entity  = "",
                     Kind    = "ParseThrew",
                     Severity= "Error",
-                    Message = $"Parser.ParseFile threw: {ex.GetType().Name}: {ex.Message}",
+                    Message = $"loading the design threw: {ex.GetType().Name}: {ex.Message}",
                 });
             }
 

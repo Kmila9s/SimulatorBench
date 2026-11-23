@@ -11,6 +11,5 @@
     "inSelect": "std_logic_vector",
     "outSelect": "std_logic_vector",
     "out7Seg": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

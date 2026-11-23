@@ -11,6 +11,5 @@
     "ENABLE": "std_logic",
     "UP_DOWN": "std_logic",
     "COUNTER_OUT": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

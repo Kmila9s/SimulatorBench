@@ -11,6 +11,5 @@
     "din": "std_logic",
     "reset": "std_logic",
     "dout": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

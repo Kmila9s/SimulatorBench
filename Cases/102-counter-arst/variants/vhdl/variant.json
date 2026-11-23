@@ -11,6 +11,5 @@
     "arst_i": "std_logic",
     "en_i": "std_logic",
     "q_o": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

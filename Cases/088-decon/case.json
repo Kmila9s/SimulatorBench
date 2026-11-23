@@ -26,7 +26,5 @@
   "timeScale": "NS",
   "durationNs": 20,
   "tickResNs": 1,
-  "systemClockMhz": 0,
-  "stimulus": [],
-  "autoStimulus": true
+  "systemClockMhz": 0
 }

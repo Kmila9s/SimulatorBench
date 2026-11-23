@@ -36,7 +36,5 @@
   "timeScale": "NS",
   "durationNs": 300,
   "tickResNs": 1,
-  "systemClockMhz": 50,
-  "stimulus": [],
-  "autoStimulus": true
+  "systemClockMhz": 50
 }

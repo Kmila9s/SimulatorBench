@@ -11,6 +11,5 @@
     "reset": "std_logic",
     "seq": "std_logic",
     "det_vld": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

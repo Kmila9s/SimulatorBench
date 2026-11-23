@@ -9,6 +9,5 @@
   "portTypes": {
     "g_i": "std_logic_vector",
     "b_o": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

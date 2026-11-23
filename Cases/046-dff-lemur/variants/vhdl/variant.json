@@ -11,6 +11,5 @@
     "r": "std_logic",
     "D": "std_logic",
     "Q": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

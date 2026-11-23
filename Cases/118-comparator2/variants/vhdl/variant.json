@@ -12,6 +12,5 @@
     "b_gt": "std_logic",
     "b_a_eq": "std_logic",
     "a_gt": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

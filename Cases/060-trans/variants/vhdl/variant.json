@@ -12,6 +12,5 @@
     "se": "std_logic",
     "C": "std_logic_vector",
     "sum": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

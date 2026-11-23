@@ -13,6 +13,5 @@
     "kin2": "std_logic_vector",
     "o1": "std_logic_vector",
     "o2": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

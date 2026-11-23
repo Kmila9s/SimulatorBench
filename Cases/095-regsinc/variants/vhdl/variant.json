@@ -11,6 +11,5 @@
     "rst_i": "std_logic",
     "d_i": "std_logic_vector",
     "q_o": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

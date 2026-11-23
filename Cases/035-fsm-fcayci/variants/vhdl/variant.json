@@ -12,6 +12,5 @@
     "b": "std_logic",
     "mealy": "std_logic",
     "moore": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

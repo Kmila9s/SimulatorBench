@@ -13,6 +13,5 @@
     "data_in": "std_logic_vector",
     "serial_out": "std_logic",
     "done": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }
