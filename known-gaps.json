@@ -1,58 +1,16 @@
 [
   {
-    "case": "034-hamming",
+    "case": "014-mux-sel",
     "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
+    "category": "time",
+    "reason": "G103 retardos menores a 1 ns (WAIT FOR 500 ps): la resolución del motor es 1 ns; requiere tiempo absoluto en fs/ps (Fase 2, IR)",
+    "since": "2026-11-22"
   },
   {
-    "case": "066-gray2bin",
+    "case": "113-edges-det",
     "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
-  },
-  {
-    "case": "067-paridad",
-    "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
-  },
-  {
-    "case": "068-summag",
-    "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
-  },
-  {
-    "case": "075-cont-anillo",
-    "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
-  },
-  {
-    "case": "088-decon",
-    "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
-  },
-  {
-    "case": "089-muxn",
-    "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
-  },
-  {
-    "case": "098-tcqrs",
-    "variant": "vhdl",
-    "category": "elaboration",
-    "reason": "G86 genéricos del testbench (generic map) no llegan a la DUT: Kmila usa el valor por omisión",
-    "since": "2026-11-21"
+    "category": "time",
+    "reason": "G103 retardos menores a 1 ns (HALF_PERIODE = 5.26315789474 ns): la resolución del motor es 1 ns; requiere tiempo absoluto en fs/ps (Fase 2, IR)",
+    "since": "2026-11-22"
   }
 ]

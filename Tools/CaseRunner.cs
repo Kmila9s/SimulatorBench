@@ -80,9 +80,12 @@ public sealed class CaseRunner(IKmilaRunner kmila, SourceMode mode, bool roundtr
             File.WriteAllText(Path.Combine(langDir, "golden.vcd"), run.Vcd);
             var golden = VcdReader.Parse(run.Vcd!);
 
-            // 2. Kmila on the chosen sources, with the case's stimulus; 3. strict comparison on the outputs.
-            bool ignoreT0 = mode == SourceMode.Legacy && v.LegacyT0Divergence != null;
-            var (sim, diff) = await CaseSimulation.RunAsync(kmila, c.Spec, v, KmilaSources(c, v, r), golden, ignoreT0);
+            // 2. Kmila: verbatim simulates the author's testbench itself; legacy drives the
+            //    re-implementation with the case's stimulus. 3. Strict comparison.
+            var sources = KmilaSources(c, v, r);
+            var (sim, diff) = mode == SourceMode.Verbatim
+                ? await CaseSimulation.RunTestbenchAsync(kmila, c.Spec, v, sources, golden)
+                : await CaseSimulation.RunAsync(kmila, c.Spec, v, sources, golden, ignoreT0: v.LegacyT0Divergence != null);
             r.KmilaMs = sim.DurationMs;
             r.KmilaError = sim.Error;
             r.Diff = diff;
@@ -91,7 +94,8 @@ public sealed class CaseRunner(IKmilaRunner kmila, SourceMode mode, bool roundtr
             File.WriteAllText(Path.Combine(outDir, "diff.json"), JsonSerializer.Serialize(r.Diff, Reporter.Indented));
             return (r, golden);
         }
-        catch (Exception ex) when (ex is InvalidOperationException or NotSupportedException or ArgumentException or IOException or HttpRequestException)
+        catch (Exception ex) when (ex is InvalidOperationException or NotSupportedException or ArgumentException or IOException or HttpRequestException
+                                   or Parser.Models.ParserException or Interpreter.Models.SimulationRuntimeException)
         {
             r.KmilaError ??= ex.Message;
             return (r, null);
