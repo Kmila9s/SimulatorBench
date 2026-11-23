@@ -26,37 +26,5 @@
   "timeScale": "NS",
   "durationNs": 200,
   "tickResNs": 1,
-  "systemClockMhz": 50,
-  "stimulus": [
-    {
-      "t": 0,
-      "port": "D",
-      "value": "0"
-    },
-    {
-      "t": 35,
-      "port": "D",
-      "value": "1"
-    },
-    {
-      "t": 73,
-      "port": "D",
-      "value": "0"
-    },
-    {
-      "t": 123,
-      "port": "D",
-      "value": "1"
-    },
-    {
-      "t": 145,
-      "port": "D",
-      "value": "0"
-    }
-  ],
-  "clocks": [
-    {
-      "port": "clk"
-    }
-  ]
+  "systemClockMhz": 50
 }

@@ -3,6 +3,8 @@
 GHDL-vs-Kmila accuracy harness. See `Documentacion/HANDOFF_simulator_bench_api.md`
 for the master plan.
 
+**Status 2026-11-22 (v3.1.9):** the bench simulates each **author's testbench verbatim** in Kmila and in GHDL and compares every testbench signal strictly: **147/149**. The 2 left (`014-mux-sel`, `113-edges-det`) are G103 — delays below 1 ns, deferred to Fase 2 — in `known-gaps.json`. This run is the golden master (`hash --check Tests/baseline/2026-11-22-v319/bench-kmila-vcd.sha256`, identical in process and over HTTP). The legacy re-implementations and `--legacy-source` are gone; `audit-synth` audits the author's DUT.
+
 **Status 2026-11-21 (v3.0.8, layout v2):** verbatim **138/149**; los 11 restantes están catalogados en `known-gaps.json` (G84, G85, G86; repros en `Documentacion/handoffs/repros_gaps_2026-11-16/v308/`) y se corrigen en v3.1.8. *Golden master* del refactor: `run --legacy-source` 149/149 con `hash --legacy-source --check Tests/baseline/2026-11-20-v316/bench-kmila-vcd.sha256` idéntico, en proceso y por HTTP.
 
 **Status 2026-11-16:** 149/149 PASS (fuente legada `kmila.vhdl`), golden master del refactor multi-HDL.
@@ -49,10 +51,9 @@ Setup/install-deps.sh        # brew install ghdl gtkwave (macOS)
 ```sh
 dotnet run -- verify                      # GHDL, Kmila API and OpenAPI snapshot
 dotnet run -- list                        # cases and their variants
-dotnet run -- run                         # verbatim, in process, ratcheted by known-gaps.json
-dotnet run -- run --legacy-source         # golden master: legacy/kmila.vhdl, every case must pass
+dotnet run -- run                         # golden master: authors' testbenches verbatim, ratcheted by known-gaps.json
 dotnet run -- run --http --only 001-and   # through a running Kmila.Web (--api URL)
-dotnet run -- hash --legacy-source --check ../Tests/baseline/<date>/bench-kmila-vcd.sha256
+dotnet run -- hash --check ../Tests/baseline/<date>/bench-kmila-vcd.sha256
 ```
 
 `run` is in process (`Kmila.TestKit`'s `InProcessKmilaRunner`, the same
@@ -63,14 +64,17 @@ dotnet run -- hash --legacy-source --check ../Tests/baseline/<date>/bench-kmila-
 
 ```text
 Cases/<id>/
-  case.json                    # provenance + language-neutral spec: ports, timing, stimulus, clocks
+  case.json                    # provenance + language-neutral spec: DUT ports (documentation), timing
   variants/<lang>/variant.json # sources (analysis order), top (testbench), entity (DUT), standard
   variants/<lang>/reference/   # the author's UNTOUCHED sources (DUT + testbench)
-  legacy/kmila.vhdl            # pre-verbatim re-implementation (golden master until v3.1.8)
-  results/<lang>/              # run outputs: golden.vcd, reference.log, verbatim/ and legacy/ (kmila.vcd, diff.json)
+  results/<lang>/              # run outputs: golden.vcd, reference.log, kmila.vcd, diff.json
 ```
 
-A case passes only when **every supported HDL has a variant**, each variant's
+Both simulators run the same testbench (`variant.top`), so its generic maps
+and stimulus are the author's; every signal of the testbench's own scope is
+compared. The port-stimulus path the app uses for designs without a testbench
+is covered by the practice oracle (`PracticeValidator`), the fixture cases and
+`Tests/baseline/cli_golden.sh`. A case passes only when **every supported HDL has a variant**, each variant's
 Kmila run matches its golden (strict: nine values, t=0 included) and the
 variants' goldens agree. A missing variant is a failure, never a skip.
 Kmila reads the reference sources verbatim — the bench never rewrites them

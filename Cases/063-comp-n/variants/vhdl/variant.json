@@ -12,6 +12,5 @@
     "may_o": "std_logic",
     "men_o": "std_logic",
     "igu_o": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

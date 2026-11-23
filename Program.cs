@@ -22,7 +22,6 @@ public static class Program
         bool keep      = HasFlag(args, "--keep");
         bool roundtrip = HasFlag(args, "--roundtrip");
         bool http = HasFlag(args, "--http");
-        var mode = HasFlag(args, "--legacy-source") ? SourceMode.Legacy : SourceMode.Verbatim;
 
         if (args.Length == 0 || args[0] is "help" or "--help" or "-h")
         {
@@ -33,8 +32,8 @@ public static class Program
         return args[0] switch
         {
             "verify"          => await VerifyAsync(api, token),
-            "run"             => await RunAsync(api, root, only, keep, roundtrip, http, mode, token),
-            "hash"            => Hash(root, mode, ArgValue(args, "--check"), ArgValue(args, "--write")),
+            "run"             => await RunAsync(api, root, only, keep, roundtrip, http, token),
+            "hash"            => Hash(root, ArgValue(args, "--check"), ArgValue(args, "--write")),
             "list"            => ListCases(root),
             "fixtures"        => await RegenerateFixturesAsync(ArgValue(args, "--fixtures") ?? Path.Combine(root, "..", "Tests", "Unit", "Kmila.Shared.Tests", "Fixtures", "Cases")),
             "audit-concepts"  => AuditConcepts(conceptsRoot, only),
@@ -113,20 +112,19 @@ public static class Program
     }
 
     /// <summary>
-    /// SHA-256 of each Kmila VCD of the last <c>run</c> in <paramref name="mode"/>, without
-    /// its <c>$date</c> block. Legacy hashes are keyed by case (one legacy source per case:
-    /// the golden master); verbatim ones by <c>case/lang</c>. <c>--check</c> compares with a
-    /// baseline file, <c>--write</c> creates one (only for a NEW dated baseline folder).
+    /// SHA-256 of each Kmila VCD of the last <c>run</c>, without its <c>$date</c> block,
+    /// keyed by <c>case/lang</c>. <c>--check</c> compares with a baseline file,
+    /// <c>--write</c> creates one (only for a NEW dated baseline folder).
     /// </summary>
-    private static int Hash(string root, SourceMode mode, string? check, string? write)
+    private static int Hash(string root, string? check, string? write)
     {
         var current = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (var c in CaseLoader.LoadAll(Path.Combine(root, "Cases")))
             foreach (var lang in c.Variants.Languages)
             {
-                var vcd = Path.Combine(CaseRunner.ModeDir(c.Dir, lang, mode), "kmila.vcd");
+                var vcd = Path.Combine(CaseRunner.ResultsDir(c.Dir, lang), "kmila.vcd");
                 if (!File.Exists(vcd)) continue;
-                current[mode == SourceMode.Legacy ? c.Spec.Id : $"{c.Spec.Id}/{lang.Id}"] = GoldenHashes.Of(File.ReadAllText(vcd));
+                current[$"{c.Spec.Id}/{lang.Id}"] = GoldenHashes.Of(File.ReadAllText(vcd));
             }
         string text = GoldenHashes.Format(current);
         if (write != null)
@@ -240,9 +238,9 @@ public static class Program
         return 0;
     }
 
-    private static async Task<int> RunAsync(string api, string root, string? only, bool keep, bool roundtrip, bool http, SourceMode mode, string? token)
+    private static async Task<int> RunAsync(string api, string root, string? only, bool keep, bool roundtrip, bool http, string? token)
     {
-        Console.WriteLine($"[run] Kmila on the {(mode == SourceMode.Legacy ? "legacy re-implementations (golden master)" : "reference sources, verbatim")}"
+        Console.WriteLine($"[run] Kmila on the reference sources, verbatim (each author's testbench)"
             + $", {(http ? "over HTTP at " + api : "in process")}{(roundtrip ? ", through the block editor" : "")}");
         using var client = http ? new KmilaApiClient(api, token: token) : null;
         if (client != null && !await client.HealthAsync())
@@ -251,7 +249,7 @@ public static class Program
             return 2;
         }
         IKmilaRunner kmila = client != null ? new HttpKmilaRunner(client, keep) : new InProcessKmilaRunner(keep);
-        var runner = new CaseRunner(kmila, mode, roundtrip);
+        var runner = new CaseRunner(kmila, roundtrip);
 
         var casesDir = Path.Combine(root, "Cases");
         if (!Directory.Exists(casesDir)) { Console.Error.WriteLine($"[run] no Cases/ at {casesDir}"); return 2; }
@@ -260,27 +258,20 @@ public static class Program
             if (only == null || c.Spec.Id.Contains(only, StringComparison.OrdinalIgnoreCase))
                 results.Add(await runner.RunAsync(c));
 
-        // Verbatim failures are ratcheted by known-gaps.json (variant failures only:
-        // a missing variant or disagreeing goldens always fail); legacy must pass outright.
-        var violations = new List<string>();
-        if (mode == SourceMode.Verbatim)
-        {
-            var (ratchet, reasons) = KnownGaps.Apply(KnownGaps.Load(Path.Combine(root, KnownGapsFile)),
-                results.Where(r => !r.Skipped).SelectMany(r => r.Variants.Select(v => (r.Id, v.Language, v.Pass))));
-            violations = ratchet;
-            foreach (var r in results) r.KnownGap = reasons.GetValueOrDefault(r.Id);
-        }
+        // Failures are ratcheted by known-gaps.json (variant failures only: a missing
+        // variant or disagreeing goldens always fail).
+        var (violations, reasons) = KnownGaps.Apply(KnownGaps.Load(Path.Combine(root, KnownGapsFile)),
+            results.Where(r => !r.Skipped).SelectMany(r => r.Variants.Select(v => (r.Id, v.Language, v.Pass))));
+        foreach (var r in results) r.KnownGap = reasons.GetValueOrDefault(r.Id);
         bool ok = violations.Count == 0 && results.All(r => r.Skipped || r.Pass
-            || (mode == SourceMode.Verbatim && r.KnownGap != null && r.MissingVariants.Count == 0 && r.GoldensAgree));
+            || (r.KnownGap != null && r.MissingVariants.Count == 0 && r.GoldensAgree));
 
         Reporter.WriteConsoleSummary(results);
-        string reportPath = Path.Combine(root, mode == SourceMode.Legacy ? "report.legacy.json" : "report.json");
+        string reportPath = Path.Combine(root, "report.json");
         Reporter.WriteJson(reportPath, results);
         Console.WriteLine($"[run] wrote {reportPath}");
         foreach (var v in violations) Console.WriteLine($"  ✗ {v}");
-        Console.WriteLine(!ok ? "[run] FAILED"
-            : mode == SourceMode.Verbatim ? "[run] ratchet OK: every failure is a listed known gap"
-            : "[run] golden master: all cases pass");
+        Console.WriteLine(!ok ? "[run] FAILED" : "[run] ratchet OK: every failure is a listed known gap");
         return ok ? 0 : 1;
     }
 
@@ -357,8 +348,8 @@ public static class Program
               dotnet run --project SimulatorBench -- verify [--api URL]
               dotnet run --project SimulatorBench -- list
               dotnet run --project SimulatorBench -- fixtures [--fixtures PATH]
-              dotnet run --project SimulatorBench -- run    [--legacy-source] [--http] [--api URL] [--only ID] [--keep] [--roundtrip]
-              dotnet run --project SimulatorBench -- hash   [--legacy-source] [--check FILE] [--write FILE]
+              dotnet run --project SimulatorBench -- run    [--http] [--api URL] [--only ID] [--keep] [--roundtrip]
+              dotnet run --project SimulatorBench -- hash   [--check FILE] [--write FILE]
               dotnet run --project SimulatorBench -- audit-concepts [--concepts-root PATH] [--only LANG]
               dotnet run --project SimulatorBench -- audit-synth    [--root PATH] [--only ID]
               dotnet run --project SimulatorBench -- report
@@ -367,27 +358,25 @@ public static class Program
               --api URL           Kmila Web API base. Default $KMILA_API or http://127.0.0.1:5298
               --token TOKEN       Bearer token for a host with KMILA_LOCAL_API_TOKEN. Default $KMILA_TOKEN
               --root PATH         Bench root (Cases/ tree). Default $BENCH_ROOT or the project's own directory
-              --legacy-source     Simulate legacy/kmila.vhdl (the golden master) instead of the
-                                  reference sources verbatim
               --http              Run Kmila through a host's /api/v1 instead of in this process
               --concepts-root PATH  Concepts corpus root. Default $CONCEPTS_ROOT or the checkout's
                                   App/Kmila/Kmila.Shared/wwwroot/Concepts/
               --only ID           Run only cases/exercises whose id contains the substring
               --keep              Keep sandbox projects after the run (default: delete)
-              --roundtrip         Push each case's kmila.vhdl through the block editor
+              --roundtrip         Push each case's sources through the block editor
                                   (VhdlBlockBuilder + VhdlBlockEmitter) first: a FAIL means
                                   the round trip altered simulation semantics.
 
             run:
-              Cases/<id>/case.json (ports, timing, stimulus) + variants/<lang>/variant.json
-              (reference/ sources, testbench top, DUT entity, legacySource). Each variant runs
-              the reference simulator on the testbench and Kmila on the DUT; a case passes when
-              every supported language has a variant, each matches its golden and the goldens
-              agree. Verbatim failures must be listed in known-gaps.json (the list only shrinks);
-              with --legacy-source every case must pass. Outputs: results/<lang>/.
+              Cases/<id>/case.json (DUT ports, timing) + variants/<lang>/variant.json
+              (reference/ sources, testbench top, DUT entity). Each variant runs the reference
+              simulator and Kmila on the same testbench, verbatim, and compares every signal of
+              the testbench strictly; a case passes when every supported language has a variant,
+              each matches its golden and the goldens agree. Failures must be listed in
+              known-gaps.json (the list only shrinks). Outputs: results/<lang>/.
 
             hash:
-              SHA-256 of every results/<lang>/<legacy|verbatim>/kmila.vcd without its $date block.
+              SHA-256 of every results/<lang>/kmila.vcd without its $date block.
               --check FILE compares with a baseline (Tests/baseline/<date>/bench-kmila-vcd.sha256);
               --write FILE creates one and refuses to overwrite an existing file.
               Practice solutions, starters and the GHDL oracle are checked by PracticeValidator.

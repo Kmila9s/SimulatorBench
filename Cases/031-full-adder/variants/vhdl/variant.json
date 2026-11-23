@@ -13,6 +13,5 @@
     "cin": "std_logic",
     "s": "std_logic",
     "cout": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

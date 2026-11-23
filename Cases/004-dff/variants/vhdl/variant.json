@@ -11,7 +11,5 @@
     "clk": "std_logic",
     "D": "std_logic",
     "Q": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl",
-  "legacyT0Divergence": "La referencia asigna Q desde una variable de proceso fuera del flanco (Q=0 en t=0); kmila.vhdl asigna Q solo dentro de rising_edge. Verificado 2026-11-19: Kmila sobre la referencia da Q=0 en t=0, como GHDL (v3.1.5)."
+  }
 }

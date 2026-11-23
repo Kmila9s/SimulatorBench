@@ -31,37 +31,5 @@
   "timeScale": "NS",
   "durationNs": 100,
   "tickResNs": 1,
-  "systemClockMhz": 100,
-  "stimulus": [
-    {
-      "t": 0,
-      "port": "sel",
-      "value": "00"
-    },
-    {
-      "t": 0,
-      "port": "a",
-      "value": "1010"
-    },
-    {
-      "t": 0,
-      "port": "b",
-      "value": "0101"
-    },
-    {
-      "t": 10,
-      "port": "sel",
-      "value": "01"
-    },
-    {
-      "t": 20,
-      "port": "sel",
-      "value": "10"
-    },
-    {
-      "t": 30,
-      "port": "sel",
-      "value": "11"
-    }
-  ]
+  "systemClockMhz": 100
 }

@@ -11,6 +11,5 @@
     "rst_i": "std_logic",
     "dat_i": "std_logic",
     "sal_o": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

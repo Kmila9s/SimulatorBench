@@ -8,6 +8,5 @@
   "entity": "case_wait",
   "portTypes": {
     "q": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

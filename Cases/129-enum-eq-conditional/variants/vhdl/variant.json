@@ -10,6 +10,5 @@
     "clk": "std_logic",
     "go": "std_logic",
     "flag": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

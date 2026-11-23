@@ -13,6 +13,5 @@
     "red": "std_logic",
     "yellow": "std_logic",
     "green": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

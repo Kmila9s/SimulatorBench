@@ -21,11 +21,5 @@
   "timeScale": "NS",
   "durationNs": 50,
   "tickResNs": 1,
-  "systemClockMhz": 100,
-  "stimulus": [],
-  "clocks": [
-    {
-      "port": "clk"
-    }
-  ]
+  "systemClockMhz": 100
 }

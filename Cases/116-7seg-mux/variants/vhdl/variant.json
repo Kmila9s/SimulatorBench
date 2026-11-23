@@ -11,6 +11,5 @@
     "DATA_IN": "std_logic_vector",
     "SEG_SEL": "std_logic_vector",
     "SEG_OUT": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

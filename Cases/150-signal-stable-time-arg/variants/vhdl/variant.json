@@ -11,6 +11,5 @@
     "clk": "std_logic",
     "data": "std_logic",
     "stable_out": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

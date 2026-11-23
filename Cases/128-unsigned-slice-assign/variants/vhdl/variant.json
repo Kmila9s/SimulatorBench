@@ -11,6 +11,5 @@
     "word": "std_logic_vector",
     "go": "std_logic",
     "data": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

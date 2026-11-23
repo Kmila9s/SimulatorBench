@@ -12,6 +12,5 @@
     "start": "std_logic",
     "done": "std_logic",
     "acc_out": "std_logic_vector"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

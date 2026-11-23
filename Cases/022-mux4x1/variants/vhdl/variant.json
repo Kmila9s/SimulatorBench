@@ -13,6 +13,5 @@
     "d": "std_logic",
     "sel": "std_logic_vector",
     "o": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }

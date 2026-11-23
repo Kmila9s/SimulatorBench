@@ -11,6 +11,5 @@
     "B": "std_logic",
     "SUM": "std_logic",
     "CARRY": "std_logic"
-  },
-  "legacySource": "legacy/kmila.vhdl"
+  }
 }
