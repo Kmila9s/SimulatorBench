@@ -3,6 +3,8 @@
 GHDL-vs-Kmila accuracy harness. See `Documentacion/HANDOFF_simulator_bench_api.md`
 for the master plan.
 
+**Status 2026-11-24 (v3.2.0):** **149/149** with `known-gaps.json` empty: the engine counts time in ticks of whole femtoseconds, so `014-mux-sel` (`WAIT FOR 500 ps`) and `113-edges-det` (`HALF_PERIODE = 5.26315789474 ns`) match GHDL (G103). Golden master: `hash --check Tests/baseline/2026-11-24-v320/bench-kmila-vcd.sha256` (13 hashes changed from v3.1.9, all with event instants identical to GHDL; same in process and over HTTP).
+
 **Status 2026-11-22 (v3.1.9):** the bench simulates each **author's testbench verbatim** in Kmila and in GHDL and compares every testbench signal strictly: **147/149**. The 2 left (`014-mux-sel`, `113-edges-det`) are G103 — delays below 1 ns, deferred to Fase 2 — in `known-gaps.json`. This run is the golden master (`hash --check Tests/baseline/2026-11-22-v319/bench-kmila-vcd.sha256`, identical in process and over HTTP). The legacy re-implementations and `--legacy-source` are gone; `audit-synth` audits the author's DUT.
 
 **Status 2026-11-21 (v3.0.8, layout v2):** verbatim **138/149**; los 11 restantes están catalogados en `known-gaps.json` (G84, G85, G86; repros en `Documentacion/handoffs/repros_gaps_2026-11-16/v308/`) y se corrigen en v3.1.8. *Golden master* del refactor: `run --legacy-source` 149/149 con `hash --legacy-source --check Tests/baseline/2026-11-20-v316/bench-kmila-vcd.sha256` idéntico, en proceso y por HTTP.
