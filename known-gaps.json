@@ -1,16 +1,1 @@
-[
-  {
-    "case": "014-mux-sel",
-    "variant": "vhdl",
-    "category": "time",
-    "reason": "G103 retardos menores a 1 ns (WAIT FOR 500 ps): la resolución del motor es 1 ns; requiere tiempo absoluto en fs/ps (Fase 2, IR)",
-    "since": "2026-11-22"
-  },
-  {
-    "case": "113-edges-det",
-    "variant": "vhdl",
-    "category": "time",
-    "reason": "G103 retardos menores a 1 ns (HALF_PERIODE = 5.26315789474 ns): la resolución del motor es 1 ns; requiere tiempo absoluto en fs/ps (Fase 2, IR)",
-    "since": "2026-11-22"
-  }
-]
+[]
